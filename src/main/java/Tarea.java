@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tarea {
@@ -16,6 +17,8 @@ public class Tarea {
 
     public Tarea(String titulo) {
         this.titulo = titulo;
+        listaEtiquetas = new ArrayList<>();
+        listaPersonas = new ArrayList<>();
     }
     public void marcarComoFinalizada(){
         isFinalizada = true;
@@ -25,5 +28,8 @@ public class Tarea {
     }
     public void quitarPersona(Persona persona) {
         listaPersonas.remove(persona);
+    }
+    public void addEtiqueta(Etiqueta etiqueta) {
+        listaEtiquetas.add(etiqueta);
     }
 }
