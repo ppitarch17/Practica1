@@ -24,4 +24,8 @@ public class Tarea {
     public Tarea(String titulo) {
         this.titulo = titulo;
     }
+
+    public void marcarComoFinalizada(){
+        isFinalizada = true;
+    }
 }
