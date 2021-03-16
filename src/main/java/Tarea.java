@@ -21,10 +21,11 @@ public class Tarea {
     Resultado resultado;
     List<Etiqueta> listaEtiquetas;
 
+    String identificador;
+
     public Tarea(String titulo) {
         this.titulo = titulo;
     }
-
     public void marcarComoFinalizada(){
         isFinalizada = true;
     }
