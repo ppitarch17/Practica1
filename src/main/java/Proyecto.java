@@ -6,9 +6,6 @@ public class Proyecto {
     List<Tarea> listaTareas;
     String nombre;
 
-
-
-
     public Proyecto(String nombre){
         this.nombre = nombre;
         this.listaPersonas = new ArrayList<>();
@@ -25,11 +22,11 @@ public class Proyecto {
         tarea.marcarComoFinalizada();
     }
     public void addPersona (Persona persona, Tarea tarea){
-        tarea.anyadirPersona(persona);
+        tarea.addPersona(persona);
         persona.addTarea(tarea);
     }
     public void removePersona (Persona persona, Tarea tarea){
-        tarea.quitarPersona(persona);
+        tarea.removePersona(persona);
         persona.removeTarea(tarea);
     }
     public void imprimirPersonas(){

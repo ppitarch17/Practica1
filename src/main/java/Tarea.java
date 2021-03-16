@@ -20,10 +20,10 @@ public class Tarea {
     public void marcarComoFinalizada(){
         isFinalizada = true;
     }
-    public void anyadirPersona(Persona persona) {
+    public void addPersona(Persona persona) {
         listaPersonas.add(persona);
     }
-    public void quitarPersona(Persona persona) {
+    public void removePersona(Persona persona) {
         listaPersonas.remove(persona);
     }
 }
