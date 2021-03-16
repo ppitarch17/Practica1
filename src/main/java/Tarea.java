@@ -39,6 +39,8 @@ public class Tarea {
     }
 
     public void setPrioridad(int prioridad) {
+        if (prioridad < 1 || prioridad > 5) //exception?
+            return;
         this.prioridad = prioridad;
     }
 }
