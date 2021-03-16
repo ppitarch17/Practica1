@@ -15,8 +15,8 @@ public class Proyecto {
         this.listaTareas = new ArrayList<>();
     }
 
-    public void newPersona(String nombre, String correo){
-        listaPersonas.add(new Persona(nombre,correo));
+    public void newPersona(String nombre, String correo, String DNI){
+        listaPersonas.add(new Persona(nombre,correo, DNI));
     }
     public void newTarea(String titulo){
         listaTareas.add(new Tarea(titulo));
@@ -26,9 +26,11 @@ public class Proyecto {
     }
     public void addPersona (Persona persona, Tarea tarea){
         tarea.anyadirPersona(persona);
+        persona.addTarea(tarea);
     }
     public void removePersona (Persona persona, Tarea tarea){
         tarea.quitarPersona(persona);
+        persona.removeTarea(tarea);
     }
     public void imprimirPersonas(){
         Interfaz.imprimirPersonas(listaPersonas);

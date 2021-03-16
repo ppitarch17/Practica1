@@ -9,9 +9,10 @@ public class Persona {
     private String DNI; //identificador
     private List<Tarea> tareas; //tareas de las que es responsable esta persona
 
-    public Persona(String nombre, String correo) {
+    public Persona(String nombre, String correo, String DNI) {
         this.nombre = nombre;
         this.correo = correo;
+        this.DNI = DNI;
         tareas = new ArrayList<>();
         //hola
     }
@@ -21,4 +22,11 @@ public class Persona {
     public List<Tarea> getTareas(){return tareas;}
 
     //fuction add persona
+    public void addTarea(Tarea tarea){
+        tareas.add(tarea);
+    }
+
+    public void removeTarea(Tarea tarea){
+        tareas.remove(tarea);
+    }
 }
