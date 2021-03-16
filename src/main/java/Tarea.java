@@ -1,13 +1,13 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tarea {
     String titulo;
-    String descripcion; //permite NULL
+    String descripcion;
     List<Persona> listaPersonas;
     Persona responsable;
     int prioridad;
     String fechaCreado;
-
     String fechaFin;
     boolean isFinalizada;
     Resultado resultado;
@@ -17,6 +17,8 @@ public class Tarea {
 
     public Tarea(String titulo) {
         this.titulo = titulo;
+        listaEtiquetas = new ArrayList<>();
+        listaPersonas = new ArrayList<>();
         //set fecha creacion
     }
     public void marcarComoFinalizada(){
@@ -42,5 +44,8 @@ public class Tarea {
         if (prioridad < 1 || prioridad > 5) //exception?
             return;
         this.prioridad = prioridad;
+    }
+    public void addEtiqueta(Etiqueta etiqueta) {
+        listaEtiquetas.add(etiqueta);
     }
 }
