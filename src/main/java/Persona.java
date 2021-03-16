@@ -10,6 +10,7 @@ public class Persona {
         this.nombre = nombre;
         this.correo = correo;
         tareas = new ArrayList<>();
+        //hola
     }
 
     public String getNombre(){return nombre;}
