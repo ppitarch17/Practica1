@@ -15,12 +15,15 @@ public class Tarea {
 
     String identificador;
 
+    //-----CONSTRUCTORES-----
     public Tarea(String titulo) {
         this.titulo = titulo;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
         //set fecha creacion
     }
+
+    //-----METODOS-----
     public void marcarComoFinalizada(){
         isFinalizada = true;
         //set fecha fin
@@ -31,7 +34,13 @@ public class Tarea {
     public void removePersona(Persona persona) {
         listaPersonas.remove(persona);
     }
+    public void addEtiqueta(Etiqueta etiqueta) {
+        listaEtiquetas.add(etiqueta);
+    }
+    //-----GETTERS-----
 
+
+    //-----SETTERS-----
     public void setResponsable(Persona responsable) {
         this.responsable = responsable;
     }
@@ -44,8 +53,5 @@ public class Tarea {
         if (prioridad < 1 || prioridad > 5) //exception?
             return;
         this.prioridad = prioridad;
-    }
-    public void addEtiqueta(Etiqueta etiqueta) {
-        listaEtiquetas.add(etiqueta);
     }
 }
