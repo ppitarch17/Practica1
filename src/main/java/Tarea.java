@@ -25,6 +25,8 @@ public class Tarea {
         //set fecha creacion
     }
 
+    public Tarea(){}
+
     //-----METODOS-----
     public void marcarComoFinalizada(){
         isFinalizada = true;
@@ -51,9 +53,9 @@ public class Tarea {
         this.descripcion = descripcion;
     }
 
-    public void setPrioridad(int prioridad) {
+    public void setPrioridad(int prioridad) throws Exception {
         if (prioridad < 1 || prioridad > 5) //exception?
-            return;
+            throw new Exception("La p");
         this.prioridad = prioridad;
     }
 }
