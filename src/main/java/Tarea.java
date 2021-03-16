@@ -18,6 +18,10 @@ public class Tarea {
     String identificador;
 
     //-----CONSTRUCTORES-----
+    public  Tarea(){
+
+    }
+
     public Tarea(String titulo) {
         this.titulo = titulo;
         listaEtiquetas = new ArrayList<>();
@@ -43,6 +47,10 @@ public class Tarea {
     }
     //-----GETTERS-----
 
+
+    public int getPrioridad() {
+        return prioridad;
+    }
 
     //-----SETTERS-----
     public void setResponsable(Persona responsable) {
