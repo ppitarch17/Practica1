@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Persona {
+    //yee
     private String nombre;
     private String correo;
     private List<Tarea> tareas; //tareas de las que es responsable esta persona
