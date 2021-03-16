@@ -1,3 +1,5 @@
+import Resultados.Resultado;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class Tarea {
     Persona responsable;
     int prioridad;
     String fechaCreado;
-    String fechaFin;
+    String fechaFin; // (puede estar en blanco)
     boolean isFinalizada;
     Resultado resultado;
     List<Etiqueta> listaEtiquetas;
