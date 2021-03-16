@@ -1,31 +1,34 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Proyecto {
     List<Persona> listaPersonas;
     List<Tarea> listaTareas;
+    String nombre;
 
 
 
 
     public Proyecto(String nombre){
-
+        this.nombre = nombre;
+        this.listaPersonas = new ArrayList<>();
+        this.listaTareas = new ArrayList<>();
     }
+
     public void newPersona(String nombre, String correo){
-        Persona persona = new Persona(nombre,correo);
-        listaPersonas.add(persona);
+        listaPersonas.add(new Persona(nombre,correo));
     }
     public void newTarea(String titulo){
-        Tarea tarea = new Tarea(titulo);
-        listaTareas.add(tarea);
+        listaTareas.add(new Tarea(titulo));
     }
     public void finalizada(Tarea tarea){
-
+        tarea.marcarComoFinalizada();
     }
     public void addPersona (Persona persona, Tarea tarea){
-
+        tarea.anyadirPersona(persona);
     }
     public void removePersona (Persona persona, Tarea tarea){
-
+        tarea.quitarPersona(persona);
     }
     public void imprimirPersonas(){
         Interfaz.imprimirPersonas(listaPersonas);

@@ -29,4 +29,10 @@ public class Tarea {
     public void marcarComoFinalizada(){
         isFinalizada = true;
     }
+    public void anyadirPersona(Persona persona) {
+        listaPersonas.add(persona);
+    }
+    public void quitarPersona(Persona persona) {
+        listaPersonas.remove(persona);
+    }
 }
