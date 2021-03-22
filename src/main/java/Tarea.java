@@ -19,7 +19,6 @@ public class Tarea {
 
     //-----CONSTRUCTORES-----
     public  Tarea(){
-
     }
 
     public Tarea(String titulo) {
@@ -29,7 +28,6 @@ public class Tarea {
         //set fecha creacion
     }
 
-    public Tarea(){}
 
     //-----METODOS-----
     public void marcarComoFinalizada(){
