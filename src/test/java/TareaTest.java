@@ -1,3 +1,5 @@
+import org.junit.Assert;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TareaTest {
@@ -23,5 +25,20 @@ class TareaTest {
     void getPrioridad(){
         Tarea tarea = new Tarea();
         assertEquals(1, tarea.getPrioridad());
+    }
+
+    @org.junit.jupiter.api.Test
+    void Responsable(){
+        Tarea tarea = new Tarea();
+        tarea.addPersona(new Persona("Persona", "persona@uji.es", "11111111A"));
+
+        assertNull(tarea.getResponsable());
+
+        tarea.setResponsable(new Persona("Persona2", "persona2@uji.es", "222222222A"));
+
+        assertNotNull(tarea.getResponsable());
+
+
+
     }
 }

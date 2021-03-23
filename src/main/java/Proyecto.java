@@ -41,7 +41,7 @@ public class Proyecto {
             listaPersonas.add(persona);
 
         //que pasa si esa persona ya pertenece a esa tarea?
-        if (tarea.listaPersonas.contains(persona))
+        if (tarea.getListaPersonas().contains(persona))
             return;
 
         tarea.addPersona(persona);

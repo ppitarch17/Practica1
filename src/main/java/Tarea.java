@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tarea {
-    String titulo;
-    String descripcion;
-    List<Persona> listaPersonas;
-    Persona responsable;
-    int prioridad;
-    String fechaCreado;
-    String fechaFin; // (puede estar en blanco)
-    boolean isFinalizada;
-    Resultado resultado;
-    List<Etiqueta> listaEtiquetas;
+    private String titulo;
+    private String descripcion;
+    private List<Persona> listaPersonas;
+    private Persona responsable;
+    private int prioridad;
+    private String fechaCreado;
+    private String fechaFin; // (puede estar en blanco)
+    private boolean isFinalizada;
+    private Resultado resultado;
+    private List<Etiqueta> listaEtiquetas;
 
     String identificador;
 
@@ -37,6 +37,9 @@ public class Tarea {
 
     //-----METODOS-----
     public void marcarComoFinalizada(){ //Fecha fin es opcional
+
+        //si ya esta finalizada?
+
         isFinalizada = true;
     }
 
@@ -58,6 +61,14 @@ public class Tarea {
     //-----GETTERS-----
     public int getPrioridad() {
         return prioridad;
+    }
+
+    public List<Persona> getListaPersonas() {
+        return listaPersonas;
+    }
+
+    public Persona getResponsable() {
+        return responsable;
     }
 
     //-----SETTERS-----
