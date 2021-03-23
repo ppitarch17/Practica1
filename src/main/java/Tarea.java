@@ -61,7 +61,7 @@ public class Tarea {
 
     public void setPrioridad(int prioridad) throws Exception {
         if (prioridad < 1 || prioridad > 5) //exception?
-            throw new Exception("La p");
+            throw new IllegalArgumentException();
         this.prioridad = prioridad;
     }
 }
