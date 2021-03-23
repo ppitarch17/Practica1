@@ -3,8 +3,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InterfazTest {
-
-    /*
+/*
     public static void main(String[] args) {
 
         //Pruebas
@@ -25,7 +24,7 @@ class InterfazTest {
         System.out.println("---");
         Interfaz.imprimirTareas(proyecto.listaTareas);
     }
-    */
+*/
 
     @Test
     void imprimirPersonas() {
@@ -33,7 +32,6 @@ class InterfazTest {
         proyecto.addPersona(new Persona("Persona", "persona@uji.es", "11111111A"), new Tarea("TituloTarea"));
 
         assertDoesNotThrow(() -> Interfaz.imprimirPersonas(proyecto.listaPersonas));
-
     }
 
     @Test

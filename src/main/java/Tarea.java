@@ -19,12 +19,18 @@ public class Tarea {
 
     //-----CONSTRUCTORES-----
     public  Tarea(){
+        //titulo = null;
+        listaEtiquetas = new ArrayList<>();
+        listaPersonas = new ArrayList<>();
+        prioridad = 1;
     }
 
     public Tarea(String titulo) {
         this.titulo = titulo;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
+        //inicializo la prioridad a 1 para que no sea 0 (no es valido)
+        prioridad = 1;
         //set fecha creacion
     }
 
@@ -56,6 +62,11 @@ public class Tarea {
 
     //-----SETTERS-----
     public void setResponsable(Persona responsable) {
+
+        //Si el responsable no esta en la lista de la tarea lo añadimos
+        if(!listaPersonas.contains(responsable))
+            listaPersonas.add(responsable);
+
         this.responsable = responsable;
     }
 
