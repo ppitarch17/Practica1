@@ -68,4 +68,14 @@ public class Tarea {
             throw new IllegalArgumentException();
         this.prioridad = prioridad;
     }
+
+    @Override
+    public String toString() {
+        return "Tarea{" +
+                "titulo='" + titulo + '\'' +
+                ", listaPersonas=" + listaPersonas +
+                ", isFinalizada=" + isFinalizada +
+                ", resultado=" + resultado +
+                '}';
+    }
 }

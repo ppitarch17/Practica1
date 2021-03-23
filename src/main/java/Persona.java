@@ -27,4 +27,8 @@ public class Persona {
         tareas.remove(tarea);
     }
 
+    @Override
+    public String toString() {
+        return DNI + " " + nombre;
+    }
 }
