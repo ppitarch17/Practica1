@@ -14,7 +14,7 @@ class TareaTest {
 
         mensajeSiError = "Test.setPropiedad() no lanzo expecion. propidad debe estar entre 1 y 5";
 
-        assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(1), mensajeSiError); //El segundo parámetro emite una excepción del tipo que se pasa como primer parametro.
+        assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(-1), mensajeSiError); //El segundo parámetro emite una excepción del tipo que se pasa como primer parametro.
         assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(6),mensajeSiError);
         assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(0),mensajeSiError);
     }
