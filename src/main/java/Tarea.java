@@ -74,6 +74,7 @@ public class Tarea {
         return "Tarea{" +
                 "titulo='" + titulo + '\'' +
                 ", listaPersonas=" + listaPersonas +
+                ", responsable =" + responsable +
                 ", isFinalizada=" + isFinalizada +
                 ", resultado=" + resultado +
                 '}';
