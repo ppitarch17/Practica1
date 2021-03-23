@@ -1,3 +1,5 @@
+package Resultados;
+
 import Resultados.Resultado;
 
 public class Programa extends Resultado {

@@ -30,10 +30,15 @@ public class Tarea {
 
 
     //-----METODOS-----
-    public void marcarComoFinalizada(){
+    public void marcarComoFinalizada(){ //Fecha fin es opcional
         isFinalizada = true;
-        //set fecha fin
     }
+
+    public void marcarComoFinalizada(String fechaFin){
+        isFinalizada = true;
+        this.fechaFin = fechaFin;
+    }
+
     public void addPersona(Persona persona) {
         listaPersonas.add(persona);
     }
@@ -43,9 +48,8 @@ public class Tarea {
     public void addEtiqueta(Etiqueta etiqueta) {
         listaEtiquetas.add(etiqueta);
     }
+
     //-----GETTERS-----
-
-
     public int getPrioridad() {
         return prioridad;
     }
