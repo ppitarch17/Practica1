@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Proyecto {
-    List<Persona> listaPersonas;
-    List<Tarea> listaTareas;
-    String nombre;
+    private List<Persona> listaPersonas;
+    private List<Tarea> listaTareas;
+    private String nombre;
 
     public Proyecto(String nombre){
         this.nombre = nombre;
@@ -51,9 +51,9 @@ public class Proyecto {
         return true;
     }
 
-    public boolean removeTareadePersona(Persona persona, Tarea tarea){
+  //  public boolean removeTareadePersona(Persona persona, Tarea tarea){
 
-    }
+    //}
 
     public void removePersona (Persona persona){
         //elimino persona de la lista del proyecto
@@ -80,5 +80,17 @@ public class Proyecto {
     }
     public void imprimirTareas(){
         Interfaz.imprimirTareas(listaTareas);
+    }
+
+    public List<Persona> getListaPersonas() {
+        return listaPersonas;
+    }
+
+    public List<Tarea> getListaTareas() {
+        return listaTareas;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 }

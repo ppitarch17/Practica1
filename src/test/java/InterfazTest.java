@@ -31,7 +31,7 @@ class InterfazTest {
         Proyecto proyecto = new Proyecto("proyecto Prueba");
         proyecto.addPersonaToTarea(new Persona("Persona", "persona@uji.es", "11111111A"), new Tarea("TituloTarea"));
 
-        assertDoesNotThrow(() -> Interfaz.imprimirPersonas(proyecto.listaPersonas));
+        assertDoesNotThrow(() -> Interfaz.imprimirPersonas(proyecto.getListaPersonas()));
     }
 
     @Test
