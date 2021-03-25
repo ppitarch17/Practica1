@@ -18,42 +18,29 @@ public class Interfaz {
         return new Proyecto(nombre);
     }
 
-    public static void menu() {
-
-    }
-
     public static void main(String[] args) {
         Proyecto proyecto = crearProyecto();
         System.out.println(proyecto.getNombre());
-        menu();
+        showMenu();
     }
 
-    public static void main(String[] args) {
-        Proyecto proyecto = createProyect();
-        ShowMenu();
-    }
-
-    public static void ShowMenu(){
-        System.out.println("Selecciona: ");
+    public static void showMenu(){
         System.out.println("1 Crear Persona");
         System.out.println("2 Crear Tarea");
         System.out.println("3 añadir persona a tarea");
         System.out.println("4 finalizar tarea");
         System.out.println("5 listar personas");
         System.out.println("6 listar tareas");
+        System.out.print("Selecciona: ");
+
         Scanner scanner = new Scanner(System.in);
         int op = scanner.nextInt();
 
-        switch (op){
-            case 1:
-                op1();
-                break;
-            case 2:
-                op2();
-                break;
-            default:
-                error();
-                break;
+        switch (op) {
+            case 0 -> System.out.println("Fin");
+            case 1 -> op1();
+            case 2 -> op2();
+            default -> error();
         }
         //recibir num
         //verificar que el numero
@@ -61,16 +48,18 @@ public class Interfaz {
 
     public static void op1(){
         System.out.println("op 1");
+        showMenu();
     }
 
     public static void op2(){
         System.out.println("op 2");
+        showMenu();
     }
 
 
     public static void error(){
         System.out.println("Error: -------");
-        ShowMenu();
+        showMenu();
     }
 
 }
