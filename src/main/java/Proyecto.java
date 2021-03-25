@@ -18,39 +18,47 @@ public class Proyecto {
         this.listaTareas = listaTareas;
     }
 
-    public void newPersona(String nombre, String correo, String DNI){
+    public void addPersona(String nombre, String correo, String DNI){
         listaPersonas.add(new Persona(nombre,correo, DNI));
     }
-    public void newTarea(String titulo){
+    public void addTarea(String titulo){
         listaTareas.add(new Tarea(titulo));
     }
 
-    public void finalizada(Tarea tarea){
+    public void setTareaComofinalizada(Tarea tarea){
         tarea.marcarComoFinalizada();
     }
 
-    public void addPersona (Persona persona, Tarea tarea){
+    public boolean addPersonaToTarea(Persona persona, Tarea tarea){
 
-        //Que pasa si nos dan una tarea que no esta en el proyecto?
-
-        if (!listaTareas.contains(tarea))
-            listaTareas.add(tarea);
-
-        //que pasa si nos dan una persona que no esta en el proyecto?
-        if(!listaPersonas.contains(persona))
-            listaPersonas.add(persona);
-
-        //que pasa si esa persona ya pertenece a esa tarea?
-        if (tarea.getListaPersonas().contains(persona))
-            return;
+        //Si la tarea o la persona no estan en el proyecto return false.
+        //Si la persona ya esta en esa tarea return false.
+        if (!listaTareas.contains(tarea) || !listaPersonas.contains(persona) || tarea.getListaPersonas().contains(persona))
+            return false;
 
         tarea.addPersona(persona);
         persona.addTarea(tarea);
+        return true;
     }
-    public void removePersona (Persona persona, Tarea tarea){
+    public void removePersonaDeTarea(Persona persona, Tarea tarea){
         tarea.removePersona(persona);
         persona.removeTarea(tarea);
     }
+
+    public void removePersona (Persona persona){
+        //elimino persona de la lista del proyecto
+        listaPersonas.remove(persona);
+        //elimino a la persona de todas las tareas en las que aparece
+        for (Tarea tarea : listaTareas) {
+            if (tarea.getListaPersonas().contains(persona))
+                tarea.removePersona(persona);
+        }
+    }
+
+    public void removeTarea(Tarea tarea){
+
+    }
+
     public void imprimirPersonas(){
         Interfaz.imprimirPersonas(listaPersonas);
     }

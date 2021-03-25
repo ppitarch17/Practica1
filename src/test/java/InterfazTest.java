@@ -29,7 +29,7 @@ class InterfazTest {
     @Test
     void imprimirPersonas() {
         Proyecto proyecto = new Proyecto("proyecto Prueba");
-        proyecto.addPersona(new Persona("Persona", "persona@uji.es", "11111111A"), new Tarea("TituloTarea"));
+        proyecto.addPersonaToTarea(new Persona("Persona", "persona@uji.es", "11111111A"), new Tarea("TituloTarea"));
 
         assertDoesNotThrow(() -> Interfaz.imprimirPersonas(proyecto.listaPersonas));
     }
