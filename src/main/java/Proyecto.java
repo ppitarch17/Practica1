@@ -40,9 +40,19 @@ public class Proyecto {
         persona.addTarea(tarea);
         return true;
     }
-    public void removePersonaDeTarea(Persona persona, Tarea tarea){
+
+    public boolean removePersonaDeTarea (Persona persona, Tarea tarea){
+
+        if(!tarea.getListaPersonas().contains(persona))
+            return false;
+
         tarea.removePersona(persona);
         persona.removeTarea(tarea);
+        return true;
+    }
+
+    public boolean removeTareadePersona(Persona persona, Tarea tarea){
+
     }
 
     public void removePersona (Persona persona){
@@ -56,7 +66,13 @@ public class Proyecto {
     }
 
     public void removeTarea(Tarea tarea){
-
+        //elimino tarea de la lista de tareas
+        listaTareas.remove(tarea);
+        //elimino la tarea de todas las personas que la tienen
+        for (Persona persona : listaPersonas) {
+            if (persona.getListaTareas().contains(tarea))
+                tarea.removePersona(persona);
+        }
     }
 
     public void imprimirPersonas(){
