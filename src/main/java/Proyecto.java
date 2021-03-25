@@ -21,6 +21,7 @@ public class Proyecto {
     public void addPersona(String nombre, String correo, String DNI){
         listaPersonas.add(new Persona(nombre,correo, DNI));
     }
+
     public void addTarea(String titulo){
         listaTareas.add(new Tarea(titulo));
     }
@@ -51,10 +52,6 @@ public class Proyecto {
         return true;
     }
 
-    public boolean removeTareadePersona(Persona persona, Tarea tarea){
-
-    }
-
     public void removePersona (Persona persona){
         //elimino persona de la lista del proyecto
         listaPersonas.remove(persona);
@@ -66,13 +63,7 @@ public class Proyecto {
     }
 
     public void removeTarea(Tarea tarea){
-        //elimino tarea de la lista de tareas
-        listaTareas.remove(tarea);
-        //elimino la tarea de todas las personas que la tienen
-        for (Persona persona : listaPersonas) {
-            if (persona.getListaTareas().contains(tarea))
-                tarea.removePersona(persona);
-        }
+        tarea.marcarComoFinalizada();
     }
 
     public void imprimirPersonas(){
