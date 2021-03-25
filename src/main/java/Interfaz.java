@@ -5,9 +5,7 @@ import java.util.Scanner;
 public class Interfaz {
 
     public static Proyecto crearProyecto(){
-        System.out.print("Introduce el nombre del proyecto: ");
-        Scanner scanner = new Scanner(System.in);
-        String nombre = scanner.next();
+        String nombre = scanStr("Introduce el nombre del proyecto: ");
         return new Proyecto(nombre);
     }
 
@@ -28,10 +26,8 @@ public class Interfaz {
         System.out.println("4 finalizar tarea");
         System.out.println("5 listar personas");
         System.out.println("6 listar tareas");
-        System.out.print("Selecciona: ");
 
-        Scanner scanner = new Scanner(System.in);
-        int op = scanner.nextInt();
+        int op = scanInt("Selecciona: ");
 
         switch (op) {
             case 0 -> System.out.println("Fin");
@@ -41,62 +37,52 @@ public class Interfaz {
             case 4 -> finalizarTarea(proyecto);
             case 5 -> listarPersonas(proyecto);
             case 6 -> listarTareas(proyecto);
-            default -> error(proyecto);
+            default -> error(proyecto, "Opción no válida.");
         }
-        //recibir num
-        //verificar que el numero
     }
-
-    public static void crearPersona(Proyecto proyecto){
-        System.out.print("Introduce el nombre de la persona: ");
+    public static String scanStr(String mensaje){
+        System.out.print(mensaje);
         Scanner scanner = new Scanner(System.in);
-        String nombre = scanner.next();
-
-        System.out.print("Introduce el correo de la persona: ");
-        scanner = new Scanner(System.in);
-        String correo = scanner.next();
-
-        System.out.print("Introduce el DNI de la persona: ");
-        scanner = new Scanner(System.in);
-        String dni = scanner.next();
+        return scanner.next();
+    }
+    public static int scanInt(String mensaje){
+        System.out.print(mensaje);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+    public static void crearPersona(Proyecto proyecto){
+        String nombre = scanStr("Introduce el nombre de la persona: ");
+        String correo = scanStr("Introduce el correo de la persona: ");
+        String dni = scanStr("Introduce el DNI de la persona: ");
 
         proyecto.addPersona(nombre, correo, dni);
         showMenu(proyecto);
     }
 
     public static void crearTarea(Proyecto proyecto){
-
-        System.out.print("Introduce el titulo de la tarea: ");
-        Scanner scanner = new Scanner(System.in);
-        String titulo = scanner.next();
+        String titulo = scanStr("Introduce el titulo de la tarea: ");
 
         proyecto.addTarea(titulo);
         showMenu(proyecto);
     }
 
     public static void addPersonaATarea(Proyecto proyecto){
-        System.out.print("Introduce el DNI de la persona: ");
-        Scanner scanner = new Scanner(System.in);
-        String dni = scanner.next();
+        String dni = scanStr("Introduce el DNI de la persona: ");
 
         Persona persona = proyecto.getPersona(dni);
 
-        System.out.print("Introduce el titulo de la tarea: ");
-        scanner = new Scanner(System.in);
-        String titulo = scanner.next();
+        String titulo = scanStr("Introduce el titulo de la tarea: ");
 
         Tarea tarea = proyecto.buscaTarea(titulo);
 
         if(persona == null || tarea == null)
-            error(proyecto);
-
-        proyecto.addPersonaToTarea(persona, tarea);
+            error(proyecto, "Persona o tarea no encontrada");
+        else
+            proyecto.addPersonaToTarea(persona, tarea);
         showMenu(proyecto);
     }
     public static void finalizarTarea(Proyecto proyecto) {
-        System.out.println("Indica la tarea: ");
-        Scanner scanner = new Scanner(System.in);
-        String tarea = scanner.next();
+        String tarea = scanStr("Indica la tarea: ");
         proyecto.buscaTarea(tarea).marcarComoFinalizada();
         showMenu(proyecto);
     }
@@ -109,8 +95,8 @@ public class Interfaz {
         showMenu(proyecto);
     }
 
-    public static void error(Proyecto proyecto){
-        System.out.println("Opción no válida.");
+    public static void error(Proyecto proyecto, String mensaje){
+        System.out.println(mensaje);
         showMenu(proyecto);
     }
 
