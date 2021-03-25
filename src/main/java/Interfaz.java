@@ -4,11 +4,6 @@ import java.util.Scanner;
 
 public class Interfaz {
 
-    public static void imprimirPersonas(List<Persona> personas){
-        System.out.println(personas.toString());
-    }
-    public static void imprimirTareas(List<Tarea> tareas){ System.out.println(tareas.toString()); }
-
     public static Proyecto crearProyecto(){
         System.out.print("Introduce el nombre del proyecto: ");
         Scanner scanner = new Scanner(System.in);
@@ -24,9 +19,9 @@ public class Interfaz {
 
     public static void showMenu(Proyecto proyecto){
 
-        System.out.println(proyecto.getListaPersonas());
-        System.out.println(proyecto.getListaTareas());
-
+//        System.out.println(proyecto.getListaPersonas());
+//        System.out.println(proyecto.getListaTareas());
+        System.out.println("0 Finalizar programa");
         System.out.println("1 Crear Persona");
         System.out.println("2 Crear Tarea");
         System.out.println("3 añadir persona a tarea");
@@ -43,6 +38,9 @@ public class Interfaz {
             case 1 -> crearPersona(proyecto);
             case 2 -> crearTarea(proyecto);
             case 3 -> addPersonaATarea(proyecto);
+            case 4 -> finalizarTarea(proyecto);
+            case 5 -> listarPersonas(proyecto);
+            case 6 -> listarTareas(proyecto);
             default -> error(proyecto);
         }
         //recibir num
@@ -87,17 +85,32 @@ public class Interfaz {
         scanner = new Scanner(System.in);
         String titulo = scanner.next();
 
-        Tarea tarea = proyecto.buscarTarea(titulo);
+        Tarea tarea = proyecto.buscaTarea(titulo);
 
         if(persona == null || tarea == null)
             error(proyecto);
 
         proyecto.addPersonaToTarea(persona, tarea);
+        showMenu(proyecto);
+    }
+    public static void finalizarTarea(Proyecto proyecto) {
+        System.out.println("Indica la tarea: ");
+        Scanner scanner = new Scanner(System.in);
+        String tarea = scanner.next();
+        proyecto.buscaTarea(tarea).marcarComoFinalizada();
+        showMenu(proyecto);
+    }
+    public static void listarPersonas (Proyecto proyecto) {
+        System.out.println(proyecto.getListaPersonas().toString());
+        showMenu(proyecto);
+    }
+    public static void listarTareas (Proyecto proyecto) {
+        System.out.println(proyecto.getListaTareas().toString());
+        showMenu(proyecto);
     }
 
-
     public static void error(Proyecto proyecto){
-        System.out.println("Error: -------");
+        System.out.println("Opción no válida.");
         showMenu(proyecto);
     }
 

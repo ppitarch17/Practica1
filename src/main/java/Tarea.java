@@ -57,6 +57,11 @@ public class Tarea {
     }
 
     //-----GETTERS-----
+
+    public String getTitulo() {
+        return titulo;
+    }
+
     public int getPrioridad() {
         return prioridad;
     }
@@ -77,10 +82,6 @@ public class Tarea {
             listaPersonas.add(responsable);
 
         this.responsable = responsable;
-    }
-
-    public String getTitulo() {
-        return titulo;
     }
 
     public void setDescripcion(String descripcion) {

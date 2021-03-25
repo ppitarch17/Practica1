@@ -87,13 +87,22 @@ public class Proyecto {
         tarea.marcarComoFinalizada();
     }
 
-    public void imprimirPersonas(){
+/*    public void imprimirPersonas(){
         Interfaz.imprimirPersonas(listaPersonas);
     }
     public void imprimirTareas(){
         Interfaz.imprimirTareas(listaTareas);
     }
+*/
 
+    public Tarea buscaTarea (String titulo) {
+        for (Tarea tar : getListaTareas()) {
+            if (tar.getTitulo().equals(titulo)) {
+                return tar;
+            }
+        }
+        return null;
+    }
     public List<Persona> getListaPersonas() {
         return listaPersonas;
     }
