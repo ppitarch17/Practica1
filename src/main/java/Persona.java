@@ -18,6 +18,10 @@ public class Persona {
     public String getCorreo(){return correo;}
     public List<Tarea> getListaTareas(){return listaTareas;}
 
+    public String getDNI() {
+        return DNI;
+    }
+
     public void addTarea(Tarea tarea){
         listaTareas.add(tarea);
     }

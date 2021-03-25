@@ -15,8 +15,6 @@ public class Tarea {
     private Resultado resultado;
     private List<Etiqueta> listaEtiquetas;
 
-    String identificador;
-
     //-----CONSTRUCTORES-----
     public  Tarea(){
         //titulo = null;
@@ -79,6 +77,10 @@ public class Tarea {
             listaPersonas.add(responsable);
 
         this.responsable = responsable;
+    }
+
+    public String getTitulo() {
+        return titulo;
     }
 
     public void setDescripcion(String descripcion) {

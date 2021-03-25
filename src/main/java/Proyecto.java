@@ -18,12 +18,25 @@ public class Proyecto {
         this.listaTareas = listaTareas;
     }
 
-    public void addPersona(String nombre, String correo, String DNI){
+    public boolean addPersona(String nombre, String correo, String DNI){
+
+        for (Persona persona: listaPersonas) {
+            if (persona.getDNI().equals(DNI))
+                return false;
+        }
         listaPersonas.add(new Persona(nombre,correo, DNI));
+        return true;
     }
 
-    public void addTarea(String titulo){
+    public boolean addTarea(String titulo){
+
+        for (Tarea tarea : listaTareas){
+            if (tarea.getTitulo().equals(titulo))
+                return false;
+        }
+
         listaTareas.add(new Tarea(titulo));
+        return true;
     }
 
     public void setTareaComofinalizada(Tarea tarea){
@@ -52,9 +65,13 @@ public class Proyecto {
         return true;
     }
 
-  //  public boolean removeTareadePersona(Persona persona, Tarea tarea){
-
-    //}
+    public Persona getPersona(String DNI){
+        for (Persona persona: listaPersonas) {
+            if (persona.getDNI().equals(DNI))
+                return persona;
+        }
+        return null;
+    }
 
     public void removePersona (Persona persona){
         //elimino persona de la lista del proyecto
