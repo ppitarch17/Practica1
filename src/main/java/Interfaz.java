@@ -11,11 +11,35 @@ public class Interfaz {
 
     public static void main(String[] args) {
         Proyecto proyecto = crearProyecto();
-        showMenu(proyecto);
+        while(true){
+            showMenu(proyecto);
+
+            int op = scanInt("Selecciona una Opcion: ");
+
+            if (op == 0){
+                System.out.println("Fin del Programa");
+                break;
+            }
+
+            switch (op) {
+                case 1 -> crearPersona(proyecto);
+                case 2 -> crearTarea(proyecto);
+                case 3 -> addPersonaATarea(proyecto);
+                case 4 -> removePersonaDeTarea(proyecto);
+                case 5 -> finalizarTarea(proyecto);
+                case 6 -> listarPersonas(proyecto);
+                case 7 -> listarTareas(proyecto);
+                case 8 -> añadirEtiqueta(proyecto);
+                case 9 -> setResponsable(proyecto);
+                default -> error(proyecto, "Opción no válida.");
+            }
+        }
+
     }
 
     public static void showMenu(Proyecto proyecto){
 
+        System.out.println("\n");
         System.out.println("0 Finalizar programa");
         System.out.println("1 Crear Persona");
         System.out.println("2 Crear Tarea");
@@ -27,20 +51,21 @@ public class Interfaz {
         System.out.println("8 añadir etiqueta");
         System.out.println("9 modificar responsable");
 
-        int op = scanInt("Selecciona una Opcion: ");
-        switch (op) {
-            case 0 -> System.out.println("Fin del Programa");
-            case 1 -> crearPersona(proyecto);
-            case 2 -> crearTarea(proyecto);
-            case 3 -> addPersonaATarea(proyecto);
-            case 4 -> removePersonaDeTarea(proyecto);
-            case 5 -> finalizarTarea(proyecto);
-            case 6 -> listarPersonas(proyecto);
-            case 7 -> listarTareas(proyecto);
-            case 8 -> añadirEtiqueta(proyecto);
-            case 9 -> setResponsable(proyecto);
-            default -> error(proyecto, "Opción no válida.");
-        }
+//        int op = scanInt("Selecciona una Opcion: ");
+//        switch (op) {
+//            case 0 -> System.out.println("Fin del Programa");
+//            case 1 -> crearPersona(proyecto);
+//            case 2 -> crearTarea(proyecto);
+//            case 3 -> addPersonaATarea(proyecto);
+//            case 4 -> removePersonaDeTarea(proyecto);
+//            case 5 -> finalizarTarea(proyecto);
+//            case 6 -> listarPersonas(proyecto);
+//            case 7 -> listarTareas(proyecto);
+//            case 8 -> añadirEtiqueta(proyecto);
+//            case 9 -> setResponsable(proyecto);
+//            default -> error(proyecto, "Opción no válida.");
+//        }
+
     }
     public static String scanStr(String mensaje){
         System.out.print(mensaje);
@@ -58,14 +83,12 @@ public class Interfaz {
         String dni = scanStr("Introduce el DNI de la persona: ");
 
         proyecto.addPersona(nombre, correo, dni);
-        showMenu(proyecto);
     }
 
     public static void crearTarea(Proyecto proyecto){
         String titulo = scanStr("Introduce el titulo de la tarea: ");
 
         proyecto.addTarea(titulo);
-        showMenu(proyecto);
     }
 
     public static void addPersonaATarea(Proyecto proyecto){
@@ -82,7 +105,6 @@ public class Interfaz {
         else
             proyecto.addPersonaToTarea(persona, tarea);
 
-        showMenu(proyecto);
     }
 
     public static void removePersonaDeTarea(Proyecto proyecto) {
@@ -94,21 +116,17 @@ public class Interfaz {
             error(proyecto, "Persona o tarea no encontrada");
         else
             proyecto.removePersonaDeTarea(persona, tarea);
-        showMenu(proyecto);
     }
 
     public static void finalizarTarea(Proyecto proyecto) {
         String tarea = scanStr("Indica la tarea: ");
         proyecto.buscaTarea(tarea).marcarComoFinalizada();
-        showMenu(proyecto);
     }
     public static void listarPersonas (Proyecto proyecto) {
         System.out.println("Personas en \"" + proyecto.getNombre() + "\": " + proyecto.getListaPersonas().toString());
-        showMenu(proyecto);
     }
     public static void listarTareas (Proyecto proyecto) {
         System.out.println("Tareas de \"" + proyecto.getNombre() + "\": " + proyecto.getListaTareas().toString());
-        showMenu(proyecto);
     }
 
     public static void  añadirEtiqueta(Proyecto proyecto) {
@@ -121,7 +139,6 @@ public class Interfaz {
             if (tarea.containsEtiqueta(etiqueta))
                 error(proyecto, "La tarea ya tiene esa etiqueta");
             tarea.addEtiqueta(new Etiqueta(etiqueta));
-            showMenu(proyecto);
         }
     }
 
@@ -138,14 +155,11 @@ public class Interfaz {
 
         if(!tarea.setResponsable(persona))
             error(proyecto,"No se pudo cambiar de responsable");
-
-        showMenu(proyecto);
     }
 
 
     public static void error(Proyecto proyecto, String mensaje){
         System.out.println(mensaje);
-        showMenu(proyecto);
     }
 
 }
