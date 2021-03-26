@@ -79,6 +79,7 @@ public class Interfaz {
             error(proyecto, "Persona o tarea no encontrada");
         else
             proyecto.addPersonaToTarea(persona, tarea);
+
         showMenu(proyecto);
     }
     public static void finalizarTarea(Proyecto proyecto) {
