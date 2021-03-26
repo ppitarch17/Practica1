@@ -12,12 +12,6 @@ public class Proyecto {
         this.listaTareas = new ArrayList<>();
     }
 
-//    public Proyecto(String nombre, List<Persona> listaPersonas, List<Tarea> listaTareas){
-//        this.nombre = nombre;
-//        this.listaPersonas = listaPersonas;
-//        this.listaTareas = listaTareas;
-//    }
-
     public boolean addPersona(String nombre, String correo, String DNI){
 
         for (Persona persona: listaPersonas) {
@@ -41,8 +35,6 @@ public class Proyecto {
 
     public boolean addPersonaToTarea(Persona persona, Tarea tarea){
 
-        //Si la tarea o la persona no estan en el proyecto return false.
-        //Si la persona ya esta en esa tarea return false.
         if (!listaTareas.contains(tarea) || !listaPersonas.contains(persona) || tarea.getListaPersonas().contains(persona))
             return false;
 
@@ -69,28 +61,9 @@ public class Proyecto {
         return null;
     }
 
-    public void removePersona (Persona persona){
-        //elimino persona de la lista del proyecto
-        listaPersonas.remove(persona);
-        //elimino a la persona de todas las tareas en las que aparece
-        for (Tarea tarea : listaTareas) {
-            //if (tarea.getListaPersonas().contains(persona))
-            tarea.removePersona(persona);
-
-        }
-    }
-
     public void removeTarea(Tarea tarea){
         tarea.marcarComoFinalizada();
     }
-
-/*    public void imprimirPersonas(){
-        Interfaz.imprimirPersonas(listaPersonas);
-    }
-    public void imprimirTareas(){
-        Interfaz.imprimirTareas(listaTareas);
-    }
-*/
 
     public Tarea buscaTarea (String titulo) {
         for (Tarea tarea : getListaTareas()) {
