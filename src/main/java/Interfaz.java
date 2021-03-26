@@ -16,8 +16,6 @@ public class Interfaz {
 
     public static void showMenu(Proyecto proyecto){
 
-//        System.out.println(proyecto.getListaPersonas());
-//        System.out.println(proyecto.getListaTareas());
         System.out.println("0 Finalizar programa");
         System.out.println("1 Crear Persona");
         System.out.println("2 Crear Tarea");
@@ -26,8 +24,11 @@ public class Interfaz {
         System.out.println("5 finalizar tarea");
         System.out.println("6 listar personas");
         System.out.println("7 listar tareas");
+        System.out.println("8 añadir etiqueta");
+        System.out.println("9 modificar responsable");
 
         int op = scanInt("Selecciona una Opcion: ");
+
         switch (op) {
             case 0 -> System.out.println("Fin del Programa");
             case 1 -> crearPersona(proyecto);
@@ -37,6 +38,7 @@ public class Interfaz {
             case 5 -> finalizarTarea(proyecto);
             case 6 -> listarPersonas(proyecto);
             case 7 -> listarTareas(proyecto);
+            case 8 -> añadirEtiqueta(proyecto);
             default -> error(proyecto, "Opción no válida.");
         }
     }
@@ -109,9 +111,22 @@ public class Interfaz {
         showMenu(proyecto);
     }
 
+    public static void  añadirEtiqueta(Proyecto proyecto) {
+        String nombre = scanStr("Indica la tarea: ");
+        Tarea tarea = proyecto.buscaTarea(nombre);
+        if (tarea == null)
+            error(proyecto, "No existe esa tarea");
+        else {
+            String etiqueta = scanStr("Indica el nombre de la etiqueta: ");
+            if (tarea.containsEtiqueta(etiqueta))
+                error(proyecto, "La tarea ya tiene esa etiqueta");
+            tarea.addEtiqueta(new Etiqueta(etiqueta));
+            showMenu(proyecto);
+        }
+    }
+
     public static void error(Proyecto proyecto, String mensaje){
         System.out.println(mensaje);
         showMenu(proyecto);
     }
-
 }

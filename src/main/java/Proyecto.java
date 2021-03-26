@@ -93,9 +93,9 @@ public class Proyecto {
 */
 
     public Tarea buscaTarea (String titulo) {
-        for (Tarea tar : getListaTareas()) {
-            if (tar.getTitulo().equals(titulo)) {
-                return tar;
+        for (Tarea tarea : getListaTareas()) {
+            if (tarea.getTitulo().equals(titulo)) {
+                return tarea;
             }
         }
         return null;

@@ -26,7 +26,7 @@ public class Tarea {
 
     public Tarea(String titulo) {
         this.titulo = titulo;
-        this.resultado = resultado;
+        this.resultado = null;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
         //inicializo la prioridad a 1 para que no sea 0 (no es valido)
@@ -53,6 +53,9 @@ public class Tarea {
         return responsable;
     }
 
+    public List<Etiqueta> getListaEtiquetas() {
+        return listaEtiquetas;
+    }
 
     //-----SETTERS-----
     public boolean setResponsable(Persona responsable) {
@@ -103,7 +106,13 @@ public class Tarea {
 
         return listaEtiquetas.add(etiqueta);
     }
-
+    public boolean containsEtiqueta(String etiqueta) {
+        for (Etiqueta etiq : listaEtiquetas){
+            if (etiqueta.equals(etiq.getNombre()))
+                return true;
+        }
+        return false;
+    }
     @Override
     public String toString() {
         return  titulo + "{" +
