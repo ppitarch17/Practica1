@@ -48,16 +48,4 @@ class ProyectoTest {
         Tarea tarea = proyecto.getListaTareas().get(1);
         assertEquals(tarea, proyecto.buscaTarea("casa"));
     }
-
-    @Test
-    void getListaPersonas() {
-    }
-
-    @Test
-    void getListaTareas() {
-    }
-
-    @Test
-    void getNombre() {
-    }
 }

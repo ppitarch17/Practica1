@@ -22,15 +22,16 @@ class TareaTest {
     @org.junit.jupiter.api.Test
     void setResposable(){
         Tarea tarea = new Tarea();
-        tarea.addPersona(new Persona("Persona", "persona@uji.es", "11111111A"));
+        Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
+        tarea.addPersona(persona);
 
-        assertNull(tarea.getResponsable());
+        assertEquals(persona, tarea.getResponsable());
 
-        Persona persona = new Persona("Persona2", "persona2@uji.es", "222222222A");
+        Persona persona2 = new Persona("Persona2", "persona2@uji.es", "222222222A");
 
         tarea.setResponsable(persona);
 
-        assertNull(tarea.getResponsable());
+        assertEquals(persona, tarea.getResponsable());
 
         tarea.addPersona(persona);
         tarea.setResponsable(persona);
