@@ -124,8 +124,21 @@ public class Interfaz {
         }
     }
 
-    public static void setResponsable(){
+    public static void setResponsable(Proyecto proyecto){
+        Tarea tarea = proyecto.buscaTarea(scanStr("Dame el titulo de la tarea: "));
 
+        if (tarea == null)
+            error(proyecto, "Tarea no encontrada");
+
+        Persona persona = tarea.getPersona(scanStr("Dame el dni de la persona: "));
+
+        if (persona == null)
+            error(proyecto, "Persona no encontrada");
+
+        if(!tarea.setResponsable(persona))
+            error(proyecto,"No se pudo cambiar de responsable");
+
+        showMenu(proyecto);
     }
 
 

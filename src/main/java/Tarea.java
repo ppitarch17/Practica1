@@ -57,6 +57,15 @@ public class Tarea {
         return listaEtiquetas;
     }
 
+    public Persona getPersona(String dni){
+        for (Persona persona : listaPersonas) {
+            if (persona.getDNI().equals(dni))
+                return persona;
+
+        }
+        return null;
+    }
+
     //-----SETTERS-----
     public boolean setResponsable(Persona responsable) {
         if(!listaPersonas.contains(responsable))
