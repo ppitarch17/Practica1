@@ -39,10 +39,6 @@ public class Proyecto {
         return true;
     }
 
-//    public void setTareaComofinalizada(Tarea tarea){
-//        tarea.marcarComoFinalizada();
-//    }
-
     public boolean addPersonaToTarea(Persona persona, Tarea tarea){
 
         //Si la tarea o la persona no estan en el proyecto return false.
