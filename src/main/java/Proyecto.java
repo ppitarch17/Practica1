@@ -61,7 +61,7 @@ public class Proyecto {
         return null;
     }
 
-    public void removeTarea(Tarea tarea){
+    public void setTareaFinalizada(Tarea tarea){
         tarea.marcarComoFinalizada();
     }
 

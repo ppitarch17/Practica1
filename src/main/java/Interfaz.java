@@ -39,44 +39,32 @@ public class Interfaz {
 
     public static void showMenu(Proyecto proyecto){
 
-        System.out.println("\n");
-        System.out.println("0 Finalizar programa");
-        System.out.println("1 Crear Persona");
-        System.out.println("2 Crear Tarea");
-        System.out.println("3 añadir persona a tarea");
-        System.out.println("4 quitar persona de tarea");
-        System.out.println("5 finalizar tarea");
-        System.out.println("6 listar personas");
-        System.out.println("7 listar tareas");
-        System.out.println("8 añadir etiqueta");
-        System.out.println("9 modificar responsable");
-
-//        int op = scanInt("Selecciona una Opcion: ");
-//        switch (op) {
-//            case 0 -> System.out.println("Fin del Programa");
-//            case 1 -> crearPersona(proyecto);
-//            case 2 -> crearTarea(proyecto);
-//            case 3 -> addPersonaATarea(proyecto);
-//            case 4 -> removePersonaDeTarea(proyecto);
-//            case 5 -> finalizarTarea(proyecto);
-//            case 6 -> listarPersonas(proyecto);
-//            case 7 -> listarTareas(proyecto);
-//            case 8 -> añadirEtiqueta(proyecto);
-//            case 9 -> setResponsable(proyecto);
-//            default -> error(proyecto, "Opción no válida.");
-//        }
+        System.out.println();
+        System.out.println("\t0 Finalizar programa");
+        System.out.println("\t1 Crear Persona");
+        System.out.println("\t2 Crear Tarea");
+        System.out.println("\t3 Añadir persona a tarea");
+        System.out.println("\t4 Quitar persona de tarea");
+        System.out.println("\t5 Finalizar tarea");
+        System.out.println("\t6 listar personas");
+        System.out.println("\t7 Listar tareas");
+        System.out.println("\t8 Añadir etiqueta");
+        System.out.println("\t9 Modificar responsable");
 
     }
+
     public static String scanStr(String mensaje){
         System.out.print(mensaje);
         Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }
+
     public static int scanInt(String mensaje){
         System.out.print(mensaje);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
+
     public static void crearPersona(Proyecto proyecto){
         String nombre = scanStr("Introduce el nombre de la persona: ");
         String correo = scanStr("Introduce el correo de la persona: ");
@@ -120,11 +108,13 @@ public class Interfaz {
 
     public static void finalizarTarea(Proyecto proyecto) {
         String tarea = scanStr("Indica la tarea: ");
-        proyecto.buscaTarea(tarea).marcarComoFinalizada();
+        proyecto.setTareaFinalizada(proyecto.buscaTarea(tarea));
     }
+
     public static void listarPersonas (Proyecto proyecto) {
         System.out.println("Personas en \"" + proyecto.getNombre() + "\": " + proyecto.getListaPersonas().toString());
     }
+
     public static void listarTareas (Proyecto proyecto) {
         System.out.println("Tareas de \"" + proyecto.getNombre() + "\": " + proyecto.getListaTareas().toString());
     }

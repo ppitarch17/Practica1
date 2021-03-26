@@ -41,20 +41,12 @@ public class Tarea {
         return titulo;
     }
 
-    public int getPrioridad() {
-        return prioridad;
-    }
-
     public List<Persona> getListaPersonas() {
         return listaPersonas;
     }
 
     public Persona getResponsable() {
         return responsable;
-    }
-
-    public List<Etiqueta> getListaEtiquetas() {
-        return listaEtiquetas;
     }
 
     public Persona getPersona(String dni){
@@ -73,10 +65,6 @@ public class Tarea {
 
         this.responsable = responsable;
         return true;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public void setPrioridad(int prioridad){
@@ -118,6 +106,7 @@ public class Tarea {
 
         return listaEtiquetas.add(etiqueta);
     }
+
     public boolean containsEtiqueta(String etiqueta) {
         for (Etiqueta etiq : listaEtiquetas){
             if (etiqueta.equals(etiq.getNombre()))
