@@ -132,6 +132,7 @@ public class Tarea {
                 ", responsable =" + responsable +
                 ", isFinalizada=" + isFinalizada +
                 ", resultado=" + resultado +
+                ", etiquetas=" + listaEtiquetas +
                 '}';
     }
 }
