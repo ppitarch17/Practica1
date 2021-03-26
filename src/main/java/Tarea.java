@@ -26,7 +26,6 @@ public class Tarea {
 
     public Tarea(String titulo) {
         this.titulo = titulo;
-        this.resultado = resultado;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
         //inicializo la prioridad a 1 para que no sea 0 (no es valido)
@@ -88,6 +87,9 @@ public class Tarea {
 
         if(listaPersonas.contains(persona) || persona == null)
             return false;
+
+        if (listaPersonas.isEmpty())
+            this.responsable = persona;
 
         return listaPersonas.add(persona);
     }

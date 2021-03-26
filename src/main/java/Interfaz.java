@@ -95,6 +95,11 @@ public class Interfaz {
         showMenu(proyecto);
     }
 
+    public static void setResponsable(){
+
+    }
+
+
     public static void error(Proyecto proyecto, String mensaje){
         System.out.println(mensaje);
         showMenu(proyecto);
