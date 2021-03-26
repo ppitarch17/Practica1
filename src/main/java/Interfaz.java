@@ -11,7 +11,6 @@ public class Interfaz {
 
     public static void main(String[] args) {
         Proyecto proyecto = crearProyecto();
-        System.out.println(proyecto.getNombre());
         showMenu(proyecto);
     }
 
@@ -19,18 +18,18 @@ public class Interfaz {
 
 //        System.out.println(proyecto.getListaPersonas());
 //        System.out.println(proyecto.getListaTareas());
-        System.out.println("0 Finalizar programa");
-        System.out.println("1 Crear Persona");
-        System.out.println("2 Crear Tarea");
-        System.out.println("3 añadir persona a tarea");
-        System.out.println("4 finalizar tarea");
-        System.out.println("5 listar personas");
-        System.out.println("6 listar tareas");
+        System.out.println("\nOpciones de Proyecto \"" + proyecto.getNombre() + "\": ");
+        System.out.println("\t0 Finalizar programa");
+        System.out.println("\t1 Crear Persona");
+        System.out.println("\t2 Crear Tarea");
+        System.out.println("\t3 Añadir persona a tarea");
+        System.out.println("\t4 Finalizar tarea");
+        System.out.println("\t5 Listar personas");
+        System.out.println("\t6 Listar tareas");
 
-        int op = scanInt("Selecciona: ");
-
+        int op = scanInt("Selecciona una Opcion: ");
         switch (op) {
-            case 0 -> System.out.println("Fin");
+            case 0 -> System.out.println("Fin del Programa");
             case 1 -> crearPersona(proyecto);
             case 2 -> crearTarea(proyecto);
             case 3 -> addPersonaATarea(proyecto);
@@ -88,11 +87,11 @@ public class Interfaz {
         showMenu(proyecto);
     }
     public static void listarPersonas (Proyecto proyecto) {
-        System.out.println(proyecto.getListaPersonas().toString());
+        System.out.println("Personas en \"" + proyecto.getNombre() + "\": " + proyecto.getListaPersonas().toString());
         showMenu(proyecto);
     }
     public static void listarTareas (Proyecto proyecto) {
-        System.out.println(proyecto.getListaTareas().toString());
+        System.out.println("Tareas de \"" + proyecto.getNombre() + "\": " + proyecto.getListaTareas().toString());
         showMenu(proyecto);
     }
 

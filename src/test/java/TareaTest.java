@@ -50,4 +50,15 @@ class TareaTest {
         assertTrue(tarea.setResponsable(persona));
     }
 
+    @org.junit.jupiter.api.Test
+    void addPersona() {
+        Tarea tarea = new Tarea();
+        assertFalse(tarea.addPersona(null));
+
+        Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
+        assertTrue(tarea.addPersona(persona));
+        assertFalse(tarea.addPersona(persona));
+    }
+
+
 }

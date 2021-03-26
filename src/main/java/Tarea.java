@@ -26,6 +26,7 @@ public class Tarea {
 
     public Tarea(String titulo) {
         this.titulo = titulo;
+        this.resultado = resultado;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
         //inicializo la prioridad a 1 para que no sea 0 (no es valido)
@@ -33,36 +34,6 @@ public class Tarea {
         fechaCreado = LocalDate.now();
     }
 
-
-    //-----METODOS-----
-    public void marcarComoFinalizada(){ //Fecha fin es opcional
-        isFinalizada = true;
-    }
-
-    public void marcarComoFinalizada(LocalDate fechaFin){
-        isFinalizada = true;
-        this.fechaFin = fechaFin;
-    }
-
-    public boolean addPersona(Persona persona) {
-
-        if(listaPersonas.contains(persona))
-            return false;
-
-        return listaPersonas.add(persona);
-    }
-
-    public boolean removePersona(Persona persona) {
-        return listaPersonas.remove(persona);
-    }
-
-    public boolean addEtiqueta(Etiqueta etiqueta) {
-
-        if(listaEtiquetas.contains(etiqueta))
-            return false;
-
-        return listaEtiquetas.add(etiqueta);
-    }
 
     //-----GETTERS-----
 
@@ -82,10 +53,9 @@ public class Tarea {
         return responsable;
     }
 
+
     //-----SETTERS-----
     public boolean setResponsable(Persona responsable) {
-
-        //El responsable debe estar en ListaPersonas
         if(!listaPersonas.contains(responsable))
             return false;
 
@@ -103,10 +73,40 @@ public class Tarea {
         this.prioridad = prioridad;
     }
 
+
+    //-----METODOS-----
+    public void marcarComoFinalizada(){ //Fecha fin es opcional
+        isFinalizada = true;
+    }
+
+    public void marcarComoFinalizada(LocalDate fechaFin){
+        isFinalizada = true;
+        this.fechaFin = fechaFin;
+    }
+
+    public boolean addPersona(Persona persona) {
+
+        if(listaPersonas.contains(persona) || persona == null)
+            return false;
+
+        return listaPersonas.add(persona);
+    }
+
+    public boolean removePersona(Persona persona) {
+        return listaPersonas.remove(persona);
+    }
+
+    public boolean addEtiqueta(Etiqueta etiqueta) {
+
+        if(listaEtiquetas.contains(etiqueta))
+            return false;
+
+        return listaEtiquetas.add(etiqueta);
+    }
+
     @Override
     public String toString() {
-        return "Tarea{" +
-                "titulo='" + titulo + '\'' +
+        return  titulo + "{" +
                 ", listaPersonas=" + listaPersonas +
                 ", responsable =" + responsable +
                 ", isFinalizada=" + isFinalizada +

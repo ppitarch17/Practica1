@@ -7,6 +7,7 @@ public class Persona {
     private String DNI; //identificador
     private List<Tarea> listaTareas;
 
+    //-----CONSTRUCTORES-----
     public Persona(String nombre, String correo, String DNI) {
         this.nombre = nombre;
         this.correo = correo;
@@ -14,6 +15,7 @@ public class Persona {
         listaTareas = new ArrayList<>();
     }
 
+    //-----GETTERS-----
     public String getNombre(){return nombre;}
     public String getCorreo(){return correo;}
     public List<Tarea> getListaTareas(){return listaTareas;}
@@ -21,9 +23,11 @@ public class Persona {
         return DNI;
     }
 
+
+    //-----METODOS-----
     public boolean addTarea(Tarea tarea){
 
-        if(listaTareas.contains(tarea))
+        if(listaTareas.contains(tarea) || tarea == null)
             return false;
 
        return listaTareas.add(tarea);
