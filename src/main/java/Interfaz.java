@@ -23,9 +23,10 @@ public class Interfaz {
         System.out.println("1 Crear Persona");
         System.out.println("2 Crear Tarea");
         System.out.println("3 añadir persona a tarea");
-        System.out.println("4 finalizar tarea");
-        System.out.println("5 listar personas");
-        System.out.println("6 listar tareas");
+        System.out.println("4 quitar persona de tarea");
+        System.out.println("5 finalizar tarea");
+        System.out.println("6 listar personas");
+        System.out.println("7 listar tareas");
 
         int op = scanInt("Selecciona: ");
 
@@ -34,9 +35,10 @@ public class Interfaz {
             case 1 -> crearPersona(proyecto);
             case 2 -> crearTarea(proyecto);
             case 3 -> addPersonaATarea(proyecto);
-            case 4 -> finalizarTarea(proyecto);
-            case 5 -> listarPersonas(proyecto);
-            case 6 -> listarTareas(proyecto);
+            case 4 -> removePersonaDeTarea(proyecto);
+            case 5 -> finalizarTarea(proyecto);
+            case 6 -> listarPersonas(proyecto);
+            case 7 -> listarTareas(proyecto);
             default -> error(proyecto, "Opción no válida.");
         }
     }
@@ -81,6 +83,19 @@ public class Interfaz {
             proyecto.addPersonaToTarea(persona, tarea);
         showMenu(proyecto);
     }
+
+    public static void removePersonaDeTarea(Proyecto proyecto) {
+        String dni = scanStr("Introduce el DNI de la persona: ");
+        Persona persona = proyecto.getPersona(dni);
+        String titulo = scanStr("Introduce el titulo de la tarea: ");
+        Tarea tarea = proyecto.buscaTarea(titulo);
+        if(persona == null || tarea == null)
+            error(proyecto, "Persona o tarea no encontrada");
+        else
+            proyecto.removePersonaDeTarea(persona, tarea);
+        showMenu(proyecto);
+    }
+
     public static void finalizarTarea(Proyecto proyecto) {
         String tarea = scanStr("Indica la tarea: ");
         proyecto.buscaTarea(tarea).marcarComoFinalizada();

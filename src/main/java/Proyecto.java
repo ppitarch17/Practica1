@@ -12,11 +12,11 @@ public class Proyecto {
         this.listaTareas = new ArrayList<>();
     }
 
-    public Proyecto(String nombre, List<Persona> listaPersonas, List<Tarea> listaTareas){
-        this.nombre = nombre;
-        this.listaPersonas = listaPersonas;
-        this.listaTareas = listaTareas;
-    }
+//    public Proyecto(String nombre, List<Persona> listaPersonas, List<Tarea> listaTareas){
+//        this.nombre = nombre;
+//        this.listaPersonas = listaPersonas;
+//        this.listaTareas = listaTareas;
+//    }
 
     public boolean addPersona(String nombre, String correo, String DNI){
 
@@ -39,9 +39,9 @@ public class Proyecto {
         return true;
     }
 
-    public void setTareaComofinalizada(Tarea tarea){
-        tarea.marcarComoFinalizada();
-    }
+//    public void setTareaComofinalizada(Tarea tarea){
+//        tarea.marcarComoFinalizada();
+//    }
 
     public boolean addPersonaToTarea(Persona persona, Tarea tarea){
 
