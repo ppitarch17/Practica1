@@ -6,7 +6,7 @@ class ProyectoTest {
     Proyecto proyecto = new Proyecto("proj");
     @Test
     void addPersona() {
-        assertTrue(proyecto.addPersona("feli", "feli@gato.es", "123F"));
+        assertTrue(proyecto.addPersona("pepe", "pepe@uji.es", "123F"));
         assertTrue(proyecto.addPersona(null,null , "123A"));
     }
 
@@ -17,7 +17,7 @@ class ProyectoTest {
 
     @Test
     void addPersonaToTarea() {
-        proyecto.addPersona("feli", "feli@gato.es", "123F");
+        proyecto.addPersona("pepe", "pepe@uji.es", "123F");
         proyecto.addTarea("tarea");
         Persona persona = proyecto.getPersona("123F");
         Tarea tarea = proyecto.getListaTareas().get(0);
@@ -26,7 +26,7 @@ class ProyectoTest {
 
     @Test
     void removePersonaDeTarea() {
-        proyecto.addPersona("feli", "feli@gato.es", "123F");
+        proyecto.addPersona("pepe", "pepe@uji.es", "123F");
         proyecto.addTarea("tarea");
         Persona persona = proyecto.getPersona("123F");
         Tarea tarea = proyecto.getListaTareas().get(0);
@@ -36,7 +36,7 @@ class ProyectoTest {
 
     @Test
     void getPersona() {
-        proyecto.addPersona("feli", "feli@gato.es", "123F");
+        proyecto.addPersona("pepe", "pepe@uji.es", "123F");
         Persona persona = proyecto.getListaPersonas().get(0);
         assertEquals(persona, proyecto.getPersona("123F"));
     }
