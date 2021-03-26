@@ -74,8 +74,9 @@ public class Proyecto {
         listaPersonas.remove(persona);
         //elimino a la persona de todas las tareas en las que aparece
         for (Tarea tarea : listaTareas) {
-            if (tarea.getListaPersonas().contains(persona))
-                tarea.removePersona(persona);
+            //if (tarea.getListaPersonas().contains(persona))
+            tarea.removePersona(persona);
+
         }
     }
 

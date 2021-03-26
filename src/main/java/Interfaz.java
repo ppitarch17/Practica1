@@ -11,7 +11,6 @@ public class Interfaz {
 
     public static void main(String[] args) {
         Proyecto proyecto = crearProyecto();
-        System.out.println(proyecto.getNombre());
         showMenu(proyecto);
     }
 
@@ -28,10 +27,9 @@ public class Interfaz {
         System.out.println("6 listar personas");
         System.out.println("7 listar tareas");
 
-        int op = scanInt("Selecciona: ");
-
+        int op = scanInt("Selecciona una Opcion: ");
         switch (op) {
-            case 0 -> System.out.println("Fin");
+            case 0 -> System.out.println("Fin del Programa");
             case 1 -> crearPersona(proyecto);
             case 2 -> crearTarea(proyecto);
             case 3 -> addPersonaATarea(proyecto);
@@ -81,6 +79,7 @@ public class Interfaz {
             error(proyecto, "Persona o tarea no encontrada");
         else
             proyecto.addPersonaToTarea(persona, tarea);
+
         showMenu(proyecto);
     }
 
@@ -102,11 +101,11 @@ public class Interfaz {
         showMenu(proyecto);
     }
     public static void listarPersonas (Proyecto proyecto) {
-        System.out.println(proyecto.getListaPersonas().toString());
+        System.out.println("Personas en \"" + proyecto.getNombre() + "\": " + proyecto.getListaPersonas().toString());
         showMenu(proyecto);
     }
     public static void listarTareas (Proyecto proyecto) {
-        System.out.println(proyecto.getListaTareas().toString());
+        System.out.println("Tareas de \"" + proyecto.getNombre() + "\": " + proyecto.getListaTareas().toString());
         showMenu(proyecto);
     }
 

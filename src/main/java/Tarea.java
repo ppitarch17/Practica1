@@ -1,5 +1,6 @@
 import Resultados.Resultado;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,10 @@ public class Tarea {
     private String titulo;
     private String descripcion;
     private List<Persona> listaPersonas;
-    private Persona responsable;
+    private Persona responsable = null;
     private int prioridad;
-    private String fechaCreado;
-    private String fechaFin; // (puede estar en blanco)
+    private LocalDate fechaCreado;
+    private LocalDate fechaFin; // opcional
     private boolean isFinalizada;
     private Resultado resultado;
     private List<Etiqueta> listaEtiquetas;
@@ -25,36 +26,14 @@ public class Tarea {
 
     public Tarea(String titulo) {
         this.titulo = titulo;
+        this.resultado = resultado;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
         //inicializo la prioridad a 1 para que no sea 0 (no es valido)
         prioridad = 1;
-        //set fecha creacion
+        fechaCreado = LocalDate.now();
     }
 
-
-    //-----METODOS-----
-    public void marcarComoFinalizada(){ //Fecha fin es opcional
-
-        //si ya esta finalizada?
-
-        isFinalizada = true;
-    }
-
-    public void marcarComoFinalizada(String fechaFin){
-        isFinalizada = true;
-        this.fechaFin = fechaFin;
-    }
-
-    public void addPersona(Persona persona) {
-        listaPersonas.add(persona);
-    }
-    public void removePersona(Persona persona) {
-        listaPersonas.remove(persona);
-    }
-    public void addEtiqueta(Etiqueta etiqueta) {
-        listaEtiquetas.add(etiqueta);
-    }
 
     //-----GETTERS-----
 
@@ -74,30 +53,60 @@ public class Tarea {
         return responsable;
     }
 
-    //-----SETTERS-----
-    public void setResponsable(Persona responsable) {
 
-        //Si el responsable no esta en la lista de la tarea lo añadimos
+    //-----SETTERS-----
+    public boolean setResponsable(Persona responsable) {
         if(!listaPersonas.contains(responsable))
-            listaPersonas.add(responsable);
+            return false;
 
         this.responsable = responsable;
+        return true;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public void setPrioridad(int prioridad) throws Exception {
-        if (prioridad < 1 || prioridad > 5) //exception?
+    public void setPrioridad(int prioridad){
+        if (prioridad < 1 || prioridad > 5)
             throw new IllegalArgumentException();
         this.prioridad = prioridad;
     }
 
+
+    //-----METODOS-----
+    public void marcarComoFinalizada(){ //Fecha fin es opcional
+        isFinalizada = true;
+    }
+
+    public void marcarComoFinalizada(LocalDate fechaFin){
+        isFinalizada = true;
+        this.fechaFin = fechaFin;
+    }
+
+    public boolean addPersona(Persona persona) {
+
+        if(listaPersonas.contains(persona) || persona == null)
+            return false;
+
+        return listaPersonas.add(persona);
+    }
+
+    public boolean removePersona(Persona persona) {
+        return listaPersonas.remove(persona);
+    }
+
+    public boolean addEtiqueta(Etiqueta etiqueta) {
+
+        if(listaEtiquetas.contains(etiqueta))
+            return false;
+
+        return listaEtiquetas.add(etiqueta);
+    }
+
     @Override
     public String toString() {
-        return "Tarea{" +
-                "titulo='" + titulo + '\'' +
+        return  titulo + "{" +
                 ", listaPersonas=" + listaPersonas +
                 ", responsable =" + responsable +
                 ", isFinalizada=" + isFinalizada +
