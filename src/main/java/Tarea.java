@@ -18,10 +18,12 @@ public class Tarea {
 
     //-----CONSTRUCTORES-----
     public  Tarea(){
-        //titulo = null;
+        titulo = "";
+        this.resultado = null;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
         prioridad = 1;
+        fechaCreado = LocalDate.now();
     }
 
     public Tarea(String titulo) {
@@ -29,8 +31,7 @@ public class Tarea {
         this.resultado = null;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
-        //inicializo la prioridad a 1 para que no sea 0 (no es valido)
-        prioridad = 1;
+        prioridad = 1; //inicializo la prioridad a 1 para que no sea 0 (no es valido)
         fechaCreado = LocalDate.now();
     }
 

@@ -31,7 +31,7 @@ public class Interfaz {
                 case 7 -> listarTareas(proyecto);
                 case 8 -> añadirEtiqueta(proyecto);
                 case 9 -> setResponsable(proyecto);
-                default -> error(proyecto, "Opción no válida.");
+                default -> error("Opción no válida.");
             }
         }
 
@@ -89,7 +89,7 @@ public class Interfaz {
         Tarea tarea = proyecto.buscaTarea(titulo);
 
         if(persona == null || tarea == null)
-            error(proyecto, "Persona o tarea no encontrada");
+            error("Persona o tarea no encontrada");
         else
             proyecto.addPersonaToTarea(persona, tarea);
 
@@ -101,7 +101,7 @@ public class Interfaz {
         String titulo = scanStr("Introduce el titulo de la tarea: ");
         Tarea tarea = proyecto.buscaTarea(titulo);
         if(persona == null || tarea == null)
-            error(proyecto, "Persona o tarea no encontrada");
+            error("Persona o tarea no encontrada");
         else
             proyecto.removePersonaDeTarea(persona, tarea);
     }
@@ -123,32 +123,32 @@ public class Interfaz {
         String nombre = scanStr("Indica la tarea: ");
         Tarea tarea = proyecto.buscaTarea(nombre);
         if (tarea == null)
-            error(proyecto, "No existe esa tarea");
+            error("No existe esa tarea");
         else {
             String etiqueta = scanStr("Indica el nombre de la etiqueta: ");
             if (tarea.containsEtiqueta(etiqueta))
-                error(proyecto, "La tarea ya tiene esa etiqueta");
+                error("La tarea ya tiene esa etiqueta");
             tarea.addEtiqueta(new Etiqueta(etiqueta));
         }
     }
 
     public static void setResponsable(Proyecto proyecto){
-        Tarea tarea = proyecto.buscaTarea(scanStr("Dame el titulo de la tarea: "));
+        Tarea tarea = proyecto.buscaTarea(scanStr("Indica el titulo de la tarea: "));
 
         if (tarea == null)
-            error(proyecto, "Tarea no encontrada");
+            error("Tarea no encontrada");
 
-        Persona persona = tarea.getPersona(scanStr("Dame el dni de la persona: "));
+        Persona persona = tarea.getPersona(scanStr("Indica el dni de la persona: "));
 
         if (persona == null)
-            error(proyecto, "Persona no encontrada");
+            error("Persona no encontrada");
 
         if(!tarea.setResponsable(persona))
-            error(proyecto,"No se pudo cambiar de responsable");
+            error("No se pudo cambiar de responsable");
     }
 
 
-    public static void error(Proyecto proyecto, String mensaje){
+    public static void error(String mensaje){
         System.out.println(mensaje);
     }
 

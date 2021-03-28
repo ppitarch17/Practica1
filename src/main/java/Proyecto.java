@@ -6,6 +6,12 @@ public class Proyecto {
     private List<Tarea> listaTareas;
     private String nombre;
 
+    public Proyecto(){
+        this.nombre = "";
+        this.listaPersonas = new ArrayList<>();
+        this.listaTareas = new ArrayList<>();
+    }
+
     public Proyecto(String nombre){
         this.nombre = nombre;
         this.listaPersonas = new ArrayList<>();

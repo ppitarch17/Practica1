@@ -8,6 +8,14 @@ public class Persona {
     private List<Tarea> listaTareas;
 
     //-----CONSTRUCTORES-----
+
+    public Persona() {
+        this.nombre = "";
+        this.correo = "";
+        this.DNI = "";
+        listaTareas = new ArrayList<>();
+    }
+
     public Persona(String nombre, String correo, String DNI) {
         this.nombre = nombre;
         this.correo = correo;
