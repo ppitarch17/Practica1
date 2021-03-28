@@ -12,7 +12,7 @@ public class Interfaz {
     public static void main(String[] args) {
         Proyecto proyecto = crearProyecto();
         while(true){
-            showMenu(proyecto);
+            showMenu();
 
             int op = scanInt("Selecciona una Opcion: ");
 
@@ -37,7 +37,7 @@ public class Interfaz {
 
     }
 
-    public static void showMenu(Proyecto proyecto){
+    public static void showMenu(){
 
         System.out.println();
         System.out.println("\t0 Finalizar programa");
