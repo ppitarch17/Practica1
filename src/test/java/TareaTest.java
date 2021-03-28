@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TareaTest {
 
+    Tarea tarea = new Tarea();
+
     @org.junit.jupiter.api.Test
     void setPrioridad() {
-        Tarea tarea = new Tarea();
 
         String mensajeSiError = "Test.setPropiedad() lanzo una expecion que no deberia. propidad debe estar entre 1 y 5";
         assertDoesNotThrow(() -> tarea.setPrioridad(1), mensajeSiError);
@@ -21,13 +22,10 @@ class TareaTest {
 
     @org.junit.jupiter.api.Test
     void setResposable(){
-        Tarea tarea = new Tarea();
         Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
         tarea.addPersona(persona);
 
         assertEquals(persona, tarea.getResponsable());
-
-        Persona persona2 = new Persona("Persona2", "persona2@uji.es", "222222222A");
 
         tarea.setResponsable(persona);
 
