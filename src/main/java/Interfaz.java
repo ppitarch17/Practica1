@@ -135,14 +135,16 @@ public class Interfaz {
     public static void setResponsable(Proyecto proyecto){
         Tarea tarea = proyecto.buscaTarea(scanStr("Indica el titulo de la tarea: "));
 
-        if (tarea == null)
+        if (tarea == null) {
             error("Tarea no encontrada");
-
+            return;
+        }
         Persona persona = tarea.getPersona(scanStr("Indica el dni de la persona: "));
 
-        if (persona == null)
+        if (persona == null) {
             error("Persona no encontrada");
-
+            return;
+        }
         if(!tarea.setResponsable(persona))
             error("No se pudo cambiar de responsable");
     }
