@@ -10,6 +10,18 @@ public class Interfaz {
     }
 
     public static void main(String[] args) {
+
+        Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
+        Tarea tara = new Tarea("titulo hola");
+        tara.addPersona(persona);
+
+        System.out.println(tara.getClave());
+        System.out.println(persona.getClave());
+
+        System.out.println(tara.getLista());
+        System.out.println(persona.getLista());
+
+        System.out.println("-------------");
         Proyecto proyecto = crearProyecto();
         while(true){
             showMenu();
