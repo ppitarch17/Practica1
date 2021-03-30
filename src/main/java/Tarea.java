@@ -127,7 +127,7 @@ public class Tarea implements tieneLista, tieneClave {
     }
 
     @Override
-    public List getLista() {
+    public List<Persona> getLista() {
         return listaPersonas;
     }
 

@@ -1,27 +1,32 @@
 import java.util.List;
 
-public class UtilidadesParaListas<E> implements tieneClave {
-
-    public static <E> List<E> elementosConListaVacia(List<E> lista) {
-        for (E objectInList: lista) {
-            if (objectInList.getLista()){
-                lista.remove(objectInList);
-            }
-        }
-        return lista;
-    }
-
-    public boolean sePuedeInsertar(E objetoConLista, E objetoAAñadir) {
-        for (Object ObjectInList :objetoConLista.getLista()) {
-            if(ObjectInList.getClave() == objetoAAñadir.getClave())
-                return false;
-        }
-        return true;
-    }
-
+public class UtilidadesParaListas<E> implements tieneClave, tieneLista<E> {
+//
+//    public static <E> List<E> elementosConListaVacia(tieneLista<E> lista) {
+//        for (tieneLista<E> objectInList : lista.getLista()) {
+//            if (objectInList.isEmpty()){
+//                lista.remove(objectInList);
+//            }
+//        }
+//        return lista;
+//    }
+//
+//    public boolean sePuedeInsertar(tieneLista objetoConLista, tieneClave objetoAAñadir) {
+//        for (Object ObjectInList :objetoConLista.getLista()) {
+//            if((tieneClave) ObjectInList.getClave() == objetoAAñadir.getClave())
+//                return false;
+//        }
+//        return true;
+//    }
+//
 
     @Override
     public Object getClave() {
+        return null;
+    }
+
+    @Override
+    public List getLista() {
         return null;
     }
 }

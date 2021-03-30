@@ -52,11 +52,11 @@ public class Persona implements tieneLista, tieneClave {
 
     @Override
     public List getLista() {
-        return null;
+        return listaTareas;
     }
 
     @Override
     public Object getClave() {
-        return null;
+        return DNI;
     }
 }
