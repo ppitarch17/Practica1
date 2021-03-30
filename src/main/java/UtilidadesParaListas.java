@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class UtilidadesParaListas<E> implements tieneClave {
+public class UtilidadesParaListas<E> implements tieneClave<E> {
 
     public static <E> List<E> elementosConListaVacia(List<E> lista) {
         return null;
@@ -12,7 +12,7 @@ public class UtilidadesParaListas<E> implements tieneClave {
 
 
     @Override
-    public Object getClave() {
+    public E getClave() {
         return null;
     }
 }
