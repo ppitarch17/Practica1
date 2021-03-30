@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persona implements tieneLista, tieneClave {
+public class Persona implements tieneLista<Tarea>, tieneClave<String> {
     private String nombre;
     private String correo;
     private String DNI; //identificador
@@ -51,12 +51,12 @@ public class Persona implements tieneLista, tieneClave {
     }
 
     @Override
-    public List getLista() {
+    public List<Tarea> getLista() {
         return listaTareas;
     }
 
     @Override
-    public Object getClave() {
+    public String getClave() {
         return DNI;
     }
 }
