@@ -74,7 +74,6 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
         this.prioridad = prioridad;
     }
 
-
     //-----METODOS-----
     public void marcarComoFinalizada(){ //Fecha fin es opcional
         isFinalizada = true;
@@ -129,11 +128,11 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
 
     @Override
     public List<Persona> getLista() {
-        return null;
+        return listaPersonas;
     }
 
     @Override
     public String getClave() {
-        return null;
+        return titulo;
     }
 }
