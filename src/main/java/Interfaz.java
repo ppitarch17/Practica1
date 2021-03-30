@@ -10,7 +10,7 @@ public class Interfaz {
     }
 
     public static void main(String[] args) {
-
+        //yeeeeeeeeeeeeeeeeeeeeeeeeeee
         Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
         Tarea tara = new Tarea("titulo hola");
         tara.addPersona(persona);
