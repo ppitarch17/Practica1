@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persona {
+public class Persona implements tieneLista {
     private String nombre;
     private String correo;
     private String DNI; //identificador
@@ -48,5 +48,10 @@ public class Persona {
     @Override
     public String toString() {
         return DNI + ": " + nombre;
+    }
+
+    @Override
+    public List getLista() {
+        return null;
     }
 }

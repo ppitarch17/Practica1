@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tarea {
+public class Tarea implements tieneLista{
     private String titulo;
     private String descripcion;
     private List<Persona> listaPersonas;
@@ -125,5 +125,10 @@ public class Tarea {
                 ", resultado=" + resultado +
                 ", etiquetas=" + listaEtiquetas +
                 '}';
+    }
+
+    @Override
+    public List getLista() {
+        return null;
     }
 }
