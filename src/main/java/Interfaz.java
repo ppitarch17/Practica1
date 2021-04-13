@@ -173,13 +173,13 @@ public class Interfaz {
 
     public static void listarTareasSinPersonas(Proyecto proyecto) {
         List tareas = proyecto.getListaTareas();
-        System.out.println(UtilidadesParaListas.test(tareas));
+        System.out.println(UtilidadesParaListas.elementosConListaVacia(tareas));
     }
     public static void listarNoResponsables(Proyecto proyecto) {
         List<Persona> personas = proyecto.getListaPersonas();
         List noResponsables = new ArrayList();
         for (Persona persona : personas) {
-            noResponsables.add(UtilidadesParaListas.test(persona.getTareasResponsable()));
+            noResponsables.add(UtilidadesParaListas.elementosConListaVacia(persona.getTareasResponsable()));
         }
         System.out.println(noResponsables);
     }
