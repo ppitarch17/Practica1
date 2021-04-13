@@ -51,7 +51,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String> {
     }
 
     @Override
-    public List<Tarea> getLista() {
+    public List getLista() {
         return listaTareas;
     }
 
