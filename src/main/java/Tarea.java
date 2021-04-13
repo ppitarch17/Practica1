@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tarea implements tieneLista<Persona>, tieneClave<String> {
+public class Tarea implements tieneLista, tieneClave<String> {
     private String titulo;
     private String descripcion;
     private List<Persona> listaPersonas;
@@ -127,7 +127,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
     }
 
     @Override
-    public List<Persona> getLista() {
+    public List getLista() {
         return listaPersonas;
     }
 

@@ -3,9 +3,9 @@ import java.util.List;
 
 public class UtilidadesParaListas<E> {
 
-    public static List<Object> test (List<tieneLista> obj){
+    public static List<Object> elementosConListaVacia (List<tieneLista> obj){
         ArrayList result = new ArrayList<>();
-        System.out.println("Probando");
+        //System.out.println("Probando");
         for (tieneLista objEnLista: obj) {
             System.out.println(objEnLista.getLista());
             if (objEnLista.getLista().isEmpty())
@@ -13,6 +13,8 @@ public class UtilidadesParaListas<E> {
         }
         return result;
     }
+
+    public static List<Object>
 
 //    public static <E> List elementosConListaVacia(List<tieneLista> lista) {
 //        System.out.println(lista.getLista());

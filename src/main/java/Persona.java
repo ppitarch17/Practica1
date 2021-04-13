@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persona implements tieneLista, tieneClave {
+public class Persona implements tieneLista<Tarea>, tieneClave {
     private String nombre;
     private String correo;
     private String DNI; //identificador
