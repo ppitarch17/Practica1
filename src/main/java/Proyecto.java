@@ -41,7 +41,7 @@ public class Proyecto {
 
     public boolean addPersonaToTarea(Persona persona, Tarea tarea){
 
-        if (!listaTareas.contains(tarea) || !listaPersonas.contains(persona) || tarea.getListaPersonas().contains(persona))
+        if (!listaTareas.contains(tarea) || !listaPersonas.contains(persona) || tarea.getLista().contains(persona))
             return false;
 
         tarea.addPersona(persona);
@@ -51,7 +51,7 @@ public class Proyecto {
 
     public boolean removePersonaDeTarea (Persona persona, Tarea tarea){
 
-        if(!tarea.getListaPersonas().contains(persona))
+        if(!tarea.getLista().contains(persona))
             return false;
 
         tarea.removePersona(persona);

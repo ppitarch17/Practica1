@@ -35,7 +35,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String> {
     //-----METODOS-----
     public boolean addTarea(Tarea tarea){
 
-        if(listaTareas.contains(tarea) || tarea == null)
+        if(!UtilidadesParaListas.sePuedeInsertar(getLista(), tarea))
             return false;
 
        return listaTareas.add(tarea);

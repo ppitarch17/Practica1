@@ -42,10 +42,6 @@ public class Tarea implements tieneLista, tieneClave<String> {
         return titulo;
     }
 
-    public List<Persona> getListaPersonas() {
-        return listaPersonas;
-    }
-
     public Persona getResponsable() {
         return responsable;
     }
@@ -86,7 +82,7 @@ public class Tarea implements tieneLista, tieneClave<String> {
 
     public boolean addPersona(Persona persona) {
 
-        if(listaPersonas.contains(persona) || persona == null)
+        if(UtilidadesParaListas.sePuedeInsertar(getLista(), persona))
             return false;
 
         if (listaPersonas.isEmpty())
