@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -58,7 +59,8 @@ public class Interfaz {
                 case 7 -> listarTareas(proyecto);
                 case 8 -> añadirEtiqueta(proyecto);
                 case 9 -> setResponsable(proyecto);
-                //case 10 -> ;
+                case 10 -> listarTareasSinPersonas(proyecto);
+                case 11 -> listarNoResponsables(proyecto);
                 default -> error("Opción no válida.");
             }
         }
@@ -78,7 +80,8 @@ public class Interfaz {
         System.out.println("\t7 Listar tareas");
         System.out.println("\t8 Añadir etiqueta");
         System.out.println("\t9 Modificar responsable");
-        System.out.println("\t10 Listar no responsables");
+        System.out.println("\t10 Listar tareas sin personas asignadas");
+        System.out.println("\t11 Listar personas que no son responsables");
 
     }
 
@@ -178,6 +181,18 @@ public class Interfaz {
             error("No se pudo cambiar de responsable");
     }
 
+    public static void listarTareasSinPersonas(Proyecto proyecto) {
+        List tareas = proyecto.getListaTareas();
+        System.out.println(UtilidadesParaListas.test(tareas));
+    }
+    public static void listarNoResponsables(Proyecto proyecto) {
+        List<Persona> personas = proyecto.getListaPersonas();
+        List noResponsables = new ArrayList();
+        for (Persona persona : personas) {
+            noResponsables.add(UtilidadesParaListas.test(persona.getTareasResponsable()));
+        }
+        System.out.println(noResponsables);
+    }
 
     public static void error(String mensaje){
         System.out.println(mensaje);

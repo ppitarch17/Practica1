@@ -65,6 +65,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
             return false;
 
         this.responsable = responsable;
+        responsable.addResponsabilidad(this);
         return true;
     }
 

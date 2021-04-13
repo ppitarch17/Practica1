@@ -6,6 +6,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String> {
     private String correo;
     private String DNI; //identificador
     private List<Tarea> listaTareas;
+    private List<Tarea> tareasResponsable = new ArrayList<>();
 
     //-----CONSTRUCTORES-----
 
@@ -30,7 +31,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String> {
     public String getDNI() {
         return DNI;
     }
-
+    public List getTareasResponsable() {return tareasResponsable;}
 
     //-----METODOS-----
     public boolean addTarea(Tarea tarea){
@@ -39,6 +40,13 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String> {
             return false;
 
        return listaTareas.add(tarea);
+    }
+
+    public boolean addResponsabilidad (Tarea tarea) {
+
+        //falta comprobar
+
+        return tareasResponsable.add(tarea);
     }
 
     public boolean removeTarea(Tarea tarea){

@@ -7,7 +7,7 @@ public class UtilidadesParaListas<E> {
         ArrayList result = new ArrayList<>();
         System.out.println("Probando");
         for (tieneLista objEnLista: obj) {
-            System.out.println(objEnLista.getLista());
+//            System.out.println(objEnLista.getLista());
             if (objEnLista.getLista().isEmpty())
                 result.add(objEnLista);
         }
