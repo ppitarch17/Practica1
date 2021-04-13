@@ -58,7 +58,7 @@ public class Interfaz {
                 case 7 -> listarTareas(proyecto);
                 case 8 -> añadirEtiqueta(proyecto);
                 case 9 -> setResponsable(proyecto);
-                case 10 ->
+                //case 10 -> ;
                 default -> error("Opción no válida.");
             }
         }
