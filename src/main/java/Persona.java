@@ -1,3 +1,5 @@
+import Excepciones.NoSePuedeInsertarException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,6 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String> {
     //-----GETTERS-----
     public String getNombre(){return nombre;}
     public String getCorreo(){return correo;}
-    public List<Tarea> getListaTareas(){return listaTareas;}
     public String getDNI() {
         return DNI;
     }
@@ -37,10 +38,20 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String> {
     //-----METODOS-----
     public boolean addTarea(Tarea tarea){
 
-        //if(!UtilidadesParaListas.sePuedeInsertar(tarea, this))
-            //return false;
+        try {
+            if (tarea == null)
+                throw new NullPointerException("La tarea no puede ser " + tarea);
 
-       return listaTareas.add(tarea);
+            if (!UtilidadesParaListas.sePuedeInsertar(tarea, this))
+                throw new NoSePuedeInsertarException("La tarea " + tarea + " ya esta en la lista de " + this.toString());
+
+            return listaTareas.add(tarea);
+
+        } catch (NullPointerException | NoSePuedeInsertarException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     public boolean addResponsabilidad (Tarea tarea) {

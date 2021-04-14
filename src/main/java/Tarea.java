@@ -1,4 +1,5 @@
 import Excepciones.FechaNoValidaException;
+import Excepciones.NoSePuedeInsertarException;
 import Resultados.Resultado;
 
 import java.time.LocalDate;
@@ -71,6 +72,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
 
             if (prioridad < 1 || prioridad > 5)
                 throw new IllegalArgumentException("La prioridad" + prioridad + "no es valida. Debe estar entre 1 y 5");
+
             this.prioridad = prioridad;
 
         } catch (IllegalArgumentException e) {
@@ -101,13 +103,22 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
 
     public boolean addPersona(Persona persona) {
 
-        //if(UtilidadesParaListas.sePuedeInsertar(getLista(), persona))
-            //return false;
+        try {
+            if(persona == null)
+                throw new NullPointerException("La persona no puede ser " + persona);
+            if(!UtilidadesParaListas.sePuedeInsertar(persona, this))
+                throw new NoSePuedeInsertarException("La persona " + persona + " ya esta en la tarea " + this.toString());
 
-        if (listaPersonas.isEmpty())
-            this.responsable = persona;
+            if (listaPersonas.isEmpty())
+                this.responsable = persona;
 
-        return listaPersonas.add(persona);
+            return listaPersonas.add(persona);
+        } catch (NullPointerException | NoSePuedeInsertarException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
     }
 
     public boolean removePersona(Persona persona) {
@@ -116,10 +127,22 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
 
     public boolean addEtiqueta(Etiqueta etiqueta) {
 
-        if(listaEtiquetas.contains(etiqueta))
-            return false;
+        try {
+            if(etiqueta ==  null)
+                throw new NullPointerException("La etiqueta no puede ser " + etiqueta);
 
-        return listaEtiquetas.add(etiqueta);
+            for (Etiqueta etiquetaEnLista : listaEtiquetas)
+                if (etiquetaEnLista.getNombre().equals(etiqueta.getNombre()))
+                    throw new NoSePuedeInsertarException("La etiqueta " + etiqueta.getNombre() + " ya esta en la tarea " + this.toString());
+
+            return listaEtiquetas.add(etiqueta);
+
+        } catch (NullPointerException | NoSePuedeInsertarException e){
+            e.printStackTrace();
+        }
+
+        return false;
+
     }
 
     public boolean containsEtiqueta(String etiqueta) {
@@ -149,5 +172,9 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
     @Override
     public String getClave() {
         return titulo;
+    }
+
+    public List<Etiqueta> getListaEtiquetas() {
+        return listaEtiquetas;
     }
 }
