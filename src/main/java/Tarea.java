@@ -1,3 +1,4 @@
+import Excepciones.FechaNoValidaException;
 import Resultados.Resultado;
 
 import java.time.LocalDate;
@@ -66,9 +67,15 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
     }
 
     public void setPrioridad(int prioridad){
-        if (prioridad < 1 || prioridad > 5)
-            throw new IllegalArgumentException();
-        this.prioridad = prioridad;
+        try {
+
+            if (prioridad < 1 || prioridad > 5)
+                throw new IllegalArgumentException("La prioridad" + prioridad + "no es valida. Debe estar entre 1 y 5");
+            this.prioridad = prioridad;
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 
     //-----METODOS-----
@@ -77,8 +84,19 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
     }
 
     public void marcarComoFinalizada(LocalDate fechaFin){
-        isFinalizada = true;
-        this.fechaFin = fechaFin;
+
+        try{
+            if(fechaFin.isBefore(fechaCreado))
+                throw new FechaNoValidaException
+                        ("La fecha de creacion " + fechaCreado + " no puede ser posterior a la fecha de finalización: " + fechaFin);
+
+            isFinalizada = true;
+            this.fechaFin = fechaFin;
+
+        } catch (FechaNoValidaException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public boolean addPersona(Persona persona) {
@@ -124,7 +142,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
     }
 
     @Override
-    public List getLista() {
+    public List<Persona> getLista() {
         return listaPersonas;
     }
 

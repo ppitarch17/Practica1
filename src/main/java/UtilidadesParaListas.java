@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UtilidadesParaListas {
@@ -39,25 +41,26 @@ public class UtilidadesParaListas {
 //        persona2.addTarea(tarea);
 //        System.out.println(sePuedeInsertar(tarea, persona2));
 
-        Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
-        Tarea tarea = new Tarea("Tarea con lista llena");
+//        Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
+//        Tarea tarea = new Tarea("Tarea con lista llena");
+//
+//        persona.addTarea(new Tarea("Tarea con lista vacia"));
+//        persona.addTarea(new Tarea("Otra Tarea con lista vacia"));
+//        persona.addTarea(tarea);
+//        tarea.addPersona(persona);
+//
+//        Persona persona2 = new Persona("Persona2", "persona2@uji.es", "222222222A");
+//        tarea.addPersona(persona2);
+//
+//        System.out.println("---");
+//
+//        //System.out.println(UtilidadesParaListas.elementosConListaVacia(persona.getLista()));
+//        //System.out.println(UtilidadesParaListas.elementosConListaVacia(tarea.getLista()));
+//
+//        System.out.println("-------------");
 
-        persona.addTarea(new Tarea("Tarea con lista vacia"));
-        persona.addTarea(new Tarea("Otra Tarea con lista vacia"));
-        persona.addTarea(tarea);
-        tarea.addPersona(persona);
-
-        Persona persona2 = new Persona("Persona2", "persona2@uji.es", "222222222A");
-        tarea.addPersona(persona2);
-
-        System.out.println("---");
-
-        System.out.println(UtilidadesParaListas.elementosConListaVacia(persona.getLista()));
-        System.out.println(UtilidadesParaListas.elementosConListaVacia(tarea.getLista()));
-
-        System.out.println("-------------");
-
-
+        Tarea tarea = new Tarea();
+        tarea.marcarComoFinalizada(LocalDate.of(1900,1,1));
 
     }
 }
