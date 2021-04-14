@@ -11,22 +11,6 @@ public class Interfaz {
     }
 
     public static void main(String[] args) {
-        Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
-        Tarea tara = new Tarea("Tarea con lista no vacia");
-        persona.addTarea(new Tarea("Tarea con lista vacia"));
-        persona.addTarea(new Tarea("Otra Tarea con lista vacia"));
-        persona.addTarea(tara);
-        tara.addPersona(persona);
-
-        Persona persona2 = new Persona("Persona2", "persona2@uji.es", "222222222A");
-        tara.addPersona(persona2);
-
-        System.out.println("---");
-
-        System.out.println(UtilidadesParaListas.elementosConListaVacia(persona.getLista()));
-        System.out.println(UtilidadesParaListas.elementosConListaVacia(tara.getLista()));
-
-        System.out.println("-------------");
         Proyecto proyecto = crearProyecto();
 
         while(true){

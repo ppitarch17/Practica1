@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tarea implements tieneLista, tieneClave<String> {
+public class Tarea implements tieneLista<Persona>, tieneClave<String> {
     private String titulo;
     private String descripcion;
     private List<Persona> listaPersonas;
@@ -83,8 +83,8 @@ public class Tarea implements tieneLista, tieneClave<String> {
 
     public boolean addPersona(Persona persona) {
 
-        if(UtilidadesParaListas.sePuedeInsertar(getLista(), persona))
-            return false;
+        //if(UtilidadesParaListas.sePuedeInsertar(getLista(), persona))
+            //return false;
 
         if (listaPersonas.isEmpty())
             this.responsable = persona;

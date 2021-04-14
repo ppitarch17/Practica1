@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +37,8 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String> {
     //-----METODOS-----
     public boolean addTarea(Tarea tarea){
 
-        if(!UtilidadesParaListas.sePuedeInsertar(getLista(), tarea))
-            return false;
+        //if(!UtilidadesParaListas.sePuedeInsertar(tarea, this))
+            //return false;
 
        return listaTareas.add(tarea);
     }
@@ -59,7 +60,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String> {
     }
 
     @Override
-    public List getLista() {
+    public List<Tarea> getLista() {
         return listaTareas;
     }
 
