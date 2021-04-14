@@ -1,3 +1,5 @@
+import Excepciones.NoSePuedeInsertarException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class Proyecto {
 
     public boolean addPersonaToTarea(Persona persona, Tarea tarea){
 
-        if (!listaTareas.contains(tarea) || !listaPersonas.contains(persona) || tarea.getLista().contains(persona))
+        if (!listaTareas.contains(tarea) || !listaPersonas.contains(persona))
             return false;
 
         tarea.addPersona(persona);

@@ -71,7 +71,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String> {
         try {
 
             if (prioridad < 1 || prioridad > 5)
-                throw new IllegalArgumentException("La prioridad" + prioridad + "no es valida. Debe estar entre 1 y 5");
+                throw new IllegalArgumentException("La prioridad " + prioridad + " no es valida. Debe estar entre 1 y 5");
 
             this.prioridad = prioridad;
 

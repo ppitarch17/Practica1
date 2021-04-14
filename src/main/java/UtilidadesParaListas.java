@@ -17,8 +17,10 @@ public class UtilidadesParaListas {
     public static <T,E extends tieneClave<T>> boolean sePuedeInsertar (E elemento, tieneLista<E> objetoConLista){
 
         for ( E objeto : objetoConLista.getLista()) {
-            if(objeto.getClave().equals(objeto.getClave()))
+            if(objeto.getClave().equals(elemento.getClave())){
                 return false;
+            }
+
         }
         return true;
     }

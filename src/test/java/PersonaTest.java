@@ -1,3 +1,5 @@
+import Excepciones.NoSePuedeInsertarException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonaTest {
@@ -25,4 +27,12 @@ class PersonaTest {
 
     }
 
+    @org.junit.jupiter.api.Test
+    void excepcionesEnPersona(){
+        Tarea tarea = new Tarea();
+
+        //assertThrows(NullPointerException.class, () -> persona.addTarea(null));
+        //assertTrue(persona.addTarea(tarea));
+        //assertThrows(NoSePuedeInsertarException.class, () -> persona.addTarea(tarea));
+    }
 }

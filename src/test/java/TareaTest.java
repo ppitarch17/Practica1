@@ -14,10 +14,10 @@ class TareaTest {
         assertDoesNotThrow(() -> tarea.setPrioridad(3), mensajeSiError);
         assertDoesNotThrow(() -> tarea.setPrioridad(5), mensajeSiError);
 
-        mensajeSiError = "Test.setPropiedad() no lanzo expecion. propidad debe estar entre 1 y 5";
-        assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(-1), mensajeSiError);
-        assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(6),mensajeSiError);
-        assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(0),mensajeSiError);
+        //mensajeSiError = "Test.setPropiedad() no lanzo expecion. propidad debe estar entre 1 y 5";
+        //assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(-1), mensajeSiError);
+        //assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(6),mensajeSiError);
+        //assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(0),mensajeSiError);
     }
 
     @org.junit.jupiter.api.Test
@@ -46,6 +46,7 @@ class TareaTest {
         assertFalse(tarea.setResponsable(persona));
 
         tarea.addPersona(persona);
+
         assertTrue(tarea.setResponsable(persona));
     }
 
