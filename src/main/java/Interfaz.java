@@ -181,16 +181,19 @@ public class Interfaz {
     }
 
     public static void listarTareasSinPersonas(Proyecto proyecto) {
-        List tareas = proyecto.getListaTareas();
-        System.out.println(UtilidadesParaListas.elementosConListaVacia(tareas));
+        System.out.println(UtilidadesParaListas.elementosConListaVacia(proyecto.getListaTareas()));
     }
     public static void listarNoResponsables(Proyecto proyecto) {
-        List<Persona> personas = proyecto.getListaPersonas();
-        List noResponsables = new ArrayList();
-        for (Persona persona : personas) {
-            noResponsables.add(UtilidadesParaListas.elementosConListaVacia(persona.getTareasResponsable()));
+        List<Persona> personas = new ArrayList<>(proyecto.getListaPersonas());
+//
+//
+//        for (Persona persona : personas) {
+//            System.out.println((UtilidadesParaListas.elementosConListaVacia(persona.getTareasResponsable())));
+//        }
+        for (Tarea tarea : proyecto.getListaTareas()) {
+            personas.remove(tarea.getResponsable());
         }
-        System.out.println(noResponsables);
+        System.out.println(personas);
     }
 
     public static void grabacionDeDatos(Proyecto proyecto){

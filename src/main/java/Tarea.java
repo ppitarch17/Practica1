@@ -110,9 +110,6 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
             if(!UtilidadesParaListas.sePuedeInsertar(persona, this))
                 throw new NoSePuedeInsertarException("La persona " + persona + " ya esta en la tarea " + this.toString());
 
-            if (listaPersonas.isEmpty())
-                this.responsable = persona;
-
             return listaPersonas.add(persona);
         } catch (NullPointerException | NoSePuedeInsertarException e) {
             e.printStackTrace();

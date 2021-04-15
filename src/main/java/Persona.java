@@ -33,7 +33,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     public String getDNI() {
         return DNI;
     }
-    public List getTareasResponsable() {return tareasResponsable;}
+    public List<Tarea> getTareasResponsable() {return tareasResponsable;}
 
     //-----METODOS-----
     public boolean addTarea(Tarea tarea){
@@ -71,7 +71,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     }
 
     @Override
-    public List<Tarea> getLista() {
+    public List getLista() {
         return listaTareas;
     }
 
