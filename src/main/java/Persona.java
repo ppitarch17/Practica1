@@ -56,7 +56,16 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
 
     public boolean addResponsabilidad (Tarea tarea) {
 
-        //falta comprobar
+       try {
+           if (tarea == null)
+               throw new NullPointerException();
+
+           if (tareasResponsable.contains(tarea))
+               throw new NoSePuedeInsertarException("La tarea " + tarea + " ya esta en la lista " + tareasResponsable.toString());
+
+       } catch (NullPointerException | NoSePuedeInsertarException e){
+           e.printStackTrace();
+       }
 
         return tareasResponsable.add(tarea);
     }
@@ -71,7 +80,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     }
 
     @Override
-    public List getLista() {
+    public List<Tarea> getLista() {
         return listaTareas;
     }
 

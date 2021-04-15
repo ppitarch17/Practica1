@@ -26,13 +26,4 @@ class PersonaTest {
         assertTrue(persona.removeTarea(tarea));
 
     }
-
-    @org.junit.jupiter.api.Test
-    void excepcionesEnPersona(){
-        Tarea tarea = new Tarea();
-
-        //assertThrows(NullPointerException.class, () -> persona.addTarea(null));
-        //assertTrue(persona.addTarea(tarea));
-        //assertThrows(NoSePuedeInsertarException.class, () -> persona.addTarea(tarea));
-    }
 }

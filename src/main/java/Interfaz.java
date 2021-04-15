@@ -185,11 +185,6 @@ public class Interfaz {
     }
     public static void listarNoResponsables(Proyecto proyecto) {
         List<Persona> personas = new ArrayList<>(proyecto.getListaPersonas());
-//
-//
-//        for (Persona persona : personas) {
-//            System.out.println((UtilidadesParaListas.elementosConListaVacia(persona.getTareasResponsable())));
-//        }
         for (Tarea tarea : proyecto.getListaTareas()) {
             personas.remove(tarea.getResponsable());
         }

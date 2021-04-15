@@ -29,27 +29,5 @@ public class UtilidadesParaListas implements Serializable {
 
     public static void main(String[] args) {
 
-//        Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
-//
-//        Tarea tarea = new Tarea("tarea con lista");
-//        tarea.addPersona(persona);
-//
-//        persona.addTarea(new Tarea("tarea con lista vacia"));
-//        persona.addTarea(new Tarea("tarea con lista vacia2"));
-//
-//        System.out.println(elementosConListaVacia(persona.getLista()));
-//
-//        System.out.println("\n---\n");
-//
-//        tarea = new Tarea();
-//        persona = new Persona("Persona con lista vacia", "persona@uji.es", "11111111A");
-//        Persona persona2 = new Persona("Persona con lista", "persona2@uji.es", "2A");
-//        persona2.addTarea(tarea);
-//
-//        tarea.addPersona(persona);
-//        tarea.addPersona(persona2);
-//
-//        System.out.println(elementosConListaVacia(tarea.getLista()));
-
     }
 }
