@@ -2,11 +2,12 @@ import Excepciones.FechaNoValidaException;
 import Excepciones.NoSePuedeInsertarException;
 import Resultados.Resultado;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tarea implements tieneLista<Persona>, tieneClave<String> {
+public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializable {
     private String titulo;
     private String descripcion;
     private List<Persona> listaPersonas;

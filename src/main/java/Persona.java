@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persona implements tieneLista<Tarea>, tieneClave<String> {
+public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializable {
     private String nombre;
     private String correo;
     private String DNI; //identificador

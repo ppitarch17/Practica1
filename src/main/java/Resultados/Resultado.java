@@ -1,6 +1,8 @@
 package Resultados;
 
-public abstract class Resultado {
+import java.io.Serializable;
+
+public abstract class Resultado implements Serializable {
     String identificador;
     int nHoras;
     boolean isInterno;

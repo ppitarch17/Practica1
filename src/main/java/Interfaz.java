@@ -1,5 +1,5 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,14 +11,39 @@ public class Interfaz {
     }
 
     public static void main(String[] args) {
-        Proyecto proyecto = crearProyecto();
+
+        Proyecto proyecto;
+
+        System.out.println("\t1 Crear Un Nuevo Proyecto");
+        System.out.println("\t2 Cargar Proyecto desde Fichero");
+
+        int op = scanInt("Selecciona una Opcion: ");
+
+        switch (op){
+            case 1 -> proyecto = crearProyecto();
+            case 2 -> {
+                proyecto = recuperacionDeDatos();
+                if (proyecto == null){
+                    error("No se pudo cargar el proyecto");
+                    System.out.println("Fin del Programa");
+                    return;
+                }
+            }
+            default -> {
+                error("Opción no válida.");
+                System.out.println("Fin del Programa");
+                return;
+            }
+        }
+
 
         while(true){
             showMenu();
 
-            int op = scanInt("Selecciona una Opcion: ");
+            op = scanInt("Selecciona una Opcion: ");
 
             if (op == 0){
+                grabacionDeDatos(proyecto);
                 System.out.println("Fin del Programa");
                 break;
             }
@@ -166,6 +191,54 @@ public class Interfaz {
             noResponsables.add(UtilidadesParaListas.elementosConListaVacia(persona.getTareasResponsable()));
         }
         System.out.println(noResponsables);
+    }
+
+    public static void grabacionDeDatos(Proyecto proyecto){
+
+        String nomFichero = scanStr("Introduce el nombre del fichero para almacenar el proyecto: ");
+
+        ObjectOutputStream oos = null;
+        try{
+            try {
+                FileOutputStream fos = new FileOutputStream(nomFichero);
+                oos = new ObjectOutputStream(fos);
+                oos.writeObject(proyecto);
+            }finally {
+                if(oos != null) oos.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static Proyecto recuperacionDeDatos(){
+
+        String nomFichero = scanStr("Introduce el nombre del fichero a cargar: ");
+
+        ObjectInputStream ois = null;
+        try{
+            try{
+                FileInputStream fis = new FileInputStream(nomFichero);
+                ois = new ObjectInputStream(fis);
+                Proyecto proyecto = (Proyecto) ois.readObject();
+                return proyecto;
+            }finally {
+                if(ois != null) ois.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        return null;
+
     }
 
     public static void error(String mensaje){

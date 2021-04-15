@@ -1,9 +1,10 @@
 import Excepciones.NoSePuedeInsertarException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Proyecto {
+public class Proyecto implements Serializable {
     private List<Persona> listaPersonas;
     private List<Tarea> listaTareas;
     private String nombre;

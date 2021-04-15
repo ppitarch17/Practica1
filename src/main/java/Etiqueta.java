@@ -1,4 +1,6 @@
-public class Etiqueta {
+import java.io.Serializable;
+
+public class Etiqueta implements Serializable {
     private String nombre;
     public Etiqueta(String nombre) {
         this.nombre = nombre;
