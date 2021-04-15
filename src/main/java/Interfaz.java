@@ -63,7 +63,6 @@ public class Interfaz {
                 default -> error("Opción no válida.");
             }
         }
-
     }
 
     public static void showMenu(){
@@ -122,7 +121,8 @@ public class Interfaz {
         if(persona == null || tarea == null)
             error("Persona o tarea no encontrada");
         else
-            proyecto.addPersonaToTarea(persona, tarea);
+            if (!proyecto.addPersonaToTarea(persona, tarea))
+                error("Persona no está en la tarea");
 
     }
 
@@ -185,11 +185,6 @@ public class Interfaz {
     }
     public static void listarNoResponsables(Proyecto proyecto) {
         List<Persona> personas = new ArrayList<>(proyecto.getListaPersonas());
-//
-//
-//        for (Persona persona : personas) {
-//            System.out.println((UtilidadesParaListas.elementosConListaVacia(persona.getTareasResponsable())));
-//        }
         for (Tarea tarea : proyecto.getListaTareas()) {
             personas.remove(tarea.getResponsable());
         }

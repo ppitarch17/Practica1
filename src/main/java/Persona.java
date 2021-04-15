@@ -71,7 +71,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     }
 
     @Override
-    public List getLista() {
+    public List<Tarea> getLista() {
         return listaTareas;
     }
 
