@@ -14,6 +14,8 @@ class PersonaTest {
 
         assertTrue(persona.addTarea(tarea));
         assertFalse(persona.addTarea(tarea));
+
+        assertDoesNotThrow(() -> persona.addTarea(null), "Error: se debe capturar la excepción");
     }
 
     @org.junit.jupiter.api.Test

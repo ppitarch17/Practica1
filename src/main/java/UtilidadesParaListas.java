@@ -27,7 +27,4 @@ public class UtilidadesParaListas implements Serializable {
         return true;
     }
 
-    public static void main(String[] args) {
-
-    }
 }

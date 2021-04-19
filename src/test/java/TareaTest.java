@@ -14,10 +14,6 @@ class TareaTest {
         assertDoesNotThrow(() -> tarea.setPrioridad(3), mensajeSiError);
         assertDoesNotThrow(() -> tarea.setPrioridad(5), mensajeSiError);
 
-        //mensajeSiError = "Test.setPropiedad() no lanzo expecion. propidad debe estar entre 1 y 5";
-        //assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(-1), mensajeSiError);
-        //assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(6),mensajeSiError);
-        //assertThrows(IllegalArgumentException.class, () -> tarea.setPrioridad(0),mensajeSiError);
     }
 
     @org.junit.jupiter.api.Test
@@ -58,6 +54,9 @@ class TareaTest {
         Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
         assertTrue(tarea.addPersona(persona));
         assertFalse(tarea.addPersona(persona));
+
+
+        assertDoesNotThrow(() -> tarea.addPersona(null), "Error: se debe capturar la excepción");
     }
 
 
