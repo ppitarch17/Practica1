@@ -208,4 +208,8 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     public List<Etiqueta> getListaEtiquetas() {
         return listaEtiquetas;
     }
+
+    public double getCosteFinal() {
+        return costeFinal;
+    }
 }

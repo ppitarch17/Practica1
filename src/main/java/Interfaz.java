@@ -212,7 +212,7 @@ public class Interfaz {
         Tarea tarea = proyecto.buscaTarea(titulo);
         double coste = scanDou("Introduce el coste de la tarea: ");
 
-        tarea.setCoste(coste);
+        proyecto.cambiarCosteTarea(tarea, coste);
     }
 
     public static void setFacturacion(Proyecto proyecto) {
@@ -224,14 +224,14 @@ public class Interfaz {
 
         int facturacion = scanInt("Introduce el tipo de facturacion: ");
         switch (facturacion) {
-            case 1 -> tarea.setFacturacion(new ConsumoInterno());
-            case 2 -> tarea.setFacturacion(new Descuento());
-            case 3 -> tarea.setFacturacion(new Urgente());
+            case 1 -> proyecto.cambiarFacturacionTarea(tarea, new ConsumoInterno());
+            case 2 -> proyecto.cambiarFacturacionTarea(tarea, new Descuento());
+            case 3 -> proyecto.cambiarFacturacionTarea(tarea, new Urgente());
         }
     }
 
     public static void mostrarCoste(Proyecto proyecto) {
-        System.out.println("El coste de la tarea es: " + proyecto.getCosteTotal());
+        System.out.println("El coste del proyecto es: " + proyecto.getCosteTotal());
     }
 
 

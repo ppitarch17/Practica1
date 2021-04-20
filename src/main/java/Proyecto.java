@@ -86,14 +86,21 @@ public class Proyecto implements Serializable {
     }
 
     public void calcularCosteTotal(){
+        costeTotal = 0;
         for (Tarea tarea: listaTareas) {
-            costeTotal += tarea.getCoste();
+            costeTotal += tarea.getCosteFinal();
         }
     }
 
     public void cambiarCosteTarea(Tarea tarea, double coste){
         tarea.setCoste(coste);
+        calcularCosteTotal();
     }
+    public void cambiarFacturacionTarea(Tarea tarea, Facturación.facturacion facturacion) {
+        tarea.setFacturacion(facturacion);
+        calcularCosteTotal();
+    }
+
     public List<Persona> getListaPersonas() {
         return listaPersonas;
     }
