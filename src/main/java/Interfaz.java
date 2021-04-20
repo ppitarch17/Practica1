@@ -1,3 +1,7 @@
+import Facturación.ConsumoInterno;
+import Facturación.Descuento;
+import Facturación.Urgente;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -209,9 +213,20 @@ public class Interfaz {
 
     public static void setFacturacion(Proyecto proyecto) {
         Tarea tarea = new Tarea(scanStr("Introduce la tarea: "));
-        String facturacion = scanStr("Introduce el tipo de facturacion: ");
+        System.out.println("\t1 Consumo Interno");
+        System.out.println("\t2 Descuento");
+        System.out.println("\t3 Urgente");
 
-        tarea.setFacturacion(facturacion);
+        int facturacion = scanInt("Introduce el tipo de facturacion: ");
+        switch (facturacion) {
+            case 1 -> tarea.setFacturacion(new ConsumoInterno());
+            case 2 -> tarea.setFacturacion(new Descuento());
+            case 3 -> tarea.setFacturacion(new Urgente());
+        }
+    }
+
+    public static void mostrarCoste(Proyecto proyecto) {
+        System.out.println("El coste de la tarea es: " + proyecto.);
     }
 
 
