@@ -1,5 +1,6 @@
 import Excepciones.FechaNoValidaException;
 import Excepciones.NoSePuedeInsertarException;
+import Facturación.facturacion;
 import Resultados.Resultado;
 
 import java.io.Serializable;
@@ -19,7 +20,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     private Resultado resultado;
     private List<Etiqueta> listaEtiquetas;
     private double coste;
-    private facturacion facturacion;
+    private Facturación.facturacion facturacion;
 
     //-----CONSTRUCTORES-----
     public  Tarea(){
@@ -38,6 +39,16 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         listaPersonas = new ArrayList<>();
         prioridad = 1; //inicializo la prioridad a 1 para que no sea 0 (no es valido)
         fechaCreado = LocalDate.now();
+    }
+
+    public Tarea(String titulo, facturacion facturacion) {
+        this.titulo = titulo;
+        this.resultado = null;
+        listaEtiquetas = new ArrayList<>();
+        listaPersonas = new ArrayList<>();
+        prioridad = 1; //inicializo la prioridad a 1 para que no sea 0 (no es valido)
+        fechaCreado = LocalDate.now();
+        this.facturacion = facturacion;
     }
 
 
@@ -151,6 +162,14 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
                 return true;
         }
         return false;
+    }
+
+    public void setFacturacion(Facturación.facturacion facturacion){
+        this.facturacion = facturacion;
+    }
+
+    public Double calcularFacturacion(){
+        return facturacion.costeFacturacion();
     }
 
     @Override
