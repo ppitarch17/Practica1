@@ -1,2 +1,2 @@
-public class ConsumoInterno {
+public class ConsumoInterno implements facturacion{
 }

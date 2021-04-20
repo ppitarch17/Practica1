@@ -1,2 +1,2 @@
-public class Descuento {
+public class Descuento  implements  facturacion{
 }

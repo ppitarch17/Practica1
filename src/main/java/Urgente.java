@@ -1,2 +1,2 @@
-public class Urgente {
+public class Urgente implements facturacion{
 }
