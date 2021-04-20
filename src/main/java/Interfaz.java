@@ -66,6 +66,7 @@ public class Interfaz {
                 case 11 -> listarNoResponsables(proyecto);
                 case 12 -> setCoste(proyecto);
                 case 13 -> setFacturacion(proyecto);
+                case 14 -> mostrarCoste(proyecto);
                 default -> error("Opción no válida.");
             }
         }
@@ -86,7 +87,9 @@ public class Interfaz {
         System.out.println("\t9 Modificar responsable");
         System.out.println("\t10 Listar tareas sin personas asignadas");
         System.out.println("\t11 Listar personas que no son responsables");
-
+        System.out.println("\t12 Cambiar coste de tarea");
+        System.out.println("\t13 Seleccionar facturacion");
+        System.out.println("\t14 Mostrar coste total");
     }
 
     public static String scanStr(String mensaje){
@@ -226,7 +229,7 @@ public class Interfaz {
     }
 
     public static void mostrarCoste(Proyecto proyecto) {
-        System.out.println("El coste de la tarea es: " + proyecto.);
+        System.out.println("El coste de la tarea es: " + proyecto.getCosteTotal());
     }
 
 

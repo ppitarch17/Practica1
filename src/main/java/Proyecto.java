@@ -101,5 +101,7 @@ public class Proyecto implements Serializable {
         return nombre;
     }
 
-
+    public double getCosteTotal() {
+        return costeTotal;
+    }
 }

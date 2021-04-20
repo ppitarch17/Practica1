@@ -177,7 +177,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         //this.coste = calcularFacturacion();
     }
 
-    public Double calcularFacturacion(){
+    public void calcularFacturacion(){
         costeFinal = facturacion.costeFacturacion(this.coste);
     }
 
