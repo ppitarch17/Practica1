@@ -208,14 +208,16 @@ public class Interfaz {
     }
 
     public static void setCoste(Proyecto proyecto) {
-        Tarea tarea = new Tarea(scanStr("Introduce la tarea: "));
+        String  titulo = scanStr("Introduce la tarea: ");
+        Tarea tarea = proyecto.buscaTarea(titulo);
         double coste = scanDou("Introduce el coste de la tarea: ");
 
         tarea.setCoste(coste);
     }
 
     public static void setFacturacion(Proyecto proyecto) {
-        Tarea tarea = new Tarea(scanStr("Introduce la tarea: "));
+        String  titulo = scanStr("Introduce la tarea: ");
+        Tarea tarea = proyecto.buscaTarea(titulo);
         System.out.println("\t1 Consumo Interno");
         System.out.println("\t2 Descuento");
         System.out.println("\t3 Urgente");
