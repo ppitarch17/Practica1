@@ -29,6 +29,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         listaPersonas = new ArrayList<>();
         prioridad = 1;
         fechaCreado = LocalDate.now();
+        coste = 0;
     }
 
     public Tarea(String titulo) {
@@ -38,6 +39,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         listaPersonas = new ArrayList<>();
         prioridad = 1; //inicializo la prioridad a 1 para que no sea 0 (no es valido)
         fechaCreado = LocalDate.now();
+        coste = 0;
     }
 
 
@@ -58,6 +60,10 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
         }
         return null;
+    }
+
+    public double getCoste() {
+        return coste;
     }
 
     //-----SETTERS-----
@@ -81,6 +87,10 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setCoste(double coste) {
+        this.coste = coste;
     }
 
     //-----METODOS-----

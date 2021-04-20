@@ -60,6 +60,8 @@ public class Interfaz {
                 case 9 -> setResponsable(proyecto);
                 case 10 -> listarTareasSinPersonas(proyecto);
                 case 11 -> listarNoResponsables(proyecto);
+                case 12 -> setCoste(proyecto);
+                case 13 -> setFacturacion(proyecto);
                 default -> error("Opción no válida.");
             }
         }
@@ -93,6 +95,12 @@ public class Interfaz {
         System.out.print(mensaje);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
+    }
+
+    public static double scanDou(String mensaje){
+        System.out.print(mensaje);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextDouble();
     }
 
     public static void crearPersona(Proyecto proyecto){
@@ -183,6 +191,7 @@ public class Interfaz {
     public static void listarTareasSinPersonas(Proyecto proyecto) {
         System.out.println(UtilidadesParaListas.elementosConListaVacia(proyecto.getListaTareas()));
     }
+
     public static void listarNoResponsables(Proyecto proyecto) {
         List<Persona> personas = new ArrayList<>(proyecto.getListaPersonas());
         for (Tarea tarea : proyecto.getListaTareas()) {
@@ -190,6 +199,22 @@ public class Interfaz {
         }
         System.out.println(personas);
     }
+
+    public static void setCoste(Proyecto proyecto) {
+        Tarea tarea = new Tarea(scanStr("Introduce la tarea: "));
+        double coste = scanDou("Introduce el coste de la tarea: ");
+
+        tarea.setCoste(coste);
+    }
+
+    public static void setFacturacion(Proyecto proyecto) {
+        Tarea tarea = new Tarea(scanStr("Introduce la tarea: "));
+        String facturacion = scanStr("Introduce el tipo de facturacion: ");
+
+        tarea.setFacturacion(facturacion);
+    }
+
+
 
     public static void grabacionDeDatos(Proyecto proyecto){
 
