@@ -1,3 +1,5 @@
+import Facturación.ConsumoInterno;
+import Facturación.Descuento;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,5 +49,38 @@ class ProyectoTest {
         proyecto.addTarea("casa");
         Tarea tarea = proyecto.getListaTareas().get(1);
         assertEquals(tarea, proyecto.buscaTarea("casa"));
+    }
+
+    @Test
+    void calcularCosteTotal() {
+        proyecto.addTarea("tarea");
+        Tarea tarea = proyecto.getListaTareas().get(0);
+        proyecto.cambiarFacturacionTarea(tarea, new Descuento());
+        proyecto.cambiarCosteTarea(tarea, 20);
+        assertEquals(1, proyecto.getCosteTotal());
+        proyecto.cambiarFacturacionTarea(tarea, new ConsumoInterno());
+        assertEquals(20, proyecto.getCosteTotal());
+    }
+
+    @Test
+    void cambiarCosteTarea() {
+        proyecto.addTarea("tarea");
+        Tarea tarea = proyecto.getListaTareas().get(0);
+        proyecto.cambiarFacturacionTarea(tarea, new ConsumoInterno());
+        proyecto.cambiarCosteTarea(tarea, 20);
+        assertEquals(20, proyecto.getListaTareas().get(0).getCoste());
+        proyecto.cambiarCosteTarea(tarea, 10);
+        assertEquals(10, proyecto.getListaTareas().get(0).getCoste());
+    }
+
+    @Test
+    void cambiarFacturacionTarea() {
+        proyecto.addTarea("tarea");
+        Tarea tarea = proyecto.getListaTareas().get(0);
+        proyecto.cambiarFacturacionTarea(tarea, new ConsumoInterno());
+        proyecto.cambiarCosteTarea(tarea, 20);
+        assertEquals(20, proyecto.getListaTareas().get(0).getCoste());
+        proyecto.cambiarFacturacionTarea(tarea, new Descuento());
+        assertEquals(1, proyecto.getCosteTotal());
     }
 }
