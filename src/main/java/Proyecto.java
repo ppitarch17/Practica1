@@ -90,6 +90,10 @@ public class Proyecto implements Serializable {
             costeTotal += tarea.getCoste();
         }
     }
+
+    public void cambiarCosteTarea(Tarea tarea, double coste){
+        tarea.setCoste(coste);
+    }
     public List<Persona> getListaPersonas() {
         return listaPersonas;
     }
