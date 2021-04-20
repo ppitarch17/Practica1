@@ -1,5 +1,9 @@
 
 
+import Facturación.ConsumoInterno;
+import Facturación.Descuento;
+import Facturación.Urgente;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TareaTest {
@@ -57,5 +61,24 @@ class TareaTest {
         assertDoesNotThrow(() -> tarea.addPersona(null), "Error: se debe capturar la excepción");
     }
 
+    @org.junit.jupiter.api.Test
+    void facturacion(){
+        tarea.setFacturacion(new ConsumoInterno());
+        assertEquals(0, tarea.getCoste());
+        assertEquals(0, tarea.getCosteFinal());
+
+        tarea.setCoste(20);
+
+        assertEquals(20, tarea.getCoste());
+        assertEquals(20, tarea.getCosteFinal());
+
+        tarea.setFacturacion(new Descuento());
+        assertEquals(20, tarea.getCoste());
+        assertEquals(1, tarea.getCosteFinal());
+
+        tarea.setFacturacion(new Urgente());
+        assertEquals(20, tarea.getCoste());
+        assertEquals(2, tarea.getCosteFinal());
+    }
 
 }

@@ -153,8 +153,14 @@ public class Interfaz {
     }
 
     public static void finalizarTarea(Proyecto proyecto) {
-        String tarea = scanStr("Indica la tarea: ");
-        proyecto.setTareaFinalizada(proyecto.buscaTarea(tarea));
+        String titulo = scanStr("Indica la tarea: ");
+        Tarea tarea = proyecto.buscaTarea(titulo);
+
+        if(tarea == null){
+            error("Tarea no encontrada");
+            return;
+        }
+        proyecto.setTareaFinalizada(tarea);
     }
 
     public static void listarPersonas (Proyecto proyecto) {
@@ -208,16 +214,21 @@ public class Interfaz {
     }
 
     public static void setCoste(Proyecto proyecto) {
-        String  titulo = scanStr("Introduce la tarea: ");
-        Tarea tarea = proyecto.buscaTarea(titulo);
+        Tarea tarea = new Tarea(scanStr("Introduce la tarea: "));
         double coste = scanDou("Introduce el coste de la tarea: ");
 
-        proyecto.cambiarCosteTarea(tarea, coste);
+        tarea.setCoste(coste);
     }
 
     public static void setFacturacion(Proyecto proyecto) {
         String  titulo = scanStr("Introduce la tarea: ");
         Tarea tarea = proyecto.buscaTarea(titulo);
+
+        if(tarea == null){
+            error("Tarea no encontrada");
+            return;
+        }
+
         System.out.println("\t1 Consumo Interno");
         System.out.println("\t2 Descuento");
         System.out.println("\t3 Urgente");
@@ -227,6 +238,7 @@ public class Interfaz {
             case 1 -> proyecto.cambiarFacturacionTarea(tarea, new ConsumoInterno());
             case 2 -> proyecto.cambiarFacturacionTarea(tarea, new Descuento());
             case 3 -> proyecto.cambiarFacturacionTarea(tarea, new Urgente());
+            default -> error("Opcion no encontrada");
         }
     }
 
