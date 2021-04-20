@@ -8,6 +8,7 @@ public class Proyecto implements Serializable {
     private List<Persona> listaPersonas;
     private List<Tarea> listaTareas;
     private String nombre;
+    private double costeTotal;
 
     public Proyecto(){
         this.nombre = "";
@@ -81,6 +82,12 @@ public class Proyecto implements Serializable {
             }
         }
         return null;
+    }
+
+    public void calcularCosteTotal(){
+        for (Tarea tarea: listaTareas) {
+            costeTotal += tarea.getCoste();
+        }
     }
     public List<Persona> getListaPersonas() {
         return listaPersonas;

@@ -1,5 +1,6 @@
 import Excepciones.FechaNoValidaException;
 import Excepciones.NoSePuedeInsertarException;
+import Facturación.Urgente;
 import Facturación.facturacion;
 import Resultados.Resultado;
 
@@ -20,6 +21,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     private Resultado resultado;
     private List<Etiqueta> listaEtiquetas;
     private double coste = 0;
+    private double costeFinal = 0;
     private Facturación.facturacion facturacion;
 
     //-----CONSTRUCTORES-----
@@ -44,7 +46,6 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         this.resultado = null;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
-        prioridad = 1; //inicializo la prioridad a 1 para que no sea 0 (no es valido)
         fechaCreado = LocalDate.now();
     }
 
@@ -97,6 +98,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
     public void setCoste(double coste) {
         this.coste = coste;
+        calcularFacturacion();
     }
 
     //-----METODOS-----
@@ -171,10 +173,12 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
     public void setFacturacion(Facturación.facturacion facturacion){
         this.facturacion = facturacion;
+        calcularFacturacion();
+        //this.coste = calcularFacturacion();
     }
 
     public Double calcularFacturacion(){
-        return facturacion.costeFacturacion();
+        costeFinal = facturacion.costeFacturacion(this.coste);
     }
 
     @Override
@@ -185,6 +189,8 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
                 ", isFinalizada=" + isFinalizada +
                 ", resultado=" + resultado +
                 ", etiquetas=" + listaEtiquetas +
+                ", coste=" + coste +
+                ", costeFinal=" + costeFinal +
                 '}';
     }
 
