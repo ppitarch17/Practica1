@@ -19,7 +19,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     private Resultado resultado;
     private List<Etiqueta> listaEtiquetas;
     private double coste;
-    private double facturacion;
+    private facturacion facturacion;
 
     //-----CONSTRUCTORES-----
     public  Tarea(){
