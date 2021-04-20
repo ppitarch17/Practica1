@@ -1,5 +1,6 @@
 import Excepciones.FechaNoValidaException;
 import Excepciones.NoSePuedeInsertarException;
+import Facturación.facturacion;
 import Resultados.Resultado;
 
 import java.io.Serializable;
@@ -12,14 +13,14 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     private String descripcion;
     private List<Persona> listaPersonas;
     private Persona responsable = null;
-    private int prioridad;
+    private int prioridad = 1;
     private LocalDate fechaCreado;
     private LocalDate fechaFin; // opcional
     private boolean isFinalizada;
     private Resultado resultado;
     private List<Etiqueta> listaEtiquetas;
-    private double coste;
-    private facturacion facturacion;
+    private double coste = 0;
+    private Facturación.facturacion facturacion;
 
     //-----CONSTRUCTORES-----
     public  Tarea(){
@@ -27,9 +28,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         this.resultado = null;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
-        prioridad = 1;
         fechaCreado = LocalDate.now();
-        coste = 0;
     }
 
     public Tarea(String titulo) {
@@ -37,9 +36,16 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         this.resultado = null;
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
+        fechaCreado = LocalDate.now();
+    }
+
+    public Tarea(String titulo, facturacion facturacion) {
+        this.titulo = titulo;
+        this.resultado = null;
+        listaEtiquetas = new ArrayList<>();
+        listaPersonas = new ArrayList<>();
         prioridad = 1; //inicializo la prioridad a 1 para que no sea 0 (no es valido)
         fechaCreado = LocalDate.now();
-        coste = 0;
     }
 
 
@@ -161,6 +167,14 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
                 return true;
         }
         return false;
+    }
+
+    public void setFacturacion(Facturación.facturacion facturacion){
+        this.facturacion = facturacion;
+    }
+
+    public Double calcularFacturacion(){
+        return facturacion.costeFacturacion();
     }
 
     @Override
