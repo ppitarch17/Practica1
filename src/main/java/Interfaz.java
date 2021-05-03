@@ -214,10 +214,11 @@ public class Interfaz {
     }
 
     public static void setCoste(Proyecto proyecto) {
-        Tarea tarea = new Tarea(scanStr("Introduce la tarea: "));
+        String  titulo = scanStr("Introduce la tarea: ");
+        Tarea tarea = proyecto.buscaTarea(titulo);
         double coste = scanDou("Introduce el coste de la tarea: ");
 
-        tarea.setCoste(coste);
+        proyecto.cambiarCosteTarea(tarea, coste);
     }
 
     public static void setFacturacion(Proyecto proyecto) {

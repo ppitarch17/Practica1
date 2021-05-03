@@ -54,33 +54,33 @@ class ProyectoTest {
     @Test
     void calcularCosteTotal() {
         proyecto.addTarea("tarea");
-        Tarea tarea = proyecto.getListaTareas().get(0);
+        Tarea tarea = proyecto.buscaTarea("tarea");
         proyecto.cambiarFacturacionTarea(tarea, new Descuento());
-        proyecto.cambiarCosteTarea(tarea, 20);
-        assertEquals(1, proyecto.getCosteTotal());
+        proyecto.cambiarCosteTarea(tarea, 100);
+        assertEquals(90, proyecto.getCosteTotal());
         proyecto.cambiarFacturacionTarea(tarea, new ConsumoInterno());
-        assertEquals(20, proyecto.getCosteTotal());
+        assertEquals(100, proyecto.getCosteTotal());
     }
 
     @Test
     void cambiarCosteTarea() {
         proyecto.addTarea("tarea");
-        Tarea tarea = proyecto.getListaTareas().get(0);
+        Tarea tarea = proyecto.buscaTarea("tarea");
         proyecto.cambiarFacturacionTarea(tarea, new ConsumoInterno());
         proyecto.cambiarCosteTarea(tarea, 20);
-        assertEquals(20, proyecto.getListaTareas().get(0).getCoste());
+        assertEquals(20, tarea.getCoste());
         proyecto.cambiarCosteTarea(tarea, 10);
-        assertEquals(10, proyecto.getListaTareas().get(0).getCoste());
+        assertEquals(10, tarea.getCoste());
     }
 
     @Test
     void cambiarFacturacionTarea() {
         proyecto.addTarea("tarea");
-        Tarea tarea = proyecto.getListaTareas().get(0);
+        Tarea tarea = proyecto.buscaTarea("tarea");
         proyecto.cambiarFacturacionTarea(tarea, new ConsumoInterno());
-        proyecto.cambiarCosteTarea(tarea, 20);
-        assertEquals(20, proyecto.getListaTareas().get(0).getCoste());
+        proyecto.cambiarCosteTarea(tarea, 100);
+        assertEquals(100, tarea.getCoste());
         proyecto.cambiarFacturacionTarea(tarea, new Descuento());
-        assertEquals(1, proyecto.getCosteTotal());
+        assertEquals(90, proyecto.getCosteTotal());
     }
 }

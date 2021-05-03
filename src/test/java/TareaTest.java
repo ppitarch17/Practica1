@@ -67,18 +67,18 @@ class TareaTest {
         assertEquals(0, tarea.getCoste());
         assertEquals(0, tarea.getCosteFinal());
 
-        tarea.setCoste(20);
+        tarea.setCoste(100);
 
-        assertEquals(20, tarea.getCoste());
-        assertEquals(20, tarea.getCosteFinal());
+        assertEquals(100, tarea.getCoste());
+        assertEquals(100, tarea.getCosteFinal());
 
         tarea.setFacturacion(new Descuento());
-        assertEquals(20, tarea.getCoste());
-        assertEquals(1, tarea.getCosteFinal());
+        assertEquals(100, tarea.getCoste());
+        assertEquals(90, tarea.getCosteFinal());
 
         tarea.setFacturacion(new Urgente());
-        assertEquals(20, tarea.getCoste());
-        assertEquals(2, tarea.getCosteFinal());
+        assertEquals(100, tarea.getCoste());
+        assertEquals(110, tarea.getCosteFinal());
     }
 
 }
