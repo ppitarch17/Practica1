@@ -179,8 +179,8 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
     public boolean calcularFacturacion(){
         try{
-        if (this.facturacion == null)
-            throw new NullPointerException("Se debe asignar un tipo de facturacion antes de calcular el coste final");
+            if (this.facturacion == null)
+                throw new NullPointerException("Se debe asignar un tipo de facturacion antes de calcular el coste final");
 
             costeFinal = facturacion.costeFacturacion(this.coste);
             return true;

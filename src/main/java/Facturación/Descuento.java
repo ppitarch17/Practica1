@@ -1,8 +1,9 @@
 package Facturación;
 
 public class Descuento  implements facturacion {
+    double descuento = 0.9;
     @Override
     public double costeFacturacion(double coste) {
-        return 1;
+        return coste * descuento;
     }
 }
