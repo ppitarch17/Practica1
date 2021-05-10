@@ -1,14 +1,23 @@
-import Excepciones.NoSePuedeInsertarException;
+package Controlador;
+
+import Controlador.*;
+import Facturación.*;
+import Modelo.*;
+import Vista.InterrogaVista;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Proyecto implements Serializable {
+public class Proyecto implements Serializable, Controlador {
     private List<Persona> listaPersonas;
     private List<Tarea> listaTareas;
     private String nombre;
     private double costeTotal = 0;
+
+    //MVC
+    private InterrogaVista vista;
+    private CambioModelo modelo;
 
     public Proyecto(){
         this.nombre = "";
@@ -22,6 +31,7 @@ public class Proyecto implements Serializable {
         this.listaTareas = new ArrayList<>();
     }
 
+    @Override
     public boolean addPersona(String nombre, String correo, String DNI){
 
         for (Persona persona: listaPersonas) {
@@ -97,7 +107,7 @@ public class Proyecto implements Serializable {
         tarea.setCoste(coste);
         calcularCosteTotal();
     }
-    public void cambiarFacturacionTarea(Tarea tarea, Facturación.facturacion facturacion) {
+    public void cambiarFacturacionTarea(Tarea tarea, facturacion facturacion) {
         tarea.setFacturacion(facturacion);
         calcularCosteTotal();
     }
@@ -117,4 +127,5 @@ public class Proyecto implements Serializable {
     public double getCosteTotal() {
         return costeTotal;
     }
+
 }

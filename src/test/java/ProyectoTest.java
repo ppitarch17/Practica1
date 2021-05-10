@@ -1,5 +1,8 @@
+import Controlador.Proyecto;
 import Facturación.ConsumoInterno;
 import Facturación.Descuento;
+import Modelo.Persona;
+import Modelo.Tarea;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

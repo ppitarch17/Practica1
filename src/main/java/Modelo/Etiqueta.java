@@ -1,3 +1,5 @@
+package Modelo;
+
 import java.io.Serializable;
 
 public class Etiqueta implements Serializable {
@@ -12,7 +14,7 @@ public class Etiqueta implements Serializable {
 
     @Override
     public String toString() {
-        return "Etiqueta{" +
+        return "Modelo.Etiqueta{" +
                 "nombre='" + nombre + '\'' +
                 '}';
     }
