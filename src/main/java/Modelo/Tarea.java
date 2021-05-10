@@ -1,15 +1,17 @@
+package Modelo;
+
 import Excepciones.FechaNoValidaException;
 import Excepciones.NoSePuedeInsertarException;
-import Facturación.Urgente;
 import Facturación.facturacion;
 import Resultados.Resultado;
+import Vista.InformaVista;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializable {
+public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializable, CambioModelo, InterrogaModelo {
     private String titulo;
     private String descripcion;
     private List<Persona> listaPersonas;
@@ -22,7 +24,11 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     private List<Etiqueta> listaEtiquetas;
     private double coste = 0;
     private double costeFinal = 0;
-    private Facturación.facturacion facturacion;
+    private facturacion facturacion;
+
+    //MVC
+    private InformaVista vista;
+
 
     //-----CONSTRUCTORES-----
     public  Tarea(){
@@ -173,6 +179,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
     public void setFacturacion(Facturación.facturacion facturacion){
         this.facturacion = facturacion;
+
         calcularFacturacion();
         //this.coste = calcularFacturacion();
     }
@@ -180,7 +187,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     public boolean calcularFacturacion(){
         try{
             if (this.facturacion == null)
-                throw new NullPointerException("Se debe asignar un tipo de facturacion antes de calcular el coste final");
+                throw new NullPointerException("Se debe asignar un tipo de Facturación.facturacion antes de calcular el coste final");
 
             costeFinal = facturacion.costeFacturacion(this.coste);
             return true;
@@ -200,7 +207,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
                 ", etiquetas=" + listaEtiquetas +
                 ", coste=" + coste +
                 ", costeFinal=" + costeFinal +
-                ", facturacion=" + facturacion +
+                ", Facturación.facturacion=" + facturacion +
                 '}';
     }
 
