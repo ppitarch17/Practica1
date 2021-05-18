@@ -41,7 +41,7 @@ public class Proyecto implements Serializable, Controlador {
         listaPersonas.add(new Persona(nombre,correo, DNI));
         return true;
     }
-
+    @Override
     public boolean addTarea(String titulo){
 
         for (Tarea tarea : listaTareas){
@@ -54,6 +54,7 @@ public class Proyecto implements Serializable, Controlador {
         return true;
     }
 
+    @Override
     public boolean addPersonaToTarea(Persona persona, Tarea tarea){
 
         if (!listaTareas.contains(tarea) || !listaPersonas.contains(persona))
@@ -64,6 +65,7 @@ public class Proyecto implements Serializable, Controlador {
         return true;
     }
 
+    @Override
     public boolean removePersonaDeTarea (Persona persona, Tarea tarea){
 
         if(!tarea.getLista().contains(persona))
@@ -74,6 +76,7 @@ public class Proyecto implements Serializable, Controlador {
         return true;
     }
 
+    @Override
     public Persona getPersona(String DNI){
         for (Persona persona: listaPersonas) {
             if (persona.getDNI().equals(DNI))
@@ -82,10 +85,12 @@ public class Proyecto implements Serializable, Controlador {
         return null;
     }
 
+    @Override
     public void setTareaFinalizada(Tarea tarea){
         tarea.marcarComoFinalizada();
     }
 
+    @Override
     public Tarea buscaTarea (String titulo) {
         for (Tarea tarea : getListaTareas()) {
             if (tarea.getTitulo().equals(titulo)) {
@@ -103,19 +108,24 @@ public class Proyecto implements Serializable, Controlador {
         }
     }
 
+    @Override
     public void cambiarCosteTarea(Tarea tarea, double coste){
         tarea.setCoste(coste);
         calcularCosteTotal();
     }
+
+    @Override
     public void cambiarFacturacionTarea(Tarea tarea, facturacion facturacion) {
         tarea.setFacturacion(facturacion);
         calcularCosteTotal();
     }
 
+    @Override
     public List<Persona> getListaPersonas() {
         return listaPersonas;
     }
 
+    @Override
     public List<Tarea> getListaTareas() {
         return listaTareas;
     }
@@ -124,8 +134,17 @@ public class Proyecto implements Serializable, Controlador {
         return nombre;
     }
 
+    @Override
     public double getCosteTotal() {
         return costeTotal;
     }
 
+    public boolean setResponsable(Tarea tarea, Persona persona) {
+        return tarea.setResponsable(persona);
+    }
+
+    @Override
+    public void setInterrogaVista(InterrogaVista vista) {
+        this.vista = vista;
+    }
 }

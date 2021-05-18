@@ -66,6 +66,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         return responsable;
     }
 
+
     public Persona getPersona(String dni){
         for (Persona persona : listaPersonas) {
             if (persona.getDNI().equals(dni))
@@ -197,17 +198,25 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         return false;
     }
 
+//    @Override
+//    public String toString() {
+//        return  titulo + "{" +
+//                ", listaPersonas=" + listaPersonas +
+//                ", responsable =" + responsable +
+//                ", isFinalizada=" + isFinalizada +
+//                ", resultado=" + resultado +
+//                ", etiquetas=" + listaEtiquetas +
+//                ", coste=" + coste +
+//                ", costeFinal=" + costeFinal +
+//                ", Facturación.facturacion=" + facturacion +
+//                '}';
+//    }
     @Override
     public String toString() {
         return  titulo + "{" +
                 ", listaPersonas=" + listaPersonas +
-                ", responsable =" + responsable +
-                ", isFinalizada=" + isFinalizada +
-                ", resultado=" + resultado +
-                ", etiquetas=" + listaEtiquetas +
-                ", coste=" + coste +
                 ", costeFinal=" + costeFinal +
-                ", Facturación.facturacion=" + facturacion +
+                ", finalizada=" + isFinalizada +
                 '}';
     }
 
