@@ -1,21 +1,14 @@
-import Controlador.*;
-import Modelo.InterrogaModelo;
-import Vista.InformaVista;
+import Controlador.Controlador;
+import Controlador.Proyecto;
 import Vista.InterfazGrafica;
-import Vista.InterrogaVista;
-
-import javax.swing.*;
 
 public class App {
-
-
     public static void main(String[] args) {
+        Controlador proyecto = new Proyecto();
+        InterfazGrafica interfaz = new InterfazGrafica();
+        interfaz.setControlador(proyecto);
+        proyecto.setInterrogaVista(interfaz);
 
-        Proyecto controlador = new Proyecto();
-        InterfazGrafica interfaz = new InterfazGrafica(controlador);
-
-        interfaz.setControlador(controlador);
-        controlador.setInterrogaVista(interfaz);
-
+        interfaz.matame();
     }
 }

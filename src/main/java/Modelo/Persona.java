@@ -27,6 +27,13 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
         listaTareas = new ArrayList<>();
     }
 
+    public Persona(String DNI) {
+        this.nombre = null;
+        this.correo = null;
+        this.DNI = DNI;
+        listaTareas = new ArrayList<>();
+    }
+
     public Persona(String nombre, String correo, String DNI) {
         this.nombre = nombre;
         this.correo = correo;
@@ -37,6 +44,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     //-----GETTERS-----
     public String getNombre(){return nombre;}
     public String getCorreo(){return correo;}
+
     public String getDNI() {
         return DNI;
     }

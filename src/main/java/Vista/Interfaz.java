@@ -180,9 +180,9 @@ public class Interfaz {
             error("No existe esa tarea");
         else {
             String etiqueta = scanStr("Indica el nombre de la etiqueta: ");
-            if (tarea.containsEtiqueta(etiqueta))
+            if (tarea.containsEtiqueta(etiqueta))       //MODELO
                 error("La tarea ya tiene esa etiqueta");
-            tarea.addEtiqueta(new Etiqueta(etiqueta));
+            tarea.addEtiqueta(new Etiqueta(etiqueta));  //MODELO
         }
     }
 
@@ -193,13 +193,13 @@ public class Interfaz {
             error("Modelo.Tarea no encontrada");
             return;
         }
-        Persona persona = tarea.getPersona(scanStr("Indica el dni de la persona: "));
+        Persona persona = tarea.getPersona(scanStr("Indica el dni de la persona: "));       //MODELO
 
         if (persona == null) {
             error("Modelo.Persona no encontrada");
             return;
         }
-        if(!tarea.setResponsable(persona))
+        if(!proyecto.setResponsable(tarea, persona))
             error("No se pudo cambiar de responsable");
     }
 
