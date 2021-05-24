@@ -16,12 +16,16 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     private InterrogaModelo modelo;
     private EscuchadoraBoton escuchadoraBoton;
     private EscuchadoraLista escuchadoraLista;
+    private EscuchadoraTextField escuchadoraTextField;
 
     private Tarea tareaSeleccionada; //Tarea
     private InterrogaModelo personaSeleccioanda; //Persona
 
     Tarea[] vectorTareas;
     Persona[] vectorPersonas;
+
+    JList<Tarea> tareas;
+    JList<Persona> personas;
 
 
     public static void main(String[] args) {
@@ -43,8 +47,10 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     public void ventanaStart(){
         JFrame ventana = new JFrame("Primera Ventana"); //Ventana principal
         this.escuchadoraBoton = new EscuchadoraBoton(controlador, this);
+        this.escuchadoraTextField = new EscuchadoraTextField(controlador,this);
+        escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
         //ventana.addWindowListener(new EscuchadoraVentana()); //para guardar el proyecto luego?
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
+        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
 
         Container container = ventana.getContentPane();
         container.setLayout(new BorderLayout());
@@ -66,7 +72,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void ventanaCrear() {
         JFrame ventana = new JFrame("Crear Proyecto");
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
         JPanel panel = new JPanel();
@@ -108,7 +114,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
         //Tarea[] datos = (Tarea[]) controlador.getListaTareas().toArray();//{new Tarea("t1"), new Tarea("t2")};
         //List<Tarea> datos = controlador.getListaTareas();
-        JList<Tarea> tareas = new JList<Tarea>(vectorTareas);
+        tareas = new JList<Tarea>(vectorTareas);
 
         tareas.addListSelectionListener(new EscuchadoraLista(controlador, this));
         tareas.setVisibleRowCount(3);
@@ -127,7 +133,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         panelCentral.add(aPersona, BorderLayout.AFTER_LAST_LINE);
 
         //List<Persona> lpersonas = controlador.getListaPersonas();//{new Persona("dni"), new Persona("nif")};
-        JList<Persona> personas = new JList<>(vectorPersonas);
+        personas = new JList<>(vectorPersonas);
         personas.setVisibleRowCount(3);
         personas.setLayoutOrientation(JList.VERTICAL_WRAP);
         panelCentral.add(personas, BorderLayout.CENTER);
@@ -171,22 +177,28 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void ventanaPersona(){
         JFrame ventana = new JFrame("Crear Persona");
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
         JPanel panel = new JPanel();
 
         JLabel nombre = new JLabel("Nombre: ");
         JTextField nombreDato = new JTextField(20);
+        nombreDato.setName("nombreDato");
+        nombreDato.addActionListener(escuchadoraTextField);
 
         JLabel correo = new JLabel("Correo: ");
         JTextField correoDato = new JTextField(20);
+        correoDato.setName("correoDato");
+        correoDato.addActionListener(escuchadoraTextField);
 
         JLabel dni = new JLabel("DNI: ");
         JTextField dniDato = new JTextField(20);
+        dniDato.setName("dniDato");
+        dniDato.addActionListener(escuchadoraTextField);
 
         JButton botonPersona = new JButton("Añadir Persona a Proyecto");
-        botonPersona.addActionListener(new EscuchadoraBoton(controlador, this));
+        botonPersona.addActionListener(escuchadoraBoton);
 
         panel.add(dni); panel.add(dniDato);
         panel.add(correo);panel.add(correoDato);
@@ -200,7 +212,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void ventanaTarea() {
         JFrame ventana = new JFrame("Crear Tarea");
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
         JPanel panel = new JPanel();
@@ -243,5 +255,13 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void setVectorPersonas(Persona[] vectorPersonas) {
         this.vectorPersonas = vectorPersonas;
+    }
+
+    public void setTareas(Tarea[] tareas) {
+        this.tareas.setListData(tareas);
+    }
+
+    public void setPersonas(Persona[] personas) {
+        this.personas.setListData(personas);
     }
 }
