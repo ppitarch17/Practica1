@@ -7,7 +7,8 @@ import Modelo.Tarea;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InterfazGrafica implements InterrogaVista, InformaVista {
     //MVC
@@ -16,8 +17,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     private EscuchadoraBoton escuchadoraBoton;
     private EscuchadoraLista escuchadoraLista;
 
-    private Tarea tareaSeleccionada;
-    private Persona personaSeleccioanda;
+    private Tarea tareaSeleccionada; //Tarea
+    private InterrogaModelo personaSeleccioanda; //Persona
+
+    Tarea[] vectorTareas;
+    Persona[] vectorPersonas;
+
 
     public static void main(String[] args) {
 
@@ -101,8 +106,10 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         aTarea.addActionListener(new EscuchadoraBoton(controlador, this));
         panelOeste.add(aTarea, BorderLayout.AFTER_LAST_LINE);
 
+        //Tarea[] datos = (Tarea[]) controlador.getListaTareas().toArray();//{new Tarea("t1"), new Tarea("t2")};
+        //List<Tarea> datos = controlador.getListaTareas();
+        JList<Tarea> tareas = new JList<Tarea>(vectorTareas);
 
-        JList<Tarea> tareas = new JList<>((Tarea[]) controlador.getListaTareas().toArray());
         tareas.addListSelectionListener(new EscuchadoraLista(controlador, this));
         tareas.setVisibleRowCount(3);
         tareas.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -119,7 +126,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         aPersona.addActionListener(new EscuchadoraBoton(controlador, this));
         panelCentral.add(aPersona, BorderLayout.AFTER_LAST_LINE);
 
-        JList<Persona> personas = new JList<>((Persona[]) controlador.getListaPersonas().toArray());
+        //List<Persona> lpersonas = controlador.getListaPersonas();//{new Persona("dni"), new Persona("nif")};
+        JList<Persona> personas = new JList<>(vectorPersonas);
         personas.setVisibleRowCount(3);
         personas.setLayoutOrientation(JList.VERTICAL_WRAP);
         panelCentral.add(personas, BorderLayout.CENTER);
@@ -129,31 +137,18 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         container.add(panelEste, BorderLayout.EAST);
         panelEste.setLayout(new GridLayout(4,3));
 
-        JButton addPaT = new JButton("Añadir persona a tarea");
-        addPaT.addActionListener(new EscuchadoraBoton(controlador, this));
-        JButton removePdT = new JButton("Quitar persona de tarea");
-        removePdT.addActionListener(new EscuchadoraBoton(controlador, this));
         JButton finalizar = new JButton("Finalizar tarea");
         finalizar.addActionListener(new EscuchadoraBoton(controlador, this));
-        JButton addEtiqueta = new JButton("Añadir etiqueta");
-        addEtiqueta.addActionListener(new EscuchadoraBoton(controlador, this));
-        JButton setResp = new JButton("Set Responsable");
-        setResp.addActionListener(new EscuchadoraBoton(controlador, this));
-        JButton selectCoste = new JButton("Seleccionar coste");
-        selectCoste.addActionListener(new EscuchadoraBoton(controlador, this));
-        JButton selectFact = new JButton("Seleccionar facturación");
-        selectFact.addActionListener(new EscuchadoraBoton(controlador, this));
-        JButton salir = new JButton("Salir del programa");
-        salir.addActionListener(new EscuchadoraBoton(controlador, this));
 
-        panelEste.add(addPaT);
-        panelEste.add(removePdT);
+
+        panelEste.add(new JButton("Añadir persona a tarea"));
+        panelEste.add(new JButton("Quitar persona de tarea"));
         panelEste.add(finalizar);
-        panelEste.add(addEtiqueta);
-        panelEste.add(setResp);
-        panelEste.add(selectCoste);
-        panelEste.add(selectFact);
-        panelEste.add(salir);
+        panelEste.add(new JButton("Añadir etiqueta"));
+        panelEste.add(new JButton("Set responsable"));
+        panelEste.add(new JButton("Seleccionar coste"));
+        panelEste.add(new JButton("Seleccionar facturación"));
+        panelEste.add(new JButton("Salir del programa"));
 
 
 
@@ -167,11 +162,24 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
         JPanel panel = new JPanel();
+
         JLabel nombre = new JLabel("Nombre: ");
-        JTextField nom = new JTextField(20);
-        JButton persona = new JButton("Añadir persona");
-        panel.add(nombre); panel.add(nom); panel.add(persona);
-        persona.addActionListener(new EscuchadoraBoton(controlador, this));
+        JTextField nombreDato = new JTextField(20);
+
+        JLabel correo = new JLabel("Correo: ");
+        JTextField correoDato = new JTextField(20);
+
+        JLabel dni = new JLabel("DNI: ");
+        JTextField dniDato = new JTextField(20);
+
+        JButton botonPersona = new JButton("Añadir Persona a Proyecto");
+        botonPersona.addActionListener(new EscuchadoraBoton(controlador, this));
+
+        panel.add(dni); panel.add(dniDato);
+        panel.add(correo);panel.add(correoDato);
+        panel.add(nombre); panel.add(nombreDato); panel.add(botonPersona);
+
+
         container.add(panel);
         ventana.pack();
         ventana.setVisible(true);
@@ -197,6 +205,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void setControlador(Controlador controlador){
         this.controlador = controlador;
+        escuchadoraBoton.setControlador(controlador);
     }
 
     public InterrogaModelo getTareaSeleccionada() {
@@ -213,5 +222,13 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void setPersonaSeleccioanda(Persona personaSeleccioanda) {
         this.personaSeleccioanda = personaSeleccioanda;
+    }
+
+    public void setVectorTareas(Tarea[] vectorTareas) {
+        this.vectorTareas = vectorTareas;
+    }
+
+    public void setVectorPersonas(Persona[] vectorPersonas) {
+        this.vectorPersonas = vectorPersonas;
     }
 }
