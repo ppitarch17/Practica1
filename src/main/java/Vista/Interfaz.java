@@ -1,6 +1,8 @@
-import Facturación.ConsumoInterno;
-import Facturación.Descuento;
-import Facturación.Urgente;
+package Vista;
+
+import Controlador.*;
+import Facturación.*;
+import Modelo.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,8 +20,8 @@ public class Interfaz {
 
         Proyecto proyecto;
 
-        System.out.println("\t1 Crear Un Nuevo Proyecto");
-        System.out.println("\t2 Cargar Proyecto desde Fichero");
+        System.out.println("\t1 Crear Un Nuevo Controlador.Proyecto");
+        System.out.println("\t2 Cargar Controlador.Proyecto desde Fichero");
 
         int op = scanInt("Selecciona una Opcion: ");
 
@@ -76,8 +78,8 @@ public class Interfaz {
 
         System.out.println();
         System.out.println("\t0 Finalizar programa");
-        System.out.println("\t1 Crear Persona");
-        System.out.println("\t2 Crear Tarea");
+        System.out.println("\t1 Crear Modelo.Persona");
+        System.out.println("\t2 Crear Modelo.Tarea");
         System.out.println("\t3 Añadir persona a tarea");
         System.out.println("\t4 Quitar persona de tarea");
         System.out.println("\t5 Finalizar tarea");
@@ -88,7 +90,7 @@ public class Interfaz {
         System.out.println("\t10 Listar tareas sin personas asignadas");
         System.out.println("\t11 Listar personas que no son responsables");
         System.out.println("\t12 Cambiar coste de tarea");
-        System.out.println("\t13 Seleccionar facturacion");
+        System.out.println("\t13 Seleccionar Facturación");
         System.out.println("\t14 Mostrar coste total");
     }
 
@@ -134,10 +136,10 @@ public class Interfaz {
         Tarea tarea = proyecto.buscaTarea(titulo);
 
         if(persona == null || tarea == null)
-            error("Persona o tarea no encontrada");
+            error("Modelo.Persona o tarea no encontrada");
         else
             if (!proyecto.addPersonaToTarea(persona, tarea))
-                error("Persona no está en la tarea");
+                error("Modelo.Persona no está en la tarea");
 
     }
 
@@ -147,7 +149,7 @@ public class Interfaz {
         String titulo = scanStr("Introduce el titulo de la tarea: ");
         Tarea tarea = proyecto.buscaTarea(titulo);
         if(persona == null || tarea == null)
-            error("Persona o tarea no encontrada");
+            error("Modelo.Persona o tarea no encontrada");
         else
             proyecto.removePersonaDeTarea(persona, tarea);
     }
@@ -157,7 +159,7 @@ public class Interfaz {
         Tarea tarea = proyecto.buscaTarea(titulo);
 
         if(tarea == null){
-            error("Tarea no encontrada");
+            error("Modelo.Tarea no encontrada");
             return;
         }
         proyecto.setTareaFinalizada(tarea);
@@ -178,9 +180,9 @@ public class Interfaz {
             error("No existe esa tarea");
         else {
             String etiqueta = scanStr("Indica el nombre de la etiqueta: ");
-            if (tarea.containsEtiqueta(etiqueta))
+            if (tarea.containsEtiqueta(etiqueta))       //MODELO
                 error("La tarea ya tiene esa etiqueta");
-            tarea.addEtiqueta(new Etiqueta(etiqueta));
+            tarea.addEtiqueta(new Etiqueta(etiqueta));  //MODELO
         }
     }
 
@@ -188,16 +190,16 @@ public class Interfaz {
         Tarea tarea = proyecto.buscaTarea(scanStr("Indica el titulo de la tarea: "));
 
         if (tarea == null) {
-            error("Tarea no encontrada");
+            error("Modelo.Tarea no encontrada");
             return;
         }
-        Persona persona = tarea.getPersona(scanStr("Indica el dni de la persona: "));
+        Persona persona = tarea.getPersona(scanStr("Indica el dni de la persona: "));       //MODELO
 
         if (persona == null) {
-            error("Persona no encontrada");
+            error("Modelo.Persona no encontrada");
             return;
         }
-        if(!tarea.setResponsable(persona))
+        if(!proyecto.setResponsable(tarea, persona))
             error("No se pudo cambiar de responsable");
     }
 
@@ -214,10 +216,10 @@ public class Interfaz {
     }
 
     public static void setCoste(Proyecto proyecto) {
-        Tarea tarea = new Tarea(scanStr("Introduce la tarea: "));
+        String  titulo = scanStr("Introduce la tarea: ");
+        Tarea tarea = proyecto.buscaTarea(titulo);
         double coste = scanDou("Introduce el coste de la tarea: ");
 
-        //tarea.setCoste(coste);
         proyecto.cambiarCosteTarea(tarea, coste);
     }
 
@@ -226,15 +228,15 @@ public class Interfaz {
         Tarea tarea = proyecto.buscaTarea(titulo);
 
         if(tarea == null){
-            error("Tarea no encontrada");
+            error("Modelo.Tarea no encontrada");
             return;
         }
 
         System.out.println("\t1 Consumo Interno");
-        System.out.println("\t2 Descuento");
+        System.out.println("\t2 Facturación.Descuento");
         System.out.println("\t3 Urgente");
 
-        int facturacion = scanInt("Introduce el tipo de facturacion: ");
+        int facturacion = scanInt("Introduce el tipo de Facturación.facturacion: ");
         switch (facturacion) {
             case 1 -> proyecto.cambiarFacturacionTarea(tarea, new ConsumoInterno());
             case 2 -> proyecto.cambiarFacturacionTarea(tarea, new Descuento());

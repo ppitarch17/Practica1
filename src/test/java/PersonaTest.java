@@ -1,10 +1,11 @@
-import Excepciones.NoSePuedeInsertarException;
+import Modelo.Persona;
+import Modelo.Tarea;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonaTest {
 
-    Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
+    Persona persona = new Persona("Modelo.Persona", "persona@uji.es", "11111111A");
 
     @org.junit.jupiter.api.Test
     void addTarea() {

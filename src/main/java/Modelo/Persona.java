@@ -1,15 +1,22 @@
+package Modelo;
+
 import Excepciones.NoSePuedeInsertarException;
+import Vista.InformaVista;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializable {
+public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializable, CambioModelo, InterrogaModelo {
     private String nombre;
     private String correo;
     private String DNI; //identificador
     private List<Tarea> listaTareas;
     private List<Tarea> tareasResponsable = new ArrayList<>();
+    private boolean clienteEspecial = false;
+
+    //MVC
+    private InformaVista vista;
 
     //-----CONSTRUCTORES-----
 
@@ -17,6 +24,13 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
         this.nombre = "";
         this.correo = "";
         this.DNI = "";
+        listaTareas = new ArrayList<>();
+    }
+
+    public Persona(String DNI) {
+        this.nombre = null;
+        this.correo = null;
+        this.DNI = DNI;
         listaTareas = new ArrayList<>();
     }
 
@@ -30,6 +44,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     //-----GETTERS-----
     public String getNombre(){return nombre;}
     public String getCorreo(){return correo;}
+
     public String getDNI() {
         return DNI;
     }
@@ -88,4 +103,10 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     public String getClave() {
         return DNI;
     }
+
+    public boolean getClienteEspecial() {
+        return clienteEspecial;
+    }
+
+
 }

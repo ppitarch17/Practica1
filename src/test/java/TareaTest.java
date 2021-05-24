@@ -1,8 +1,8 @@
 
 
-import Facturación.ConsumoInterno;
-import Facturación.Descuento;
-import Facturación.Urgente;
+import Facturación.*;
+import Modelo.Persona;
+import Modelo.Tarea;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +22,7 @@ class TareaTest {
 
     @org.junit.jupiter.api.Test
     void setResposable(){
-        Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
+        Persona persona = new Persona("Modelo.Persona", "persona@uji.es", "11111111A");
         tarea.addPersona(persona);
 
         tarea.setResponsable(persona);
@@ -38,7 +38,7 @@ class TareaTest {
     @org.junit.jupiter.api.Test
     void getResposable(){
         Tarea tarea = new Tarea();
-        tarea.addPersona(new Persona("Persona", "persona@uji.es", "11111111A"));
+        tarea.addPersona(new Persona("Modelo.Persona", "persona@uji.es", "11111111A"));
 
         Persona persona = new Persona("Persona2", "persona2@uji.es", "222222222A");
         assertFalse(tarea.setResponsable(persona));
@@ -53,7 +53,7 @@ class TareaTest {
         Tarea tarea = new Tarea();
         assertFalse(tarea.addPersona(null));
 
-        Persona persona = new Persona("Persona", "persona@uji.es", "11111111A");
+        Persona persona = new Persona("Modelo.Persona", "persona@uji.es", "11111111A");
         assertTrue(tarea.addPersona(persona));
         assertFalse(tarea.addPersona(persona));
 
@@ -67,18 +67,18 @@ class TareaTest {
         assertEquals(0, tarea.getCoste());
         assertEquals(0, tarea.getCosteFinal());
 
-        tarea.setCoste(20);
+        tarea.setCoste(100);
 
-        assertEquals(20, tarea.getCoste());
-        assertEquals(20, tarea.getCosteFinal());
+        assertEquals(100, tarea.getCoste());
+        assertEquals(100, tarea.getCosteFinal());
 
         tarea.setFacturacion(new Descuento());
-        assertEquals(20, tarea.getCoste());
-        assertEquals(1, tarea.getCosteFinal());
+        assertEquals(100, tarea.getCoste());
+        assertEquals(90, tarea.getCosteFinal());
 
         tarea.setFacturacion(new Urgente());
-        assertEquals(20, tarea.getCoste());
-        assertEquals(2, tarea.getCosteFinal());
+        assertEquals(100, tarea.getCoste());
+        assertEquals(110, tarea.getCosteFinal());
     }
 
 }
