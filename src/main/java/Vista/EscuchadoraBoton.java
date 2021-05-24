@@ -14,6 +14,7 @@ public class EscuchadoraBoton implements ActionListener {
     Controlador controlador;
     InterfazGrafica interfazGrafica;
     InterrogaModelo modelo;
+    EscuchadoraTextField escuchadoraTextField;
 
     public EscuchadoraBoton(Controlador controlador, InterfazGrafica interfazGrafica) {
         this.controlador = controlador;
@@ -35,7 +36,6 @@ public class EscuchadoraBoton implements ActionListener {
             //case "Finalizar tarea" -> controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
         }
 
-
     }
 
     public void crear(){
@@ -49,14 +49,29 @@ public class EscuchadoraBoton implements ActionListener {
         this.controlador = controlador;
     }
 
+    public void setEscuchadoraTextField(EscuchadoraTextField escuchadoraTextField) {
+        this.escuchadoraTextField = escuchadoraTextField;
+    }
 
     public void addPersona(){
         interfazGrafica.ventanaPersona();
     }
 
     public void addPersonaAProyecto(){
-        System.out.println("Anadiendo Persona");
-        //controlador.addPersona();
+        System.out.println("Añadiendo Persona");
+        System.out.println(escuchadoraTextField.getNombrePersona());
+        System.out.println(escuchadoraTextField.getCorreoPersona());
+        System.out.println(escuchadoraTextField.getDniPersona());
+
+        controlador.addPersona(escuchadoraTextField.getNombrePersona(), escuchadoraTextField.getCorreoPersona(), escuchadoraTextField.getDniPersona());
+        System.out.println(controlador.getListaPersonas());
+
+        actualizarInterfaz();
+    }
+
+    public void actualizarInterfaz(){
+        interfazGrafica.setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+        interfazGrafica.setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
     }
 
 
