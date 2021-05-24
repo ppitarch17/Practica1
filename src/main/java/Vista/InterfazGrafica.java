@@ -103,7 +103,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
         panelOeste.add(new JLabel("Tareas: "), BorderLayout.NORTH);
         JButton aTarea = new JButton("Añadir tarea");
-        aTarea.addActionListener(new EscuchadoraBoton(controlador, this));
+        aTarea.addActionListener(escuchadoraBoton);
         panelOeste.add(aTarea, BorderLayout.AFTER_LAST_LINE);
 
         //Tarea[] datos = (Tarea[]) controlador.getListaTareas().toArray();//{new Tarea("t1"), new Tarea("t2")};
@@ -137,18 +137,31 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         container.add(panelEste, BorderLayout.EAST);
         panelEste.setLayout(new GridLayout(4,3));
 
+        JButton addPaT = new JButton("Añadir persona a tarea");
+        addPaT.addActionListener(escuchadoraBoton);
+        JButton removePdT = new JButton("Quitar persona de tarea");
+        removePdT.addActionListener(escuchadoraBoton);
         JButton finalizar = new JButton("Finalizar tarea");
-        finalizar.addActionListener(new EscuchadoraBoton(controlador, this));
+        finalizar.addActionListener(escuchadoraBoton);
+        JButton addEtiqueta = new JButton("Añadir etiqueta");
+        addEtiqueta.addActionListener(escuchadoraBoton);
+        JButton setResp = new JButton("Set Responsable");
+        setResp.addActionListener(escuchadoraBoton);
+        JButton selectCoste = new JButton("Seleccionar coste");
+        selectCoste.addActionListener(escuchadoraBoton);
+        JButton selectFact = new JButton("Seleccionar facturación");
+        selectFact.addActionListener(escuchadoraBoton);
+        JButton salir = new JButton("Salir del programa");
+        salir.addActionListener(escuchadoraBoton);
 
-
-        panelEste.add(new JButton("Añadir persona a tarea"));
-        panelEste.add(new JButton("Quitar persona de tarea"));
+        panelEste.add(addPaT);
+        panelEste.add(removePdT);
         panelEste.add(finalizar);
-        panelEste.add(new JButton("Añadir etiqueta"));
-        panelEste.add(new JButton("Set responsable"));
-        panelEste.add(new JButton("Seleccionar coste"));
-        panelEste.add(new JButton("Seleccionar facturación"));
-        panelEste.add(new JButton("Salir del programa"));
+        panelEste.add(addEtiqueta);
+        panelEste.add(setResp);
+        panelEste.add(selectCoste);
+        panelEste.add(selectFact);
+        panelEste.add(salir);
 
 
 
