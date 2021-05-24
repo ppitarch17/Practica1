@@ -139,6 +139,7 @@ public class Proyecto implements Serializable, Controlador {
         return costeTotal;
     }
 
+    @Override
     public boolean setResponsable(Tarea tarea, Persona persona) {
         return tarea.setResponsable(persona);
     }

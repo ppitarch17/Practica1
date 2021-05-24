@@ -23,4 +23,5 @@ public interface Controlador {
     void cambiarFacturacionTarea(Tarea tarea, facturacion facturacion);
     double getCosteTotal();
     void setInterrogaVista(InterrogaVista vista);
+    boolean setResponsable(Tarea tarea, Persona persona);
 }

@@ -26,17 +26,17 @@ public class EscuchadoraBoton implements ActionListener {
         JButton boton = (JButton)evento.getSource();
 
         switch (boton.getText()){
-            case "Crear Proyecto" -> interfazGrafica.ventanaCrear();
+            case "Crear Proyecto" -> crearP();
             case "Abrir Proyecto" -> System.out.println("Abrir");
             case "Crear" -> crear();
-            case "Añadir tarea" -> System.out.println(interfazGrafica.getTareaSeleccionada());
+            case "Añadir tarea" -> addTarea();
             case "Añadir persona" -> addPersona();
             case "Añadir Persona a Proyecto" -> addPersonaAProyecto();
             case "Añadir persona a tarea" -> System.out.println("añadir personita");
             case "Quitar persona de tarea" -> System.out.println("quitar personita");
             //case "Finalizar tarea" -> controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
             case "Añadir etiqueta" -> System.out.println("añadir eti");
-            case "Set Responsable" -> System.out.println("set resp");
+            case "Set Responsable" -> setResponsable();
             case "Seleccionar coste" -> System.out.println("cuanto cuesta??");
             case "Seleccionar facturación" -> System.out.println("facturacion");
             case "Salir del programa" -> System.out.println("mueranse");
@@ -44,6 +44,10 @@ public class EscuchadoraBoton implements ActionListener {
         }
 
 
+    }
+
+    public void crearP(){
+        interfazGrafica.ventanaCrear();
     }
 
     public void crear(){
@@ -57,6 +61,9 @@ public class EscuchadoraBoton implements ActionListener {
         this.controlador = controlador;
     }
 
+    public void addTarea() {
+        interfazGrafica.ventanaTarea();
+    }
 
     public void addPersona(){
         interfazGrafica.ventanaPersona();
@@ -67,5 +74,15 @@ public class EscuchadoraBoton implements ActionListener {
         //controlador.addPersona();
     }
 
+    public void addPersonaATarea() {
+
+    }
+
+    public void addEtiqueta() {
+        InterrogaModelo tarea= interfazGrafica.getTareaSeleccionada();
+    }
+    public void setResponsable() {
+//        controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaSeleccioanda())
+    }
 
 }
