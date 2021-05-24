@@ -7,7 +7,8 @@ import Modelo.Tarea;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InterfazGrafica implements InterrogaVista, InformaVista {
     //MVC
@@ -16,8 +17,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     private EscuchadoraBoton escuchadoraBoton;
     private EscuchadoraLista escuchadoraLista;
 
-    private InterrogaModelo tareaSeleccionada;
-    private InterrogaModelo personaSeleccioanda;
+    private Tarea tareaSeleccionada; //Tarea
+    private InterrogaModelo personaSeleccioanda; //Persona
+
+    Tarea[] vectorTareas;
+    Persona[] vectorPersonas;
+
 
     public static void main(String[] args) {
 
@@ -101,8 +106,10 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         aTarea.addActionListener(new EscuchadoraBoton(controlador, this));
         panelOeste.add(aTarea, BorderLayout.AFTER_LAST_LINE);
 
-        Tarea[] datos = {new Tarea("t1"), new Tarea("t2")};
-        JList<Tarea> tareas = new JList<>(datos);
+        //Tarea[] datos = (Tarea[]) controlador.getListaTareas().toArray();//{new Tarea("t1"), new Tarea("t2")};
+        //List<Tarea> datos = controlador.getListaTareas();
+        JList<Tarea> tareas = new JList<Tarea>(vectorTareas);
+
         tareas.addListSelectionListener(new EscuchadoraLista(controlador, this));
         tareas.setVisibleRowCount(3);
         tareas.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -119,8 +126,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         aPersona.addActionListener(new EscuchadoraBoton(controlador, this));
         panelCentral.add(aPersona, BorderLayout.AFTER_LAST_LINE);
 
-        Persona[] lpersonas = {new Persona("dni"), new Persona("nif")};
-        JList<Persona> personas = new JList<>(lpersonas);
+        //List<Persona> lpersonas = controlador.getListaPersonas();//{new Persona("dni"), new Persona("nif")};
+        JList<Persona> personas = new JList<>(vectorPersonas);
         personas.setVisibleRowCount(3);
         personas.setLayoutOrientation(JList.VERTICAL_WRAP);
         panelCentral.add(personas, BorderLayout.CENTER);
@@ -132,9 +139,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
         JButton finalizar = new JButton("Finalizar tarea");
         finalizar.addActionListener(new EscuchadoraBoton(controlador, this));
-
-
-
 
 
         panelEste.add(new JButton("Añadir persona a tarea"));
@@ -188,6 +192,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void setControlador(Controlador controlador){
         this.controlador = controlador;
+        escuchadoraBoton.setControlador(controlador);
     }
 
     public InterrogaModelo getTareaSeleccionada() {
@@ -204,5 +209,13 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void setPersonaSeleccioanda(Persona personaSeleccioanda) {
         this.personaSeleccioanda = personaSeleccioanda;
+    }
+
+    public void setVectorTareas(Tarea[] vectorTareas) {
+        this.vectorTareas = vectorTareas;
+    }
+
+    public void setVectorPersonas(Persona[] vectorPersonas) {
+        this.vectorPersonas = vectorPersonas;
     }
 }

@@ -2,6 +2,8 @@ package Vista;
 
 import Controlador.*;
 import Modelo.InterrogaModelo;
+import Modelo.Persona;
+import Modelo.Tarea;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -26,12 +28,29 @@ public class EscuchadoraBoton implements ActionListener {
         switch (boton.getText()){
             case "Crear Proyecto" -> interfazGrafica.ventanaCrear();
             case "Abrir Proyecto" -> System.out.println("Abrir");
-            case "Crear" -> interfazGrafica.ventanaMain();
+            case "Crear" -> crear();
             case "Añadir tarea" -> System.out.println(interfazGrafica.getTareaSeleccionada());
-            case "Añadir persona" -> interfazGrafica.ventanaPersona();
-            case "Finalizar tarea" -> controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
+            case "Añadir persona" -> addPersona();
+            //case "Finalizar tarea" -> controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
         }
 
 
     }
+
+    public void crear(){
+        interfazGrafica.setControlador(new Proyecto()); //TODO nombre al Proyecto
+        interfazGrafica.setVectorPersonas(controlador.getListaTareas().toArray(new Persona[0]));
+        interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+        interfazGrafica.ventanaMain();
+    }
+
+    public void setControlador(Controlador controlador){
+        this.controlador = controlador;
+    }
+
+
+    public void addPersona(){
+        interfazGrafica.ventanaPersona();
+    }
+
 }

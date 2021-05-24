@@ -107,4 +107,6 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     public boolean getClienteEspecial() {
         return clienteEspecial;
     }
+
+
 }
