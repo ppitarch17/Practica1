@@ -162,11 +162,24 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
         JPanel panel = new JPanel();
+
         JLabel nombre = new JLabel("Nombre: ");
-        JTextField nom = new JTextField(20);
-        JButton persona = new JButton("Añadir persona");
-        panel.add(nombre); panel.add(nom); panel.add(persona);
-        persona.addActionListener(new EscuchadoraBoton(controlador, this));
+        JTextField nombreDato = new JTextField(20);
+
+        JLabel correo = new JLabel("Correo: ");
+        JTextField correoDato = new JTextField(20);
+
+        JLabel dni = new JLabel("DNI: ");
+        JTextField dniDato = new JTextField(20);
+
+        JButton botonPersona = new JButton("Añadir Persona a Proyecto");
+        botonPersona.addActionListener(new EscuchadoraBoton(controlador, this));
+
+        panel.add(dni); panel.add(dniDato);
+        panel.add(correo);panel.add(correoDato);
+        panel.add(nombre); panel.add(nombreDato); panel.add(botonPersona);
+
+
         container.add(panel);
         ventana.pack();
         ventana.setVisible(true);

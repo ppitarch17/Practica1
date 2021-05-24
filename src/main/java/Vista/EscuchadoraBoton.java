@@ -31,6 +31,7 @@ public class EscuchadoraBoton implements ActionListener {
             case "Crear" -> crear();
             case "Añadir tarea" -> System.out.println(interfazGrafica.getTareaSeleccionada());
             case "Añadir persona" -> addPersona();
+            case "Añadir Persona a Proyecto" -> addPersonaAProyecto();
             //case "Finalizar tarea" -> controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
         }
 
@@ -39,7 +40,7 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void crear(){
         interfazGrafica.setControlador(new Proyecto()); //TODO nombre al Proyecto
-        interfazGrafica.setVectorPersonas(controlador.getListaTareas().toArray(new Persona[0]));
+        interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
         interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
         interfazGrafica.ventanaMain();
     }
@@ -52,5 +53,11 @@ public class EscuchadoraBoton implements ActionListener {
     public void addPersona(){
         interfazGrafica.ventanaPersona();
     }
+
+    public void addPersonaAProyecto(){
+        System.out.println("Anadiendo Persona");
+        //controlador.addPersona();
+    }
+
 
 }
