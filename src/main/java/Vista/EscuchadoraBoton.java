@@ -29,7 +29,7 @@ public class EscuchadoraBoton implements ActionListener {
             case "Crear" -> interfazGrafica.ventanaMain();
             case "Añadir tarea" -> System.out.println(interfazGrafica.getTareaSeleccionada());
             case "Añadir persona" -> interfazGrafica.ventanaPersona();
-            case "Finalizar tarea" -> controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
+        //    case "Finalizar tarea" -> controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
         }
 
 

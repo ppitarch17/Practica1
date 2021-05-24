@@ -16,8 +16,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     private EscuchadoraBoton escuchadoraBoton;
     private EscuchadoraLista escuchadoraLista;
 
-    private InterrogaModelo tareaSeleccionada;
-    private InterrogaModelo personaSeleccioanda;
+    private Tarea tareaSeleccionada;
+    private Persona personaSeleccioanda;
 
     public static void main(String[] args) {
 
@@ -101,8 +101,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         aTarea.addActionListener(new EscuchadoraBoton(controlador, this));
         panelOeste.add(aTarea, BorderLayout.AFTER_LAST_LINE);
 
-        Tarea[] datos = {new Tarea("t1"), new Tarea("t2")};
-        JList<Tarea> tareas = new JList<>(datos);
+
+        JList<Tarea> tareas = new JList<>((Tarea[]) controlador.getListaTareas().toArray());
         tareas.addListSelectionListener(new EscuchadoraLista(controlador, this));
         tareas.setVisibleRowCount(3);
         tareas.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -119,8 +119,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         aPersona.addActionListener(new EscuchadoraBoton(controlador, this));
         panelCentral.add(aPersona, BorderLayout.AFTER_LAST_LINE);
 
-        Persona[] lpersonas = {new Persona("dni"), new Persona("nif")};
-        JList<Persona> personas = new JList<>(lpersonas);
+        JList<Persona> personas = new JList<>((Persona[]) controlador.getListaPersonas().toArray());
         personas.setVisibleRowCount(3);
         personas.setLayoutOrientation(JList.VERTICAL_WRAP);
         panelCentral.add(personas, BorderLayout.CENTER);
@@ -130,21 +129,31 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         container.add(panelEste, BorderLayout.EAST);
         panelEste.setLayout(new GridLayout(4,3));
 
+        JButton addPaT = new JButton("Añadir persona a tarea");
+        addPaT.addActionListener(new EscuchadoraBoton(controlador, this));
+        JButton removePdT = new JButton("Quitar persona de tarea");
+        removePdT.addActionListener(new EscuchadoraBoton(controlador, this));
         JButton finalizar = new JButton("Finalizar tarea");
         finalizar.addActionListener(new EscuchadoraBoton(controlador, this));
+        JButton addEtiqueta = new JButton("Añadir etiqueta");
+        addEtiqueta.addActionListener(new EscuchadoraBoton(controlador, this));
+        JButton setResp = new JButton("Set Responsable");
+        setResp.addActionListener(new EscuchadoraBoton(controlador, this));
+        JButton selectCoste = new JButton("Seleccionar coste");
+        selectCoste.addActionListener(new EscuchadoraBoton(controlador, this));
+        JButton selectFact = new JButton("Seleccionar facturación");
+        selectFact.addActionListener(new EscuchadoraBoton(controlador, this));
+        JButton salir = new JButton("Salir del programa");
+        salir.addActionListener(new EscuchadoraBoton(controlador, this));
 
-
-
-
-
-        panelEste.add(new JButton("Añadir persona a tarea"));
-        panelEste.add(new JButton("Quitar persona de tarea"));
+        panelEste.add(addPaT);
+        panelEste.add(removePdT);
         panelEste.add(finalizar);
-        panelEste.add(new JButton("Añadir etiqueta"));
-        panelEste.add(new JButton("Set responsable"));
-        panelEste.add(new JButton("Seleccionar coste"));
-        panelEste.add(new JButton("Seleccionar facturación"));
-        panelEste.add(new JButton("Salir del programa"));
+        panelEste.add(addEtiqueta);
+        panelEste.add(setResp);
+        panelEste.add(selectCoste);
+        panelEste.add(selectFact);
+        panelEste.add(salir);
 
 
 
