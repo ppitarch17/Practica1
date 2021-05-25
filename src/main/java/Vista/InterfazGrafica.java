@@ -23,6 +23,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     private EscuchadoraComboBox escuchadoraComboBox;
     private EscuchadoraCheckBox escuchadoraCheckBox;
 
+    JFrame ventana = new JFrame();
+
     private Tarea tareaSeleccionada; //Tarea
     private Persona personaSeleccioanda; //Persona
 
@@ -55,7 +57,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     //-------VENTANAS----------
 
     public void ventanaStart(){
-        JFrame ventana = new JFrame("Primera Ventana"); //Ventana principal
+        ventana = new JFrame("Primera Ventana"); //Ventana principal
+        ventana.setLocationRelativeTo(null);
         this.escuchadoraBoton = new EscuchadoraBoton(controlador, this);
         this.escuchadoraTextField = new EscuchadoraTextField(controlador,this);
         escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
@@ -83,11 +86,14 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     }
 
     public void ventanaAbrir(){
-        JFrame ventana = new JFrame("Abrir Proyecto");
+        ventana = new JFrame("Abrir Proyecto");
+        ventana.setLocationRelativeTo(null);
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
         JPanel panel = new JPanel();
+//        JFileChooser jfc = new JFileChooser();
+//        panel.add(jfc);
         JLabel nombre = new JLabel("Nombre: ");
         JTextField nom = new JTextField(20);
         JButton boton = new JButton("Abrir");
@@ -100,7 +106,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     }
 
     public void ventanaCrear() {
-        JFrame ventana = new JFrame("Crear Proyecto");
+        ventana = new JFrame("Crear Proyecto");
+        ventana.setLocationRelativeTo(null);
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
@@ -117,7 +124,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     }
 
     public void ventanaMain(){
-        JFrame ventana = new JFrame("Ventana Proyecto"); //Ventana principal
+        ventana = new JFrame("Ventana Proyecto"); //Ventana principal
+        ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
 
         //CONT
@@ -136,15 +144,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         container.add(panelOeste, BorderLayout.WEST);
         panelOeste.setLayout(new BorderLayout());
 
-        JPanel panelPueba = new JPanel();
-        panelOeste.add(panelPueba, BorderLayout.CENTER);
-
-
-        panelPueba.setLayout(new BorderLayout());
-        panelPueba.add(new JLabel("Personas: "), BorderLayout.NORTH);
-        JList<Persona> personas = new JList<>(vectorPersonas);
-        JScrollPane scrollPanePersonas = new JScrollPane(personas);
-        panelPueba.add(scrollPanePersonas, BorderLayout.CENTER);
 
         //TAREAS
 
@@ -346,7 +345,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     }
 
     public void ventanaPersona(){
-        JFrame ventana = new JFrame("Crear Persona");
+        ventana = new JFrame("Crear Persona");
+        ventana.setLocationRelativeTo(null);
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//container.setLayout(new GridLayout(1,3));
@@ -383,7 +383,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     }
 
     public void ventanaTarea() {
-        JFrame ventana = new JFrame("Crear Tarea");
+        ventana = new JFrame("Crear Tarea");
+        ventana.setLocationRelativeTo(null);
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//new GridLayout(1,3));
@@ -453,11 +454,30 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         ventana.setVisible(true);
     }
 
+    public void ventanaError(String error) {
+        ventana = new JFrame("Error 404");
+        ventana.setLocationRelativeTo(null);
+        Container container = ventana.getContentPane();
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//new GridLayout(1,3));
+        JPanel panel = new JPanel();
+        panel.add(new JLabel(error));
+        JButton salir = new JButton("Ok👍👍👍");
+        salir.addActionListener(escuchadoraBoton);
+        panel.add(salir);
+        container.add(panel);
+        ventana.pack();
+        ventana.setVisible(true);
+    }
+
     //---------METODOS----------
 
     public void setControlador(Controlador controlador){
         this.controlador = controlador;
         escuchadoraBoton.setControlador(controlador);
+    }
+
+    public JFrame getVentana() {
+        return ventana;
     }
 
     public InterrogaModelo getTareaSeleccionada() {

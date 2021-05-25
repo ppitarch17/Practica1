@@ -47,17 +47,19 @@ public class EscuchadoraBoton implements ActionListener {
             case "Seleccionar facturación" -> System.out.println("facturacion");
             case "Añadir tarea a Proyecto" -> addTareaAProyecto();
             case "Salir del programa" -> salir();
-
+            case "Ok👍👍👍" -> interfazGrafica.getVentana().dispose();
         }
 
 
     }
 
     public void crearP(){
+        interfazGrafica.getVentana().dispose();
         interfazGrafica.ventanaCrear();
     }
 
     public void abrirP() {
+        interfazGrafica.getVentana().dispose();
         interfazGrafica.ventanaAbrir();
     }
 
@@ -66,6 +68,7 @@ public class EscuchadoraBoton implements ActionListener {
         System.out.println(controlador.getNombre());
         interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
         interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+        interfazGrafica.getVentana().dispose();
         interfazGrafica.ventanaMain();
     }
 
@@ -82,6 +85,7 @@ public class EscuchadoraBoton implements ActionListener {
                 System.out.println(controlador.getNombre());
                 interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
                 interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+                interfazGrafica.getVentana().dispose();
                 interfazGrafica.ventanaMain();
             }finally {
                 if(ois != null) ois.close();
@@ -121,10 +125,14 @@ public class EscuchadoraBoton implements ActionListener {
         System.out.println(escuchadoraTextField.getCorreoPersona());
         System.out.println(escuchadoraTextField.getDniPersona());
 
-        controlador.addPersona(escuchadoraTextField.getNombrePersona(), escuchadoraTextField.getCorreoPersona(), escuchadoraTextField.getDniPersona());
+        if (!controlador.addPersona(escuchadoraTextField.getNombrePersona(), escuchadoraTextField.getCorreoPersona(), escuchadoraTextField.getDniPersona()))
+            interfazGrafica.ventanaError("La persona ya existe en el proyecto");
+        else {
+            interfazGrafica.getVentana().dispose();
+            actualizarInterfaz();
+        }
         System.out.println(controlador.getListaPersonas());
 
-        actualizarInterfaz();
     }
 
     public void addTareaAProyecto(){
@@ -147,7 +155,10 @@ public class EscuchadoraBoton implements ActionListener {
 
         controlador.addTarea(titulo, descripcion, prioridad, resultado, coste, facturacion);
 
+        interfazGrafica.getVentana().dispose();
         actualizarInterfaz();
+
+
     }
 
     public void actualizarInterfaz(){

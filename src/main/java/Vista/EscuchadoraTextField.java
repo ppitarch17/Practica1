@@ -38,12 +38,21 @@ public class EscuchadoraTextField implements ActionListener {
                 case "nombreDato" -> this.nombrePersona = text.getText();
                 case "nombreTareaDato" -> this.nombreTarea = text.getText();
                 case "descripcionDato" -> this.descripcionTarea = text.getText();
-                case "costeInicialDatos" -> this.costeTarea = Double.parseDouble(text.getText());
+                case "costeInicialDatos" -> costeInicial(text);
             }
         else this.texto = text.getText();
 
         System.out.println(text.getName() + ": " + text.getText());
 
+    }
+
+    public void costeInicial(JTextField text) {
+        try {
+            this.costeTarea = Double.parseDouble(text.getText());
+        }
+        catch (NumberFormatException e) {
+            interfazGrafica.ventanaError("No es un número");
+        }
     }
 
     public String getNombrePersona() {
