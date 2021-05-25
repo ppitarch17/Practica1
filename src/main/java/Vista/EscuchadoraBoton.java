@@ -175,7 +175,7 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void salir() {
         grabacionDeDatos(controlador);
-
+        System.exit(0);
     }
 
     public void grabacionDeDatos(Controlador proyecto){
