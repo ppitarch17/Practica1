@@ -19,7 +19,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     private EscuchadoraTextField escuchadoraTextField;
 
     private Tarea tareaSeleccionada; //Tarea
-    private InterrogaModelo personaSeleccioanda; //Persona
+    private Persona personaSeleccioanda; //Persona
 
     Tarea[] vectorTareas;
     Persona[] vectorPersonas;
@@ -70,6 +70,23 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         ventana.setVisible(true);
     }
 
+    public void ventanaAbrir(){
+        JFrame ventana = new JFrame("Abrir Proyecto");
+        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Container container = ventana.getContentPane();
+        container.setLayout(new GridLayout(1,3));
+        JPanel panel = new JPanel();
+        JLabel nombre = new JLabel("Nombre: ");
+        JTextField nom = new JTextField(20);
+        JButton boton = new JButton("Abrir");
+        panel.add(nombre); panel.add(nom); panel.add(boton);
+        nom.addActionListener(escuchadoraTextField);
+        boton.addActionListener(escuchadoraBoton);
+        container.add(panel);
+        ventana.pack();
+        ventana.setVisible(true);
+    }
+
     public void ventanaCrear() {
         JFrame ventana = new JFrame("Crear Proyecto");
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,6 +97,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JTextField nom = new JTextField(20);
         JButton boton = new JButton("Crear");
         panel.add(nombre); panel.add(nom); panel.add(boton);
+        nom.addActionListener(escuchadoraTextField);
         boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
@@ -97,9 +115,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         //NORTE
         JPanel panelNorte = new JPanel();
         container.add(panelNorte, BorderLayout.NORTH);
-        JLabel nombre = new JLabel("Nombre: ");
-        JTextField nom = new JTextField(20);
-        panelNorte.add(nombre); panelNorte.add(nom);
+        JLabel nombre = new JLabel(controlador.getNombre());
+        panelNorte.add(nombre);
 
 
         //TAREAS
@@ -117,9 +134,11 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         tareas = new JList<Tarea>(vectorTareas);
 
         tareas.addListSelectionListener(new EscuchadoraLista(controlador, this));
-        tareas.setVisibleRowCount(3);
+        tareas.setVisibleRowCount(20);
+        JScrollPane scrollPane = new JScrollPane(tareas);
         tareas.setLayoutOrientation(JList.VERTICAL_WRAP);
-        panelOeste.add(tareas, BorderLayout.CENTER);
+        panelOeste.add(scrollPane, BorderLayout.CENTER);
+//        panelOeste.add(tareas, BorderLayout.CENTER);
 
 
         //PERSONAS
@@ -134,9 +153,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
         //List<Persona> lpersonas = controlador.getListaPersonas();//{new Persona("dni"), new Persona("nif")};
         personas = new JList<>(vectorPersonas);
-        personas.setVisibleRowCount(3);
+        personas.setVisibleRowCount(20);
         personas.setLayoutOrientation(JList.VERTICAL_WRAP);
-        panelCentral.add(personas, BorderLayout.CENTER);
+        JScrollPane scrollPanel = new JScrollPane(personas);
+        personas.setLayoutOrientation(JList.VERTICAL_WRAP);
+        panelCentral.add(scrollPanel, BorderLayout.CENTER);
+//        panelCentral.add(personas, BorderLayout.CENTER);
 
         //INTERFAZ
         JPanel panelEste = new JPanel();

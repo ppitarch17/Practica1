@@ -16,6 +16,7 @@ public class EscuchadoraTextField implements ActionListener {
     private String nombrePersona;
     private String correoPersona;
     private String dniPersona;
+    private String texto;
 
     public EscuchadoraTextField(Controlador controlador, InterfazGrafica interfazGrafica){
         this.controlador = controlador;
@@ -26,12 +27,13 @@ public class EscuchadoraTextField implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JTextField text = (JTextField) e.getSource();
-
-        switch (text.getName()){
-            case "dniDato" -> this.dniPersona = text.getText();
-            case "correoDato" -> this.correoPersona = text.getText();
-            case "nombreDato" -> this.nombrePersona = text.getText();
-        }
+        if (text.getName() != null)
+            switch (text.getName()){
+                case "dniDato" -> this.dniPersona = text.getText();
+                case "correoDato" -> this.correoPersona = text.getText();
+                case "nombreDato" -> this.nombrePersona = text.getText();
+            }
+        else this.texto = text.getText();
 
         System.out.println(text.getName());
         System.out.println(text.getText());
@@ -48,5 +50,9 @@ public class EscuchadoraTextField implements ActionListener {
 
     public String getDniPersona() {
         return dniPersona;
+    }
+
+    public String getTexto() {
+        return texto;
     }
 }
