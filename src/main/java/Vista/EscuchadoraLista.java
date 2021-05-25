@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.Controlador;
+import Modelo.Persona;
 import Modelo.Tarea;
 
 import javax.swing.*;
@@ -11,17 +12,40 @@ public class EscuchadoraLista implements ListSelectionListener {
 
     Controlador controlador;
     InterfazGrafica interfazGrafica;
+    EscuchadoraBoton escuchadoraBoton;
 
     public EscuchadoraLista(Controlador controlador, InterfazGrafica interfazGrafica) {
         this.controlador = controlador;
         this.interfazGrafica = interfazGrafica;
     }
 
+    public EscuchadoraLista(Controlador controlador, InterfazGrafica interfazGrafica, EscuchadoraBoton escuchadoraBoton) {
+        this.controlador = controlador;
+        this.interfazGrafica = interfazGrafica;
+        this.escuchadoraBoton = escuchadoraBoton;
+    }
+
+    public void setEscuchadoraBoton(EscuchadoraBoton escuchadoraBoton) {
+        this.escuchadoraBoton = escuchadoraBoton;
+    }
+
     @Override
     public void valueChanged(ListSelectionEvent e) {
         JList lista = (JList) e.getSource();
-        interfazGrafica.setTareaSeleccionada((Tarea)lista.getSelectedValue());
+
+
+        switch (lista.getName()){
+            case "cuadroPersonas" -> interfazGrafica.setPersonaSeleccioanda((Persona) lista.getSelectedValue());
+            case "cuadroTareas" -> {
+                interfazGrafica.setTareaSeleccionada((Tarea) lista.getSelectedValue());
+                interfazGrafica.actualizarInfoTareaSeleccionada();
+            }
+            case "cuadroPersonasEnTarea" -> interfazGrafica.setPersonaDeTareaSeleccionada((Persona) lista.getSelectedValue());
+        }
+        System.out.println(lista.getName());
         System.out.println(lista.getSelectedValue());
+
+        //interfazGrafica.setTareaSeleccionada((Tarea)lista.getSelectedValue());
     }
 
 

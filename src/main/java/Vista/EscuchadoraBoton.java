@@ -66,6 +66,7 @@ public class EscuchadoraBoton implements ActionListener {
         System.out.println(controlador.getNombre());
         interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
         interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+        interfazGrafica.setVectorPersonasEnTarea(new Persona[0]);
         interfazGrafica.ventanaMain();
     }
 
@@ -82,6 +83,8 @@ public class EscuchadoraBoton implements ActionListener {
                 System.out.println(controlador.getNombre());
                 interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
                 interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+                interfazGrafica.setVectorPersonasEnTarea(new Persona[0]);
+                //interfazGrafica.setVectorPersonasEnTarea(controlado);
                 interfazGrafica.ventanaMain();
             }finally {
                 if(ois != null) ois.close();
@@ -153,15 +156,22 @@ public class EscuchadoraBoton implements ActionListener {
     public void actualizarInterfaz(){
         interfazGrafica.setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
         interfazGrafica.setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
+        if (interfazGrafica.getTareaSeleccionada() != null)
+            interfazGrafica.setPersonasEnTarea( (Persona[]) interfazGrafica.getTareaSeleccionada().getListaAlmacacenada());
     }
 
     public void addPersonaATarea() {
 
+        if (interfazGrafica.getPersonaSeleccioanda() != null && interfazGrafica.getTareaSeleccionada() != null) //TODO error
+            controlador.addPersonaToTarea(interfazGrafica.getPersonaSeleccioanda(), interfazGrafica.getTareaSeleccionada());
 
-        //actualizarInterfaz();
+        actualizarInterfaz();
     }
 
     public void finalizarTarea() {
+        controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
+        actualizarInterfaz();
+        interfazGrafica.actualizarInfoTareaSeleccionada();
 //        controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
     }
 

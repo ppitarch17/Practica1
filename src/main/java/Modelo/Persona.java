@@ -104,9 +104,9 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
         return DNI;
     }
 
-//    public boolean getClienteEspecial() {
-//        return clienteEspecial;
-//    }
-
+    @Override
+    public Object[] getListaAlmacacenada(){
+        return listaTareas.toArray(new Tarea[0]);
+    }
 
 }
