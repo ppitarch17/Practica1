@@ -6,6 +6,7 @@ import Modelo.InterrogaModelo;
 import Modelo.Persona;
 import Modelo.Tarea;
 import Facturación.*;
+import Resultados.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -225,7 +226,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel nombreTarea = new JLabel("Nombre: ");
+        JLabel nombreTarea = new JLabel("Titulo: ");
         JTextField nombreTareaDato = new JTextField(20);
         nombreTareaDato.setName("nombreTareaDato");
         nombreTareaDato.addActionListener(escuchadoraTextField);
@@ -235,12 +236,13 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         descripcionDato.setName("descripcionDato");
         descripcionDato.addActionListener(escuchadoraTextField);
 
-        //int[] tiposPrioridades = { 1, 2, 3, 4, 5 };
+
         JLabel prioridad = new JLabel("prioridad: ");
-        String[] tiposPrioridades = { "1", "2", "3", "4", "5" };
-        JComboBox<String> prioridadDato = new JComboBox<String>(tiposPrioridades);
+        Integer[] tipos = { 1, 2, 3, 4, 5 };
+        JComboBox<Integer> prioridadDato = new JComboBox<Integer>(tipos);
         prioridadDato.setName("prioridadDato");
         prioridadDato.addActionListener(escuchadoraComboBox);
+        prioridadDato.setEditable(false);
 
 
 //        JLabel slider = new JLabel("Slider: ");
@@ -250,10 +252,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 //        sliderDato.setPaintTicks(true);
 
         JLabel resultado = new JLabel("resultado: ");
-        String[] tiposResultado = { "Biblioteca", "Documentacion", "Pagina Web","Programa"};
-        JComboBox<String> resultadoDato = new JComboBox<String>(tiposResultado);
+        //String[] tiposResultado = { "Biblioteca", "Documentacion", "Pagina Web","Programa"};
+        Resultado[] tiposResultado = {new Biblioteca(), new Documentación(), new PaginaWeb(), new Programa()};
+        JComboBox<Resultado> resultadoDato = new JComboBox<Resultado>(tiposResultado);
         resultadoDato.setName("resultadoDato");
         resultadoDato.addActionListener(escuchadoraComboBox);
+        resultadoDato.setEditable(false);
 
         JLabel costeInicial = new JLabel("Coste Inicial: ");
         JTextField costeInicialDatos = new JTextField(20);
@@ -261,17 +265,23 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         costeInicialDatos.addActionListener(escuchadoraTextField);
 
         JLabel facturacion = new JLabel("facturacion: ");
-        String[] tiposFacturacion = { "Descuento", "Cosnumo Interno", "Urgente"};
-        JComboBox<String> facturacionDato = new JComboBox<>(tiposFacturacion);
+        facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
+        JComboBox<facturacion> facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.setName("facturacionDato");
         facturacionDato.addActionListener(escuchadoraComboBox);
+        facturacionDato.setEditable(false);
+        //TODO si descuento seleccionar descuentoPorClienteEspecial
+        //TODO si urgente seleccionar sobrecoste
+
+
+        //TODO ComboBox etiquetas
 
         JButton tareaBoton = new JButton("Añadir tarea a Proyecto");
         tareaBoton.addActionListener(escuchadoraBoton);
 
         panel.add(nombreTarea); panel.add(nombreTareaDato); panel.add(descripcion);panel.add(descripcionDato);
-        panel.add(prioridad);panel.add(prioridadDato);panel.add(costeInicial); panel.add(costeInicialDatos);
-        panel.add(facturacion); panel.add(facturacionDato);
+        panel.add(prioridad); panel.add(prioridadDato); panel.add(resultado); panel.add(resultadoDato);
+        panel.add(costeInicial); panel.add(costeInicialDatos);panel.add(facturacion); panel.add(facturacionDato);
         panel.add(tareaBoton);
 
         container.add(panel);

@@ -40,8 +40,7 @@ public class EscuchadoraTextField implements ActionListener {
             case "costeInicialDatos" -> this.costeTarea = Double.parseDouble(text.getText());
         }
 
-        System.out.println(text.getName());
-        System.out.println(text.getText());
+        System.out.println(text.getName() + ": " + text.getText());
 
     }
 

@@ -8,4 +8,9 @@ public class Urgente implements facturacion {
     public double costeFacturacion(double coste) {
         return round(coste * sobrecoste);
     }
+
+    @Override
+    public String toString(){
+        return "Urgente";
+    }
 }

@@ -3,7 +3,7 @@ package Resultados;
 import java.io.Serializable;
 
 public abstract class Resultado implements Serializable {
-    String identificador;
+    String identificador = getClass().getName();
     int nHoras;
     boolean isInterno;
 

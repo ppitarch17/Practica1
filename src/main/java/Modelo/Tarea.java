@@ -61,7 +61,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         this.prioridad = prioridad;
         this.resultado = resultado;
         this.coste = coste;
-        this.facturacion = facturacion;
+        setFacturacion(facturacion);
         listaEtiquetas = new ArrayList<>();
         listaPersonas = new ArrayList<>();
         fechaCreado = LocalDate.now();

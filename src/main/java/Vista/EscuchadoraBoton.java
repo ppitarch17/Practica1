@@ -1,9 +1,11 @@
 package Vista;
 
 import Controlador.*;
+import Facturación.facturacion;
 import Modelo.InterrogaModelo;
 import Modelo.Persona;
 import Modelo.Tarea;
+import Resultados.Resultado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -81,7 +83,7 @@ public class EscuchadoraBoton implements ActionListener {
     }
 
     public void addPersonaAProyecto(){
-        System.out.println("Añadiendo Persona");
+        System.out.println("---Añadiendo Persona");
         System.out.println(escuchadoraTextField.getNombrePersona());
         System.out.println(escuchadoraTextField.getCorreoPersona());
         System.out.println(escuchadoraTextField.getDniPersona());
@@ -93,7 +95,7 @@ public class EscuchadoraBoton implements ActionListener {
     }
 
     public void addTareaAProyecto(){
-        System.out.println("Añadiendo Tarea");
+        System.out.println("---Añadiendo Tarea");
 
         //String titulo, String descripcion, int prioridad, Resultado resultado, double coste, facturacion facturacion
         System.out.println(escuchadoraTextField.getNombreTarea());
@@ -102,6 +104,17 @@ public class EscuchadoraBoton implements ActionListener {
         System.out.println(escuchadoraComboBox.getTipoResultadoTarea());
         System.out.println(escuchadoraTextField.getCosteTarea());
         System.out.println(escuchadoraComboBox.getTipofacturacionTarea());
+
+        String titulo = escuchadoraTextField.getNombreTarea();
+        String descripcion = escuchadoraTextField.getDescripcionTarea();
+        int prioridad = escuchadoraComboBox.getPrioridadTarea();
+        Resultado resultado = escuchadoraComboBox.getTipoResultadoTarea();
+        double coste = escuchadoraTextField.getCosteTarea();
+        facturacion facturacion = escuchadoraComboBox.getTipofacturacionTarea();
+
+        controlador.addTarea(titulo, descripcion, prioridad, resultado, coste, facturacion);
+
+        actualizarInterfaz();
     }
 
     public void actualizarInterfaz(){

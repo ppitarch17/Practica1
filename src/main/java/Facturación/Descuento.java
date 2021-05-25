@@ -6,4 +6,8 @@ public class Descuento  implements facturacion {
     public double costeFacturacion(double coste) {
         return coste -= descuentoPorClienteEspecial;
     }
+    @Override
+    public String toString(){
+        return "Descuento";
+    }
 }

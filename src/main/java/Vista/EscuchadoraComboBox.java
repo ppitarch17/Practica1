@@ -15,7 +15,7 @@ public class EscuchadoraComboBox implements ActionListener {
     InterfazGrafica interfazGrafica;
     InterrogaModelo modelo;
 
-    private facturacion TipofacturacionTarea;
+    private facturacion tipofacturacionTarea;
     private int prioridadTarea;
     private Resultado tipoResultadoTarea;
 
@@ -25,28 +25,36 @@ public class EscuchadoraComboBox implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("ComboBox");
+
         JComboBox comboBox = (JComboBox) e.getSource();
+        System.out.println("ComboBox " + comboBox.getName() +": " + comboBox.getSelectedItem());
 
         switch (comboBox.getName()){
-            case "facturacionDato" -> tipofacturacion((String) comboBox.getSelectedItem());
-            case "prioridadDato" -> this.prioridadTarea = Integer.parseInt((String) comboBox.getSelectedItem());
-            case "resultadoDato" -> tipoResultado((String) comboBox.getSelectedItem());
+            case "facturacionDato" -> this.tipofacturacionTarea = (facturacion) comboBox.getSelectedItem();
+            case "prioridadDato" -> {
+                this.prioridadTarea = (int) comboBox.getSelectedItem();
+                System.out.println("Entra prioridad");
+            }
+            case "resultadoDato" -> {
+                this.tipoResultadoTarea = (Resultado) comboBox.getSelectedItem();
+                System.out.println("Entra resultado");
+            }
         }
 
     }
 
     public void tipofacturacion(String selectedItem){
-        System.out.println(selectedItem);
-        System.out.println(prioridadTarea);
+
+        System.out.println("facturacion seleccionada: " + selectedItem);
+        //System.out.println(prioridadTarea);
     }
 
     public void tipoResultado(String selectedItem){
-        System.out.println(selectedItem);
+        System.out.println("resultado seleccionada: " + selectedItem);
     }
 
     public facturacion getTipofacturacionTarea() {
-        return TipofacturacionTarea;
+        return tipofacturacionTarea;
     }
 
     public int getPrioridadTarea() {
