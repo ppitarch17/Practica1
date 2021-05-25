@@ -3,6 +3,7 @@ package Controlador;
 import Facturación.facturacion;
 import Modelo.Persona;
 import Modelo.Tarea;
+import Resultados.Resultado;
 import Vista.InterrogaVista;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public interface Controlador {
 
     boolean addPersona(String nombre, String correo, String DNI);
     boolean addTarea(String titulo);
+    boolean addTarea(String titulo, String descripcion, int prioridad, Resultado resultado, double coste, facturacion facturacion);
     Persona getPersona(String DNI);
     Tarea buscaTarea (String titulo);
     boolean addPersonaToTarea(Persona persona, Tarea tarea);

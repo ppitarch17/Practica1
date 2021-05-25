@@ -14,10 +14,12 @@ public class EscuchadoraBoton implements ActionListener {
     Controlador controlador;
     InterfazGrafica interfazGrafica;
     InterrogaModelo modelo;
+    EscuchadoraTextField escuchadoraTextField;
+    EscuchadoraComboBox escuchadoraComboBox;
 
     public EscuchadoraBoton(Controlador controlador, InterfazGrafica interfazGrafica) {
         this.controlador = controlador;
-        System.out.println(controlador);
+        //System.out.println(controlador);
         this.interfazGrafica = interfazGrafica;
     }
 
@@ -40,6 +42,7 @@ public class EscuchadoraBoton implements ActionListener {
             case "Seleccionar coste" -> System.out.println("cuanto cuesta??");
             case "Seleccionar facturación" -> System.out.println("facturacion");
             case "Salir del programa" -> System.out.println("mueranse");
+            case "Añadir tarea a Proyecto" -> addTareaAProyecto();
 
         }
 
@@ -64,6 +67,11 @@ public class EscuchadoraBoton implements ActionListener {
     public void setEscuchadoraTextField(EscuchadoraTextField escuchadoraTextField) {
         this.escuchadoraTextField = escuchadoraTextField;
     }
+
+    public void setEscuchadoraComboBox(EscuchadoraComboBox escuchadoraComboBox) {
+        this.escuchadoraComboBox = escuchadoraComboBox;
+    }
+
     public void addTarea() {
         interfazGrafica.ventanaTarea();
     }
@@ -84,6 +92,18 @@ public class EscuchadoraBoton implements ActionListener {
         actualizarInterfaz();
     }
 
+    public void addTareaAProyecto(){
+        System.out.println("Añadiendo Tarea");
+
+        //String titulo, String descripcion, int prioridad, Resultado resultado, double coste, facturacion facturacion
+        System.out.println(escuchadoraTextField.getNombreTarea());
+        System.out.println(escuchadoraTextField.getDescripcionTarea());
+        System.out.println(escuchadoraComboBox.getPrioridadTarea());
+        System.out.println(escuchadoraComboBox.getTipoResultadoTarea());
+        System.out.println(escuchadoraTextField.getCosteTarea());
+        System.out.println(escuchadoraComboBox.getTipofacturacionTarea());
+    }
+
     public void actualizarInterfaz(){
         interfazGrafica.setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
         interfazGrafica.setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
@@ -91,6 +111,8 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void addPersonaATarea() {
 
+
+        //actualizarInterfaz();
     }
 
     public void addEtiqueta() {

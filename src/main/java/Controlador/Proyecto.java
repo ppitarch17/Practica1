@@ -3,6 +3,7 @@ package Controlador;
 import Controlador.*;
 import Facturación.*;
 import Modelo.*;
+import Resultados.Resultado;
 import Vista.InterrogaVista;
 
 import java.io.Serializable;
@@ -50,6 +51,17 @@ public class Proyecto implements Serializable, Controlador {
         }
 
         listaTareas.add(new Tarea(titulo));
+        calcularCosteTotal();
+        return true;
+    }
+    @Override
+    public boolean addTarea(String titulo, String descripcion, int prioridad, Resultado resultado, double coste, facturacion facturacion){
+        for (Tarea tarea : listaTareas){
+            if (tarea.getTitulo().equals(titulo))
+                return false;
+        }
+
+        listaTareas.add(new Tarea(titulo, descripcion, prioridad, resultado, coste, facturacion));
         calcularCosteTotal();
         return true;
     }

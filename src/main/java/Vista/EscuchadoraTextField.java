@@ -17,6 +17,10 @@ public class EscuchadoraTextField implements ActionListener {
     private String correoPersona;
     private String dniPersona;
 
+    private String nombreTarea;
+    private String descripcionTarea;
+    private double costeTarea;
+
     public EscuchadoraTextField(Controlador controlador, InterfazGrafica interfazGrafica){
         this.controlador = controlador;
         System.out.println(controlador);
@@ -31,6 +35,9 @@ public class EscuchadoraTextField implements ActionListener {
             case "dniDato" -> this.dniPersona = text.getText();
             case "correoDato" -> this.correoPersona = text.getText();
             case "nombreDato" -> this.nombrePersona = text.getText();
+            case "nombreTareaDato" -> this.nombreTarea = text.getText();
+            case "descripcionDato" -> this.descripcionTarea = text.getText();
+            case "costeInicialDatos" -> this.costeTarea = Double.parseDouble(text.getText());
         }
 
         System.out.println(text.getName());
@@ -48,5 +55,17 @@ public class EscuchadoraTextField implements ActionListener {
 
     public String getDniPersona() {
         return dniPersona;
+    }
+
+    public String getNombreTarea() {
+        return nombreTarea;
+    }
+
+    public String getDescripcionTarea() {
+        return descripcionTarea;
+    }
+
+    public double getCosteTarea() {
+        return costeTarea;
     }
 }

@@ -13,7 +13,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     private String DNI; //identificador
     private List<Tarea> listaTareas;
     private List<Tarea> tareasResponsable = new ArrayList<>();
-    private boolean clienteEspecial = false;
+    //private boolean clienteEspecial = false;
 
     //MVC
     private InformaVista vista;
@@ -104,9 +104,9 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
         return DNI;
     }
 
-    public boolean getClienteEspecial() {
-        return clienteEspecial;
-    }
+//    public boolean getClienteEspecial() {
+//        return clienteEspecial;
+//    }
 
 
 }

@@ -1,9 +1,11 @@
 package Vista;
 
 import Controlador.Controlador;
+import Facturación.facturacion;
 import Modelo.InterrogaModelo;
 import Modelo.Persona;
 import Modelo.Tarea;
+import Facturación.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +19,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     private EscuchadoraBoton escuchadoraBoton;
     private EscuchadoraLista escuchadoraLista;
     private EscuchadoraTextField escuchadoraTextField;
+    private EscuchadoraComboBox escuchadoraComboBox;
 
     private Tarea tareaSeleccionada; //Tarea
     private InterrogaModelo personaSeleccioanda; //Persona
@@ -49,6 +52,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         this.escuchadoraBoton = new EscuchadoraBoton(controlador, this);
         this.escuchadoraTextField = new EscuchadoraTextField(controlador,this);
         escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
+        this.escuchadoraComboBox = new EscuchadoraComboBox(controlador, this);
+        escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
         //ventana.addWindowListener(new EscuchadoraVentana()); //para guardar el proyecto luego?
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
 
@@ -179,8 +184,9 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JFrame ventana = new JFrame("Crear Persona");
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
-        container.setLayout(new GridLayout(1,3));
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//container.setLayout(new GridLayout(1,3));
         JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         JLabel nombre = new JLabel("Nombre: ");
         JTextField nombreDato = new JTextField(20);
@@ -196,6 +202,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JTextField dniDato = new JTextField(20);
         dniDato.setName("dniDato");
         dniDato.addActionListener(escuchadoraTextField);
+
 
         JButton botonPersona = new JButton("Añadir Persona a Proyecto");
         botonPersona.addActionListener(escuchadoraBoton);
@@ -214,13 +221,59 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JFrame ventana = new JFrame("Crear Tarea");
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
-        container.setLayout(new GridLayout(1,3));
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//new GridLayout(1,3));
         JPanel panel = new JPanel();
-        JLabel nombre = new JLabel("Nombre: ");
-        JTextField nom = new JTextField(20);
-        JButton tarea = new JButton("Añadir tarea");
-        panel.add(nombre); panel.add(nom); panel.add(tarea);
-        tarea.addActionListener(new EscuchadoraBoton(controlador, this));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JLabel nombreTarea = new JLabel("Nombre: ");
+        JTextField nombreTareaDato = new JTextField(20);
+        nombreTareaDato.setName("nombreTareaDato");
+        nombreTareaDato.addActionListener(escuchadoraTextField);
+
+        JLabel descripcion = new JLabel("descripcion: ");
+        JTextField descripcionDato = new JTextField(20);
+        descripcionDato.setName("descripcionDato");
+        descripcionDato.addActionListener(escuchadoraTextField);
+
+        //int[] tiposPrioridades = { 1, 2, 3, 4, 5 };
+        JLabel prioridad = new JLabel("prioridad: ");
+        String[] tiposPrioridades = { "1", "2", "3", "4", "5" };
+        JComboBox<String> prioridadDato = new JComboBox<String>(tiposPrioridades);
+        prioridadDato.setName("prioridadDato");
+        prioridadDato.addActionListener(escuchadoraComboBox);
+
+
+//        JLabel slider = new JLabel("Slider: ");
+//        JSlider sliderDato = new JSlider(JSlider.HORIZONTAL,1,5, 1);
+//        sliderDato.setMinorTickSpacing(1);
+//        sliderDato.setMajorTickSpacing(5);
+//        sliderDato.setPaintTicks(true);
+
+        JLabel resultado = new JLabel("resultado: ");
+        String[] tiposResultado = { "Biblioteca", "Documentacion", "Pagina Web","Programa"};
+        JComboBox<String> resultadoDato = new JComboBox<String>(tiposResultado);
+        resultadoDato.setName("resultadoDato");
+        resultadoDato.addActionListener(escuchadoraComboBox);
+
+        JLabel costeInicial = new JLabel("Coste Inicial: ");
+        JTextField costeInicialDatos = new JTextField(20);
+        costeInicialDatos.setName("costeInicialDatos");
+        costeInicialDatos.addActionListener(escuchadoraTextField);
+
+        JLabel facturacion = new JLabel("facturacion: ");
+        String[] tiposFacturacion = { "Descuento", "Cosnumo Interno", "Urgente"};
+        JComboBox<String> facturacionDato = new JComboBox<>(tiposFacturacion);
+        facturacionDato.setName("facturacionDato");
+        facturacionDato.addActionListener(escuchadoraComboBox);
+
+        JButton tareaBoton = new JButton("Añadir tarea a Proyecto");
+        tareaBoton.addActionListener(escuchadoraBoton);
+
+        panel.add(nombreTarea); panel.add(nombreTareaDato); panel.add(descripcion);panel.add(descripcionDato);
+        panel.add(prioridad);panel.add(prioridadDato);panel.add(costeInicial); panel.add(costeInicialDatos);
+        panel.add(facturacion); panel.add(facturacionDato);
+        panel.add(tareaBoton);
+
         container.add(panel);
         ventana.pack();
         ventana.setVisible(true);
