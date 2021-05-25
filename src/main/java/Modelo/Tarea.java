@@ -249,4 +249,13 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     public double getCosteFinal() {
         return costeFinal;
     }
+
+    @Override
+    public Object[] getListaAlmacacenada(){
+        return listaPersonas.toArray(new Persona[0]);
+    }
+
+    public boolean isFinalizada() {
+        return isFinalizada;
+    }
 }
