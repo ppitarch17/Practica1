@@ -55,6 +55,18 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         fechaCreado = LocalDate.now();
     }
 
+    public Tarea(String titulo, String descripcion, int prioridad, Resultado resultado, double coste, facturacion facturacion) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.prioridad = prioridad;
+        this.resultado = resultado;
+        this.coste = coste;
+        this.facturacion = facturacion;
+        listaEtiquetas = new ArrayList<>();
+        listaPersonas = new ArrayList<>();
+        fechaCreado = LocalDate.now();
+    }
+
 
     //-----GETTERS-----
 
