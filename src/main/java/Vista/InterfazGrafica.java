@@ -20,6 +20,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     private EscuchadoraLista escuchadoraLista;
     private EscuchadoraTextField escuchadoraTextField;
     private EscuchadoraComboBox escuchadoraComboBox;
+    private EscuchadoraCheckBox escuchadoraCheckBox;
 
     private Tarea tareaSeleccionada; //Tarea
     private Persona personaSeleccioanda; //Persona
@@ -29,6 +30,11 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     JList<Tarea> tareas;
     JList<Persona> personas;
+
+    JLabel nombreTarea;
+    JLabel coste;
+    JLabel etiquetas;
+    JLabel finalizada;
 
 
     public static void main(String[] args) {
@@ -168,33 +174,155 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         //INTERFAZ
         JPanel panelEste = new JPanel();
         container.add(panelEste, BorderLayout.EAST);
-        panelEste.setLayout(new GridLayout(4,3));
+        panelEste.setLayout(new GridBagLayout());
+
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+        nombreTarea = new JLabel("Nombre tarea: ");
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 0;
+        panelEste.add(nombreTarea, c);
+        coste = new JLabel("Coste final: ");
+        c.gridx = 0;
+        c.gridy = 1;
+        panelEste.add(coste, c);
+        etiquetas = new JLabel("Etiquetas: ");
+        c.gridx = 1;
+        c.gridy = 0;
+        panelEste.add(etiquetas, c);
+        finalizada = new JLabel("Finalizada: ");
+        c.gridx = 1;
+        c.gridy = 1;
+        panelEste.add(finalizada, c);
+
+
+
+        JButton finalizar = new JButton("Finalizar tarea");
+        finalizar.addActionListener(escuchadoraBoton);
+        c.gridx = 0;
+        c.gridy = 2;
+        panelEste.add(finalizar, c);
+
+        JButton addEtiqueta = new JButton("Añadir etiqueta");
+        addEtiqueta.addActionListener(escuchadoraBoton);
+        c.gridx = 0;
+        c.gridy = 3;
+        panelEste.add(addEtiqueta, c);
+
+        JLabel introduceCoste = new JLabel("Seleccionar coste: ");
+        c.gridx = 1;
+        c.gridy = 2;
+        panelEste.add(introduceCoste, c);
+
+        JTextField selectCoste = new JTextField();
+        selectCoste.addActionListener(escuchadoraTextField);
+        c.gridx = 2;
+        c.gridy = 2;
+        panelEste.add(selectCoste, c);
+
+        facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
+        JComboBox<facturacion> facturacionDato = new JComboBox<>(tiposFacturacion);
+        facturacionDato.addActionListener(escuchadoraComboBox);
+        c.gridwidth = 2;
+        c.gridx = 1;
+        c.gridy = 3;
+        panelEste.add(facturacionDato, c);
+
+        JList<Persona> personas2 = new JList<>(vectorPersonas);
+        personas2.setVisibleRowCount(20);
+        personas2.setLayoutOrientation(JList.VERTICAL_WRAP);
+        JScrollPane scrollPanele = new JScrollPane(personas2);
+        personas2.setLayoutOrientation(JList.VERTICAL_WRAP);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 80;      //make this component tall
+        c.weightx = 0.0;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 4;
+        panelEste.add(scrollPanele, c);
 
         JButton addPaT = new JButton("Añadir persona a tarea");
         addPaT.addActionListener(escuchadoraBoton);
+        c.ipady = 0;       //reset to default
+        c.gridwidth = 1;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 5;
+        panelEste.add(addPaT, c);
+
         JButton removePdT = new JButton("Quitar persona de tarea");
         removePdT.addActionListener(escuchadoraBoton);
-        JButton finalizar = new JButton("Finalizar tarea");
-        finalizar.addActionListener(escuchadoraBoton);
-        JButton addEtiqueta = new JButton("Añadir etiqueta");
-        addEtiqueta.addActionListener(escuchadoraBoton);
+        c.gridx = 1;
+        c.gridy = 5;
+        panelEste.add(removePdT, c);
+
         JButton setResp = new JButton("Set Responsable");
         setResp.addActionListener(escuchadoraBoton);
-        JButton selectCoste = new JButton("Seleccionar coste");
-        selectCoste.addActionListener(escuchadoraBoton);
-        JButton selectFact = new JButton("Seleccionar facturación");
-        selectFact.addActionListener(escuchadoraBoton);
+        c.gridx = 2;
+        c.gridy = 5;
+        panelEste.add(setResp, c);
+
+        JCheckBox noResponsables = new JCheckBox("No responsables");
+        noResponsables.addActionListener(escuchadoraCheckBox);
+        c.gridx = 0;
+        c.gridy = 6;
+        panelEste.add(noResponsables, c);
+
+        JCheckBox sinPersonas = new JCheckBox("Sin personas");
+        sinPersonas.addActionListener(escuchadoraCheckBox);
+        c.gridx = 1;
+        c.gridy = 6;
+        panelEste.add(sinPersonas, c);
+
+
+
         JButton salir = new JButton("Salir del programa");
         salir.addActionListener(escuchadoraBoton);
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 2;       //aligned with button 2
+        c.gridwidth = 1;   //2 columns wide
+        c.gridy = 6;       //third row
+        panelEste.add(salir, c);
 
-        panelEste.add(addPaT);
-        panelEste.add(removePdT);
-        panelEste.add(finalizar);
-        panelEste.add(addEtiqueta);
-        panelEste.add(setResp);
-        panelEste.add(selectCoste);
-        panelEste.add(selectFact);
-        panelEste.add(salir);
+
+
+
+
+
+
+//
+//        JButton addPaT = new JButton("Añadir persona a tarea");
+//        addPaT.addActionListener(escuchadoraBoton);
+//        JButton removePdT = new JButton("Quitar persona de tarea");
+//        removePdT.addActionListener(escuchadoraBoton);
+//        JButton finalizar = new JButton("Finalizar tarea");
+//        finalizar.addActionListener(escuchadoraBoton);
+//        JButton addEtiqueta = new JButton("Añadir etiqueta");
+//        addEtiqueta.addActionListener(escuchadoraBoton);
+//        JButton setResp = new JButton("Set Responsable");
+//        setResp.addActionListener(escuchadoraBoton);
+//        JButton selectCoste = new JButton("Seleccionar coste");
+//        selectCoste.addActionListener(escuchadoraBoton);
+//        JButton selectFact = new JButton("Seleccionar facturación");
+//        selectFact.addActionListener(escuchadoraBoton);
+//        JButton salir = new JButton("Salir del programa");
+//        salir.addActionListener(escuchadoraBoton);
+//
+//        panelEste.add(addPaT);
+//        panelEste.add(removePdT);
+//        panelEste.add(finalizar);
+//        panelEste.add(addEtiqueta);
+//        panelEste.add(setResp);
+//        panelEste.add(selectCoste);
+//        panelEste.add(selectFact);
+//        panelEste.add(salir);
 
 
 
@@ -283,8 +411,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         costeInicialDatos.addActionListener(escuchadoraTextField);
 
         JLabel facturacion = new JLabel("facturacion: ");
-        String[] tiposFacturacion = { "Descuento", "Cosnumo Interno", "Urgente"};
-        JComboBox<String> facturacionDato = new JComboBox<>(tiposFacturacion);
+        facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
+        JComboBox<facturacion> facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.setName("facturacionDato");
         facturacionDato.addActionListener(escuchadoraComboBox);
 
