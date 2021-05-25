@@ -26,4 +26,5 @@ public interface Controlador {
     double getCosteTotal();
     void setInterrogaVista(InterrogaVista vista);
     boolean setResponsable(Tarea tarea, Persona persona);
+    String getNombre();
 }

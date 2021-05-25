@@ -142,6 +142,7 @@ public class Proyecto implements Serializable, Controlador {
         return listaTareas;
     }
 
+    @Override
     public String getNombre() {
         return nombre;
     }
@@ -160,4 +161,6 @@ public class Proyecto implements Serializable, Controlador {
     public void setInterrogaVista(InterrogaVista vista) {
         this.vista = vista;
     }
+
+
 }

@@ -16,6 +16,7 @@ public class EscuchadoraTextField implements ActionListener {
     private String nombrePersona;
     private String correoPersona;
     private String dniPersona;
+    private String texto;
 
     private String nombreTarea;
     private String descripcionTarea;
@@ -30,15 +31,16 @@ public class EscuchadoraTextField implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JTextField text = (JTextField) e.getSource();
-
-        switch (text.getName()){
-            case "dniDato" -> this.dniPersona = text.getText();
-            case "correoDato" -> this.correoPersona = text.getText();
-            case "nombreDato" -> this.nombrePersona = text.getText();
-            case "nombreTareaDato" -> this.nombreTarea = text.getText();
-            case "descripcionDato" -> this.descripcionTarea = text.getText();
-            case "costeInicialDatos" -> this.costeTarea = Double.parseDouble(text.getText());
-        }
+        if (text.getName() != null)
+            switch (text.getName()){
+                case "dniDato" -> this.dniPersona = text.getText();
+                case "correoDato" -> this.correoPersona = text.getText();
+                case "nombreDato" -> this.nombrePersona = text.getText();
+                case "nombreTareaDato" -> this.nombreTarea = text.getText();
+                case "descripcionDato" -> this.descripcionTarea = text.getText();
+                case "costeInicialDatos" -> this.costeTarea = Double.parseDouble(text.getText());
+            }
+        else this.texto = text.getText();
 
         System.out.println(text.getName() + ": " + text.getText());
 
@@ -66,5 +68,9 @@ public class EscuchadoraTextField implements ActionListener {
 
     public double getCosteTarea() {
         return costeTarea;
+    }
+
+    public String getTexto() {
+        return texto;
     }
 }

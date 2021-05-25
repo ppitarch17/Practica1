@@ -10,6 +10,7 @@ import Resultados.Resultado;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
 public class EscuchadoraBoton implements ActionListener {
 
@@ -31,20 +32,21 @@ public class EscuchadoraBoton implements ActionListener {
 
         switch (boton.getText()){
             case "Crear Proyecto" -> crearP();
-            case "Abrir Proyecto" -> System.out.println("Abrir");
+            case "Abrir Proyecto" -> abrirP();
             case "Crear" -> crear();
+            case "Abrir" -> abrir();
             case "Añadir tarea" -> addTarea();
             case "Añadir persona" -> addPersona();
             case "Añadir Persona a Proyecto" -> addPersonaAProyecto();
-            case "Añadir persona a tarea" -> System.out.println("añadir personita");
+            case "Añadir persona a tarea" -> addPersonaATarea();
             case "Quitar persona de tarea" -> System.out.println("quitar personita");
-            //case "Finalizar tarea" -> controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
-            case "Añadir etiqueta" -> System.out.println("añadir eti");
+            case "Finalizar tarea" -> finalizarTarea();
+            case "Añadir etiqueta" -> addEtiqueta();
             case "Set Responsable" -> setResponsable();
             case "Seleccionar coste" -> System.out.println("cuanto cuesta??");
             case "Seleccionar facturación" -> System.out.println("facturacion");
-            case "Salir del programa" -> System.out.println("mueranse");
             case "Añadir tarea a Proyecto" -> addTareaAProyecto();
+            case "Salir del programa" -> salir();
 
         }
 
@@ -55,11 +57,42 @@ public class EscuchadoraBoton implements ActionListener {
         interfazGrafica.ventanaCrear();
     }
 
-    public void crear(){
-        interfazGrafica.setControlador(new Proyecto()); //TODO nombre al Proyecto
+    public void abrirP() {
+        interfazGrafica.ventanaAbrir();
+    }
+
+    public void crear() {
+        interfazGrafica.setControlador(new Proyecto(escuchadoraTextField.getTexto())); //TODO nombre al Proyecto
+        System.out.println(controlador.getNombre());
         interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
         interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
         interfazGrafica.ventanaMain();
+    }
+
+    public void abrir() {
+        String nomFichero = escuchadoraTextField.getTexto();
+
+        ObjectInputStream ois = null;
+        try{
+            try{
+                FileInputStream fis = new FileInputStream(nomFichero);
+                ois = new ObjectInputStream(fis);
+                Proyecto proyecto = (Proyecto) ois.readObject();
+                interfazGrafica.setControlador(proyecto); //TODO nombre al Proyecto
+                System.out.println(controlador.getNombre());
+                interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
+                interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+                interfazGrafica.ventanaMain();
+            }finally {
+                if(ois != null) ois.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setControlador(Controlador controlador){
@@ -128,11 +161,41 @@ public class EscuchadoraBoton implements ActionListener {
         //actualizarInterfaz();
     }
 
+    public void finalizarTarea() {
+//        controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
+    }
+
     public void addEtiqueta() {
         InterrogaModelo tarea= interfazGrafica.getTareaSeleccionada();
     }
+
     public void setResponsable() {
-//        controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaSeleccioanda())
+//        controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaSeleccioanda());
     }
 
+    public void salir() {
+        grabacionDeDatos(controlador);
+
+    }
+
+    public void grabacionDeDatos(Controlador proyecto){
+        System.out.println("mueranse");
+        String nomFichero = controlador.getNombre();
+
+        ObjectOutputStream oos = null;
+        try{
+            try {
+                FileOutputStream fos = new FileOutputStream(nomFichero);
+                oos = new ObjectOutputStream(fos);
+                oos.writeObject(proyecto);
+            }finally {
+                if(oos != null) oos.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
