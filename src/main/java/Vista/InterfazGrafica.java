@@ -29,8 +29,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     Tarea[] vectorTareas;
     Persona[] vectorPersonas;
 
-    JList<Tarea> tareas;
-    JList<Persona> personas;
+    JList<Tarea> tareas = new JList<>();
+    JList<Persona> personas = new JList<>();
 
     JLabel nombreTarea;
     JLabel coste;
@@ -130,11 +130,25 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JLabel nombre = new JLabel(controlador.getNombre());
         panelNorte.add(nombre);
 
+        //PERSONAS
 
-        //TAREAS
         JPanel panelOeste = new JPanel();
         container.add(panelOeste, BorderLayout.WEST);
         panelOeste.setLayout(new BorderLayout());
+
+        JPanel panelPueba = new JPanel();
+        panelOeste.add(panelPueba, BorderLayout.CENTER);
+
+
+        panelPueba.setLayout(new BorderLayout());
+        panelPueba.add(new JLabel("Personas: "), BorderLayout.NORTH);
+        JList<Persona> personas = new JList<>(vectorPersonas);
+        JScrollPane scrollPanePersonas = new JScrollPane(personas);
+        panelPueba.add(scrollPanePersonas, BorderLayout.CENTER);
+
+        //TAREAS
+
+
 
         panelOeste.add(new JLabel("Tareas: "), BorderLayout.NORTH);
         JButton aTarea = new JButton("Añadir tarea");
@@ -153,7 +167,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 //        panelOeste.add(tareas, BorderLayout.CENTER);
 
 
-        //PERSONAS
+        //PERSONAS EN TAREA
         JPanel panelCentral = new JPanel();
         container.add(panelCentral, BorderLayout.CENTER);
         panelCentral.setLayout(new BorderLayout());
