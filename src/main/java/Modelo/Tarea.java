@@ -225,7 +225,12 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 //    }
     @Override
     public String toString() {
-        return  titulo;
+        return  titulo + "{" +
+                ", listaPersonas=" + listaPersonas +
+                ", costeFinal=" + costeFinal +
+                ", finalizada=" + isFinalizada +
+                ", responsable=" + responsable +
+                '}';
     }
 
     @Override

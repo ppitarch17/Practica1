@@ -43,6 +43,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     JLabel finalizada;
     JTextField selectCoste;
     JComboBox<facturacion> facturacionDato;
+    JLabel responsable;
 
 
     public static void main(String[] args) {
@@ -72,7 +73,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         this.escuchadoraLista = new EscuchadoraLista(controlador, this);
         escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
         this.escuchadoraCheckBox = new EscuchadoraCheckBox(this);
-
+        this.escuchadoraCheckBox = new EscuchadoraCheckBox(controlador, this);
 
         //ventana.addWindowListener(new EscuchadoraVentana()); //para guardar el proyecto luego?
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
@@ -108,7 +109,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JTextField nom = new JTextField(20);
         JButton boton = new JButton("Abrir");
         panel.add(nombre); panel.add(nom); panel.add(boton);
-        nom.addActionListener(escuchadoraTextField);
+        nom.addFocusListener(escuchadoraTextField);
         boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
@@ -126,7 +127,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JTextField nom = new JTextField(20);
         JButton boton = new JButton("Crear");
         panel.add(nombre); panel.add(nom); panel.add(boton);
-        nom.addActionListener(escuchadoraTextField);
+        nom.addFocusListener(escuchadoraTextField);
         boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
@@ -223,6 +224,10 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         c.gridx = 1;
         c.gridy = 1;
         panelEste.add(finalizada, c);
+        responsable = new JLabel("Responsable: ");
+        c.gridx = 2;
+        c.gridy = 1;
+        panelEste.add(responsable, c);
 
 
 
@@ -297,12 +302,14 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         panelEste.add(setResp, c);
 
         JCheckBox noResponsables = new JCheckBox("No responsables");
+        noResponsables.setName("No responsables");
         noResponsables.addActionListener(escuchadoraCheckBox);
         c.gridx = 0;
         c.gridy = 6;
         panelEste.add(noResponsables, c);
 
         JCheckBox sinPersonas = new JCheckBox("Sin personas");
+        sinPersonas.setName("Sin personas");
         sinPersonas.addActionListener(escuchadoraCheckBox);
         c.gridx = 1;
         c.gridy = 6;
@@ -318,7 +325,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         c.insets = new Insets(10,0,0,0);  //top padding
         c.gridx = 2;       //aligned with button 2
         c.gridwidth = 1;   //2 columns wide
-        c.gridy = 6;       //third row
+        c.gridy = 7;       //third row
         panelEste.add(salir, c);
 
 //        JButton addPaT = new JButton("Añadir persona a tarea");
@@ -365,17 +372,17 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JLabel nombre = new JLabel("Nombre: ");
         JTextField nombreDato = new JTextField(20);
         nombreDato.setName("nombreDato");
-        nombreDato.addActionListener(escuchadoraTextField);
+        nombreDato.addFocusListener(escuchadoraTextField);
 
         JLabel correo = new JLabel("Correo: ");
         JTextField correoDato = new JTextField(20);
         correoDato.setName("correoDato");
-        correoDato.addActionListener(escuchadoraTextField);
+        correoDato.addFocusListener(escuchadoraTextField);
 
         JLabel dni = new JLabel("DNI: ");
         JTextField dniDato = new JTextField(20);
         dniDato.setName("dniDato");
-        dniDato.addActionListener(escuchadoraTextField);
+        dniDato.addFocusListener(escuchadoraTextField);
 
 
         JButton botonPersona = new JButton("Añadir Persona a Proyecto");
@@ -403,12 +410,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JLabel nombreTarea = new JLabel("Titulo: ");
         JTextField nombreTareaDato = new JTextField(20);
         nombreTareaDato.setName("nombreTareaDato");
-        nombreTareaDato.addActionListener(escuchadoraTextField);
+        nombreTareaDato.addFocusListener(escuchadoraTextField);
 
         JLabel descripcion = new JLabel("descripcion: ");
         JTextField descripcionDato = new JTextField(20);
         descripcionDato.setName("descripcionDato");
-        descripcionDato.addActionListener(escuchadoraTextField);
+        descripcionDato.addFocusListener(escuchadoraTextField);
 
 
         JLabel prioridad = new JLabel("prioridad: ");
@@ -436,7 +443,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         JLabel costeInicial = new JLabel("Coste Inicial: ");
         JTextField costeInicialDatos = new JTextField(20);
         costeInicialDatos.setName("costeInicialDatos");
-        costeInicialDatos.addActionListener(escuchadoraTextField);
+        costeInicialDatos.addFocusListener(escuchadoraTextField);
 
         JLabel facturacion = new JLabel("facturacion: ");
         facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
@@ -483,6 +490,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     public void setControlador(Controlador controlador){
         this.controlador = controlador;
         escuchadoraBoton.setControlador(controlador);
+        escuchadoraCheckBox.setControlador(controlador);
     }
 
     public Tarea getTareaSeleccionada() {
@@ -493,6 +501,17 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     }
     public Persona getPersonaSeleccioanda() {
         return personaSeleccioanda;
+    }
+    public Persona getPersonaDeTareaSeleccionada() {
+        return personaDeTareaSeleccionada;
+    }
+
+    public JList<Tarea> getTareas() {
+        return tareas;
+    }
+
+    public JList<Persona> getPersonas() {
+        return personas;
     }
 
     public void setTareaSeleccionada(Tarea tareaSeleccionada) {
@@ -531,10 +550,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         this.personaDeTareaSeleccionada = personaDeTareaSeleccionada;
     }
 
-    public Persona getPersonaDeTareaSeleccionada() {
-        return personaDeTareaSeleccionada;
-    }
-
     public void actualizarInterfaz(){
         setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
         setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
@@ -551,6 +566,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         coste.setText("Coste Final: " + tareaSeleccionada.getCosteFinal());
         //etiquetas;
         finalizada.setText("Finalizada: " + tareaSeleccionada.isFinalizada());
+        responsable.setText("Responsable: " + tareaSeleccionada.getResponsable());
+
         selectCoste.setText("");
         facturacionDato.setSelectedItem(tareaSeleccionada.getFacturacion());
         //personasEnTarea.

@@ -22,7 +22,7 @@ public class EscuchadoraBoton implements ActionListener {
 
     public EscuchadoraBoton(Controlador controlador, InterfazGrafica interfazGrafica) {
         this.controlador = controlador;
-        //System.out.println(controlador);
+        //System.out.println(controlador + "boton");
         this.interfazGrafica = interfazGrafica;
     }
 
@@ -65,7 +65,7 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void crear() {
         interfazGrafica.setControlador(new Proyecto(escuchadoraTextField.getTexto())); //TODO nombre al Proyecto
-        System.out.println(controlador.getNombre());
+//        System.out.println(controlador.getNombre());
         interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
         interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
         interfazGrafica.setVectorPersonasEnTarea(new Persona[0]);
@@ -157,11 +157,16 @@ public class EscuchadoraBoton implements ActionListener {
         double coste = escuchadoraTextField.getCosteTarea();
         facturacion facturacion = escuchadoraComboBox.getTipofacturacionTarea();
 
-        controlador.addTarea(titulo, descripcion, prioridad, resultado, coste, facturacion);
-        resetValues();
-
-        interfazGrafica.getVentana().dispose();
-        actualizarInterfaz();
+        if (titulo == null)
+            interfazGrafica.ventanaError("Indica el nombre de la tarea");
+        else if (descripcion == null)
+            interfazGrafica.ventanaError("Indica la descripción de la tarea");
+        else {
+            controlador.addTarea(titulo, descripcion, prioridad, resultado, coste, facturacion);
+            interfazGrafica.getVentana().dispose();
+            resetValues();
+            actualizarInterfaz();
+        }
     }
 
     public void actualizarInterfaz(){
@@ -209,7 +214,7 @@ public class EscuchadoraBoton implements ActionListener {
     }
 
     public void setResponsable() {
-//        controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaSeleccioanda());
+       controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaDeTareaSeleccionada());
     }
 
     public void salir() {

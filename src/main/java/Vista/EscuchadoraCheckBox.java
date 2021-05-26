@@ -1,30 +1,54 @@
 package Vista;
 
-import Facturación.facturacion;
+import Controlador.Controlador;
+import Modelo.Persona;
+import Modelo.Tarea;
+import Modelo.UtilidadesParaListas;
 
-import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EscuchadoraCheckBox implements ActionListener {
 
     InterfazGrafica interfazGrafica;
+    Controlador controlador;
 
-    public EscuchadoraCheckBox(InterfazGrafica interfazGrafica){
+    public EscuchadoraCheckBox(Controlador controlador, InterfazGrafica interfazGrafica) {
+        this.controlador = controlador;
         this.interfazGrafica = interfazGrafica;
+        System.out.println(controlador + "check");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Checkbox checkbox = (Checkbox) e.getSource();
-
-//        switch (checkbox.getName()){
-//            case "facturacionDato" -> facturacionDato((facturacion) checkbox.getSelectedObjects();
-//        }
+        JCheckBox check = (JCheckBox) e.getSource();
+        if ("No responsables".equals(check.getName())) {
+            if (check.isSelected())
+                interfazGrafica.setPersonas(listarNoResponsables().toArray(new Persona[0]));
+            else {
+                interfazGrafica.setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
+                System.out.println(controlador.getListaPersonas());
+                System.out.println(listarNoResponsables());
+            }
+        }
+        else if ("Sin personas".equals(check.getName())) {
+            if (check.isSelected())
+                interfazGrafica.setTareas(UtilidadesParaListas.elementosConListaVacia(controlador.getListaTareas()).toArray(new Tarea[0]));
+            else
+                interfazGrafica.setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+        }
     }
 
-    public void facturacionDato(facturacion facturacion){
-        //interfazGrafica.getTareaSeleccionada().setFacturacion();
+    public List<Persona> listarNoResponsables() {
+        List<Persona> personas = new ArrayList<>(controlador.getListaPersonas());
+        for (Tarea tarea : controlador.getListaTareas())
+            personas.remove(tarea.getResponsable());
+        return personas;
     }
-
+    public void setControlador(Controlador controlador){
+        this.controlador = controlador;
+    }
 }

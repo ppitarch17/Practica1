@@ -43,7 +43,6 @@ public class EscuchadoraComboBox implements ActionListener {
             }
             case "facturacionTarea" -> facturacionTarea((facturacion) comboBox.getSelectedItem());
         }
-
     }
 
     public void facturacionTarea(facturacion nuevaFacturacion){

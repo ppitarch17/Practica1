@@ -6,8 +6,10 @@ import Modelo.InterrogaModelo;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
-public class EscuchadoraTextField implements ActionListener {
+public class EscuchadoraTextField implements ActionListener, FocusListener {
 
     Controlador controlador;
     InterfazGrafica interfazGrafica;
@@ -87,6 +89,28 @@ public class EscuchadoraTextField implements ActionListener {
 
     public String getTexto() {
         return texto;
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        JTextField text = (JTextField) e.getSource();
+        if (text.getName() != null)
+            switch (text.getName()){
+                case "dniDato" -> this.dniPersona = text.getText();
+                case "correoDato" -> this.correoPersona = text.getText();
+                case "nombreDato" -> this.nombrePersona = text.getText();
+                case "nombreTareaDato" -> this.nombreTarea = text.getText();
+                case "descripcionDato" -> this.descripcionTarea = text.getText();
+                case "costeInicialDatos" -> costeInicial(text);
+            }
+        else this.texto = text.getText();
+
+        System.out.println(text.getName() + ": " + text.getText());
     }
 
     public void resetValues(){
