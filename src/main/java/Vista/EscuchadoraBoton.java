@@ -166,6 +166,7 @@ public class EscuchadoraBoton implements ActionListener {
             interfazGrafica.getVentana().dispose();
             resetValues();
             actualizarInterfaz();
+            interfazGrafica.actualizarInfoTareaSeleccionada();
         }
     }
 
@@ -204,7 +205,7 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void finalizarTarea() {
         controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
-        actualizarInterfaz();
+//        actualizarInterfaz();
         interfazGrafica.actualizarInfoTareaSeleccionada();
 //        controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
     }
@@ -214,7 +215,14 @@ public class EscuchadoraBoton implements ActionListener {
     }
 
     public void setResponsable() {
-       controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaDeTareaSeleccionada());
+        if (interfazGrafica.getTareaSeleccionada() == null)
+            interfazGrafica.ventanaError("No hay ninguna tarea seleccionada");
+        else if (interfazGrafica.getPersonaDeTareaSeleccionada() == null)
+            interfazGrafica.ventanaError("Selecciona una persona que pertenezca a la tarea");
+        else {
+            controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaDeTareaSeleccionada());
+            interfazGrafica.actualizarInfoTareaSeleccionada();
+        }
     }
 
     public void salir() {

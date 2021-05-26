@@ -47,6 +47,7 @@ public class EscuchadoraComboBox implements ActionListener {
 
     public void facturacionTarea(facturacion nuevaFacturacion){
         interfazGrafica.getTareaSeleccionada().setFacturacion(nuevaFacturacion);
+        interfazGrafica.getTareaSeleccionada().calcularFacturacion();
         interfazGrafica.actualizarInfoTareaSeleccionada();
     }
 

@@ -225,12 +225,13 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 //    }
     @Override
     public String toString() {
-        return  titulo + "{" +
-                ", listaPersonas=" + listaPersonas +
-                ", costeFinal=" + costeFinal +
-                ", finalizada=" + isFinalizada +
-                ", responsable=" + responsable +
-                '}';
+        return titulo;
+//        return  titulo + "{" +
+//                ", listaPersonas=" + listaPersonas +
+//                ", costeFinal=" + costeFinal +
+//                ", finalizada=" + isFinalizada +
+//                ", responsable=" + responsable +
+//                '}';
     }
 
     @Override
@@ -262,5 +263,13 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
     public Facturación.facturacion getFacturacion() {
         return facturacion;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public Resultado getResultado() {
+        return resultado;
     }
 }

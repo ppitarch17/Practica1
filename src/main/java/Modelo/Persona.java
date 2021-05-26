@@ -91,7 +91,7 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
 
     @Override
     public String toString() {
-        return DNI + ": " + nombre;
+        return DNI + ":" + nombre;
     }
 
     @Override

@@ -113,6 +113,7 @@ public class Proyecto implements Serializable, Controlador {
         return null;
     }
 
+    @Override
     public void calcularCosteTotal(){
         costeTotal = 0;
         for (Tarea tarea: listaTareas) {

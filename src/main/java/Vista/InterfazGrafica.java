@@ -10,8 +10,8 @@ import Resultados.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.geom.RoundRectangle2D;
+
 
 public class InterfazGrafica implements InterrogaVista, InformaVista {
     //MVC
@@ -23,7 +23,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     private EscuchadoraComboBox escuchadoraComboBox;
     private EscuchadoraCheckBox escuchadoraCheckBox;
 
-    JFrame ventana = new JFrame();
+    JFrame ventana;
 
     private Tarea tareaSeleccionada; //Tarea
     private Persona personaSeleccioanda; //Persona
@@ -37,20 +37,38 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     JList<Persona> personas = new JList<>();
     JList<Persona> personasEnTarea = new JList<>();
 
+    JLabel costeTotal;
     JLabel nombreTarea;
     JLabel coste;
     JLabel etiquetas;
     JLabel finalizada;
+    JLabel responsable;
+    JLabel prioridad;
+    JLabel resultado;
+
     JTextField selectCoste;
     JComboBox<facturacion> facturacionDato;
-    JLabel responsable;
-
 
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(new Runnable(){ //Multiples Hilos
             @Override
             public void run(){
+                try {
+
+//                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+//                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+//                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedLookAndFeelException e) {
+                    e.printStackTrace();
+                }
                 new InterfazGrafica().ventanaStart();
             }
         });
@@ -64,7 +82,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void ventanaStart(){
         ventana = new JFrame("Primera Ventana"); //Ventana principal
-        ventana.setLocationRelativeTo(null);
         this.escuchadoraBoton = new EscuchadoraBoton(controlador, this);
         this.escuchadoraTextField = new EscuchadoraTextField(controlador,this);
         escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
@@ -72,11 +89,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
         this.escuchadoraLista = new EscuchadoraLista(controlador, this);
         escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
-        this.escuchadoraCheckBox = new EscuchadoraCheckBox(this);
         this.escuchadoraCheckBox = new EscuchadoraCheckBox(controlador, this);
-
-        //ventana.addWindowListener(new EscuchadoraVentana()); //para guardar el proyecto luego?
-        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
 
         Container container = ventana.getContentPane();
         container.setLayout(new BorderLayout());
@@ -93,12 +106,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         panel.add(boton); panel.add(boton2);
 
         ventana.pack();
+        ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 
     public void ventanaAbrir(){
         ventana = new JFrame("Abrir Proyecto");
-        ventana.setLocationRelativeTo(null);
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
@@ -113,12 +126,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
+        ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 
     public void ventanaCrear() {
         ventana = new JFrame("Crear Proyecto");
-        ventana.setLocationRelativeTo(null);
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
@@ -131,12 +144,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
+        ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 
     public void ventanaMain(){
         ventana = new JFrame("Ventana Proyecto"); //Ventana principal
-        ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
 
         //CONT
@@ -148,6 +161,10 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         container.add(panelNorte, BorderLayout.NORTH);
         JLabel nombre = new JLabel(controlador.getNombre());
         panelNorte.add(nombre);
+
+        controlador.calcularCosteTotal();
+        costeTotal = new JLabel("Coste total: " + controlador.getCosteTotal());
+        panelNorte.add(costeTotal);
 
         //PERSONAS
 
@@ -228,41 +245,55 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         c.gridx = 2;
         c.gridy = 1;
         panelEste.add(responsable, c);
+        prioridad = new JLabel("Prioridad: ");
+        c.gridx = 0;
+        c.gridy = 2;
+        panelEste.add(prioridad, c);
+        resultado = new JLabel("Resultado: ");
+        c.gridx = 1;
+        c.gridy = 2;
+        panelEste.add(resultado, c);
+
 
 
 
         JButton finalizar = new JButton("Finalizar tarea");
         finalizar.addActionListener(escuchadoraBoton);
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         panelEste.add(finalizar, c);
 
         JButton addEtiqueta = new JButton("Añadir etiqueta");
         addEtiqueta.addActionListener(escuchadoraBoton);
         c.gridx = 0;
-        c.gridy = 3;
+        c.gridy = 4;
         panelEste.add(addEtiqueta, c);
 
         JLabel introduceCoste = new JLabel("Seleccionar coste: ");
         c.gridx = 1;
-        c.gridy = 2;
+        c.gridy = 3;
         panelEste.add(introduceCoste, c);
 
         selectCoste = new JTextField();
         selectCoste.addActionListener(escuchadoraTextField);
         selectCoste.setName("seleccionarCoste");
         c.gridx = 2;
-        c.gridy = 2;
+        c.gridy = 3;
         panelEste.add(selectCoste, c);
 
-        facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
+        facturacion[] tiposFacturacion = { new ConsumoInterno(), new Descuento(), new Urgente()};
         facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.addActionListener(escuchadoraComboBox);
         facturacionDato.setName("facturacionTarea");
         c.gridwidth = 2;
         c.gridx = 1;
-        c.gridy = 3;
+        c.gridy = 4;
         panelEste.add(facturacionDato, c);
+
+        JLabel personasDeTarea = new JLabel("Lista de personas de la tarea: ");
+        c.gridx = 0;
+        c.gridy = 5;
+        panelEste.add(personasDeTarea, c);
 
         personasEnTarea = new JList<>(vectorPersonasEnTarea);
         personasEnTarea.setName("cuadroPersonasEnTarea");
@@ -273,96 +304,66 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         personasEnTarea.addListSelectionListener(new EscuchadoraLista(controlador,this,escuchadoraBoton));
 
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 80;      //make this component tall
+        c.ipady = 80;
         c.weightx = 0.0;
         c.gridwidth = 3;
         c.gridx = 0;
-        c.gridy = 4;
+        c.gridy = 6;
         panelEste.add(scrollPanele, c);
 
         JButton addPaT = new JButton("Añadir persona a tarea");
         addPaT.addActionListener(escuchadoraBoton);
-        c.ipady = 0;       //reset to default
+        c.ipady = 0;
         c.gridwidth = 1;
         c.weightx = 0.5;
         c.gridx = 0;
-        c.gridy = 5;
+        c.gridy = 7;
         panelEste.add(addPaT, c);
 
         JButton removePdT = new JButton("Quitar persona de tarea");
         removePdT.addActionListener(escuchadoraBoton);
         c.gridx = 1;
-        c.gridy = 5;
+        c.gridy = 7;
         panelEste.add(removePdT, c);
 
         JButton setResp = new JButton("Set Responsable");
         setResp.addActionListener(escuchadoraBoton);
         c.gridx = 2;
-        c.gridy = 5;
+        c.gridy = 7;
         panelEste.add(setResp, c);
 
         JCheckBox noResponsables = new JCheckBox("No responsables");
         noResponsables.setName("No responsables");
         noResponsables.addActionListener(escuchadoraCheckBox);
         c.gridx = 0;
-        c.gridy = 6;
+        c.gridy = 8;
         panelEste.add(noResponsables, c);
 
         JCheckBox sinPersonas = new JCheckBox("Sin personas");
         sinPersonas.setName("Sin personas");
         sinPersonas.addActionListener(escuchadoraCheckBox);
         c.gridx = 1;
-        c.gridy = 6;
+        c.gridy = 8;
         panelEste.add(sinPersonas, c);
-
-
 
         JButton salir = new JButton("Salir del programa");
         salir.addActionListener(escuchadoraBoton);
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 2;       //aligned with button 2
-        c.gridwidth = 1;   //2 columns wide
-        c.gridy = 7;       //third row
+        c.ipady = 0;
+        c.weighty = 1.0;
+        c.anchor = GridBagConstraints.PAGE_END;
+        c.insets = new Insets(10,0,0,0);
+        c.gridx = 2;
+        c.gridy = 9;
         panelEste.add(salir, c);
-
-//        JButton addPaT = new JButton("Añadir persona a tarea");
-//        addPaT.addActionListener(escuchadoraBoton);
-//        JButton removePdT = new JButton("Quitar persona de tarea");
-//        removePdT.addActionListener(escuchadoraBoton);
-//        JButton finalizar = new JButton("Finalizar tarea");
-//        finalizar.addActionListener(escuchadoraBoton);
-//        JButton addEtiqueta = new JButton("Añadir etiqueta");
-//        addEtiqueta.addActionListener(escuchadoraBoton);
-//        JButton setResp = new JButton("Set Responsable");
-//        setResp.addActionListener(escuchadoraBoton);
-//        JButton selectCoste = new JButton("Seleccionar coste");
-//        selectCoste.addActionListener(escuchadoraBoton);
-//        JButton selectFact = new JButton("Seleccionar facturación");
-//        selectFact.addActionListener(escuchadoraBoton);
-//        JButton salir = new JButton("Salir del programa");
-//        salir.addActionListener(escuchadoraBoton);
-//
-//        panelEste.add(addPaT);
-//        panelEste.add(removePdT);
-//        panelEste.add(finalizar);
-//        panelEste.add(addEtiqueta);
-//        panelEste.add(setResp);
-//        panelEste.add(selectCoste);
-//        panelEste.add(selectFact);
-//        panelEste.add(salir);
-
 
 
         ventana.pack();
+        ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 
     public void ventanaPersona(){
         ventana = new JFrame("Crear Persona");
-        ventana.setLocationRelativeTo(null);
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//container.setLayout(new GridLayout(1,3));
@@ -395,12 +396,13 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
         container.add(panel);
         ventana.pack();
+        ventana.setLocationRelativeTo(null);
+
         ventana.setVisible(true);
     }
 
     public void ventanaTarea() {
         ventana = new JFrame("Crear Tarea");
-        ventana.setLocationRelativeTo(null);
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = ventana.getContentPane();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//new GridLayout(1,3));
@@ -446,7 +448,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         costeInicialDatos.addFocusListener(escuchadoraTextField);
 
         JLabel facturacion = new JLabel("facturacion: ");
-        facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
+        facturacion[] tiposFacturacion = { new ConsumoInterno(), new Descuento(), new Urgente()};
         JComboBox<facturacion> facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.setName("facturacionDato");
         facturacionDato.addActionListener(escuchadoraComboBox);
@@ -467,12 +469,13 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
         container.add(panel);
         ventana.pack();
+        ventana.setLocationRelativeTo(null);
+
         ventana.setVisible(true);
     }
 
     public void ventanaError(String error) {
         ventana = new JFrame("Error 404");
-        ventana.setLocationRelativeTo(null);
         Container container = ventana.getContentPane();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//new GridLayout(1,3));
         JPanel panel = new JPanel();
@@ -482,6 +485,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         panel.add(salir);
         container.add(panel);
         ventana.pack();
+        ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 
@@ -502,6 +506,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     public Persona getPersonaSeleccioanda() {
         return personaSeleccioanda;
     }
+
     public Persona getPersonaDeTareaSeleccionada() {
         return personaDeTareaSeleccionada;
     }
@@ -560,13 +565,16 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     public void actualizarInfoTareaSeleccionada(){
         if (getTareaSeleccionada() == null)
             return;
-
+        controlador.calcularCosteTotal();
+        costeTotal.setText("Coste total: " + controlador.getCosteTotal());
         setPersonasEnTarea( (Persona[]) getTareaSeleccionada().getListaAlmacacenada());
         nombreTarea.setText("Titulo: " + tareaSeleccionada.getTitulo()); //TODO interrogaModelo
         coste.setText("Coste Final: " + tareaSeleccionada.getCosteFinal());
         //etiquetas;
         finalizada.setText("Finalizada: " + tareaSeleccionada.isFinalizada());
         responsable.setText("Responsable: " + tareaSeleccionada.getResponsable());
+        prioridad.setText("Prioridad: " + tareaSeleccionada.getPrioridad());
+        resultado.setText("Resultado: " + tareaSeleccionada.getResultado());
 
         selectCoste.setText("");
         facturacionDato.setSelectedItem(tareaSeleccionada.getFacturacion());
