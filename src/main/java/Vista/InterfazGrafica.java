@@ -2,6 +2,7 @@ package Vista;
 
 import Controlador.Controlador;
 import Facturación.facturacion;
+import Modelo.ImplementacionModelo;
 import Modelo.InterrogaModelo;
 import Modelo.Persona;
 import Modelo.Tarea;
@@ -45,6 +46,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     JComboBox<facturacion> facturacionDato;
     JLabel responsable;
 
+    facturacion[] tiposFacturacion = { new ConsumoInterno(),new Descuento(), new Urgente()};
 
     public static void main(String[] args) {
 
@@ -72,7 +74,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
         this.escuchadoraLista = new EscuchadoraLista(controlador, this);
         escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
-        this.escuchadoraCheckBox = new EscuchadoraCheckBox(this);
         this.escuchadoraCheckBox = new EscuchadoraCheckBox(controlador, this);
 
         //ventana.addWindowListener(new EscuchadoraVentana()); //para guardar el proyecto luego?
@@ -158,15 +159,11 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
         //TAREAS
 
-
-
         panelOeste.add(new JLabel("Tareas: "), BorderLayout.NORTH);
         JButton aTarea = new JButton("Añadir tarea");
         aTarea.addActionListener(escuchadoraBoton);
         panelOeste.add(aTarea, BorderLayout.AFTER_LAST_LINE);
 
-        //Tarea[] datos = (Tarea[]) controlador.getListaTareas().toArray();//{new Tarea("t1"), new Tarea("t2")};
-        //List<Tarea> datos = controlador.getListaTareas();
         tareas = new JList<Tarea>(vectorTareas);
         tareas.setName("cuadroTareas");
         tareas.addListSelectionListener(new EscuchadoraLista(controlador, this));
@@ -187,7 +184,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         aPersona.addActionListener(new EscuchadoraBoton(controlador, this));
         panelCentral.add(aPersona, BorderLayout.AFTER_LAST_LINE);
 
-        //List<Persona> lpersonas = controlador.getListaPersonas();//{new Persona("dni"), new Persona("nif")};
         this.personas = new JList<>(vectorPersonas);
         this.personas.setName("cuadroPersonas");
         this.personas.addListSelectionListener(escuchadoraLista);
@@ -255,7 +251,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         c.gridy = 2;
         panelEste.add(selectCoste, c);
 
-        facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
+        //String[] tiposFacturacionprueba = { "Consumo Interno","Descuento","Urgente"};
         facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.addActionListener(escuchadoraComboBox);
         facturacionDato.setName("facturacionTarea");
@@ -446,7 +442,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         costeInicialDatos.addFocusListener(escuchadoraTextField);
 
         JLabel facturacion = new JLabel("facturacion: ");
-        facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
+        //facturacion[] tiposFacturacion = { new ConsumoInterno(),new Descuento(), new Urgente()};
         JComboBox<facturacion> facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.setName("facturacionDato");
         facturacionDato.addActionListener(escuchadoraComboBox);
@@ -484,6 +480,26 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         ventana.pack();
         ventana.setVisible(true);
     }
+
+    public void ventanaEtiquetas(){
+        ventana = new JFrame("Etiqueta");
+        ventana.setLocationRelativeTo(null);
+
+        Container container = ventana.getContentPane();
+        container.setLayout(new GridLayout(1,3));
+        JPanel panel = new JPanel();
+        JLabel nombre = new JLabel("Nueva Etiqueta: ");
+        JTextField nom = new JTextField(20);
+        nom.setName("addEtiqueta");
+        JButton boton = new JButton("Agregar Nueva Etiqueta");
+        panel.add(nombre); panel.add(nom); panel.add(boton);
+        nom.addFocusListener(escuchadoraTextField);
+        boton.addActionListener(escuchadoraBoton);
+        container.add(panel);
+        ventana.pack();
+        ventana.setVisible(true);
+    }
+
 
     //---------METODOS----------
 
@@ -550,26 +566,39 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         this.personaDeTareaSeleccionada = personaDeTareaSeleccionada;
     }
 
+    @Override
     public void actualizarInterfaz(){
-        setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
-        setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
+        setTareas(modelo.getTareasEnProyecto(controlador));
+        setPersonas(modelo.getPersonasEnProyecto(controlador));
         if (getTareaSeleccionada() != null)
-            setPersonasEnTarea( (Persona[]) getTareaSeleccionada().getListaAlmacacenada());
+            setPersonasEnTarea(modelo.getListaPersonasEnTarea(tareaSeleccionada));
     }
 
+    @Override
     public void actualizarInfoTareaSeleccionada(){
         if (getTareaSeleccionada() == null)
             return;
 
-        setPersonasEnTarea( (Persona[]) getTareaSeleccionada().getListaAlmacacenada());
-        nombreTarea.setText("Titulo: " + tareaSeleccionada.getTitulo()); //TODO interrogaModelo
-        coste.setText("Coste Final: " + tareaSeleccionada.getCosteFinal());
-        //etiquetas;
-        finalizada.setText("Finalizada: " + tareaSeleccionada.isFinalizada());
-        responsable.setText("Responsable: " + tareaSeleccionada.getResponsable());
+        setPersonasEnTarea(modelo.getListaPersonasEnTarea(tareaSeleccionada));
+        nombreTarea.setText("Titulo: " + modelo.getTitulo(tareaSeleccionada));
+        coste.setText("Coste Final: " + modelo.getCosteFinalTarea(tareaSeleccionada));
+        etiquetas.setText("Etiquetas: " + modelo.getEtiquetasTarea(tareaSeleccionada));
+        finalizada.setText("Finalizada: " + modelo.isTareaFinalizada(tareaSeleccionada));
+        responsable.setText("Responsable: " + modelo.getResponsable(tareaSeleccionada));
 
         selectCoste.setText("");
-        facturacionDato.setSelectedItem(tareaSeleccionada.getFacturacion());
-        //personasEnTarea.
+        System.out.println("AAAAAAAAAAAAAAAAAAAAA " + modelo.getFacturacionTarea(tareaSeleccionada));
+
+
+        switch (modelo.getFacturacionTarea(tareaSeleccionada).toString()){
+            case "Consumo Interno" -> facturacionDato.setSelectedItem(tiposFacturacion[0]);
+            case "Descuento" -> facturacionDato.setSelectedItem(tiposFacturacion[1]);
+            case "Urgente" -> facturacionDato.setSelectedItem(tiposFacturacion[2]);
+        }
+    }
+
+    public void setModelo(InterrogaModelo modelo) {
+        this.modelo = modelo;
+        escuchadoraBoton.setModelo(this.modelo);
     }
 }

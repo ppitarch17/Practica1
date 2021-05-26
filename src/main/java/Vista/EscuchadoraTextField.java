@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.Controlador;
+import Modelo.Etiqueta;
 import Modelo.InterrogaModelo;
 
 import javax.swing.*;
@@ -24,6 +25,8 @@ public class EscuchadoraTextField implements ActionListener, FocusListener {
     private String descripcionTarea;
     private double costeTarea;
 
+    private Etiqueta etiqueta;
+
     public EscuchadoraTextField(Controlador controlador, InterfazGrafica interfazGrafica){
         this.controlador = controlador;
         System.out.println(controlador);
@@ -42,11 +45,19 @@ public class EscuchadoraTextField implements ActionListener, FocusListener {
                 case "descripcionDato" -> this.descripcionTarea = text.getText();
                 case "costeInicialDatos" -> costeInicial(text);
                 case "seleccionarCoste" -> seleccionarCoste(Double.parseDouble(text.getText()));
+                case "addEtiqueta" -> addEtiqueta(text.getText());
             }
         else this.texto = text.getText();
 
         System.out.println(text.getName() + ": " + text.getText());
 
+    }
+
+    public void addEtiqueta(String texto){
+        this.etiqueta = new Etiqueta(texto);
+    }
+    public Etiqueta getEtiqueta(){
+        return this.etiqueta;
     }
 
     public void seleccionarCoste(double nuevoCoste){

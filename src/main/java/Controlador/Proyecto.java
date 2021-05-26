@@ -88,7 +88,6 @@ public class Proyecto implements Serializable, Controlador {
         return true;
     }
 
-    @Override
     public Persona getPersona(String DNI){
         for (Persona persona: listaPersonas) {
             if (persona.getDNI().equals(DNI))
@@ -102,7 +101,6 @@ public class Proyecto implements Serializable, Controlador {
         tarea.marcarComoFinalizada();
     }
 
-    @Override
     public Tarea buscaTarea (String titulo) {
         for (Tarea tarea : getListaTareas()) {
             if (tarea.getTitulo().equals(titulo)) {
@@ -145,6 +143,11 @@ public class Proyecto implements Serializable, Controlador {
     @Override
     public String getNombre() {
         return nombre;
+    }
+
+    @Override
+    public boolean addEtiquetaATarea(Tarea tarea, Etiqueta etiqueta) {
+        return tarea.addEtiqueta(etiqueta);
     }
 
     @Override

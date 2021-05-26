@@ -15,8 +15,6 @@ public class Etiqueta implements Serializable {
 
     @Override
     public String toString() {
-        return "Modelo.Etiqueta{" +
-                "nombre='" + nombre + '\'' +
-                '}';
+        return "[" + nombre + "]";
     }
 }
