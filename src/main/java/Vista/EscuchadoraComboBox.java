@@ -40,7 +40,6 @@ public class EscuchadoraComboBox implements ActionListener {
                 System.out.println("Entra resultado");
             }
         }
-
     }
 
     public void tipofacturacion(String selectedItem){

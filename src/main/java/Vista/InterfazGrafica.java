@@ -69,7 +69,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
         this.escuchadoraLista = new EscuchadoraLista(controlador, this);
         escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
-
+        this.escuchadoraCheckBox = new EscuchadoraCheckBox(controlador, this);
 
         //ventana.addWindowListener(new EscuchadoraVentana()); //para guardar el proyecto luego?
         //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
@@ -292,12 +292,14 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         panelEste.add(setResp, c);
 
         JCheckBox noResponsables = new JCheckBox("No responsables");
+        noResponsables.setName("No responsables");
         noResponsables.addActionListener(escuchadoraCheckBox);
         c.gridx = 0;
         c.gridy = 6;
         panelEste.add(noResponsables, c);
 
         JCheckBox sinPersonas = new JCheckBox("Sin personas");
+        sinPersonas.setName("Sin personas");
         sinPersonas.addActionListener(escuchadoraCheckBox);
         c.gridx = 1;
         c.gridy = 6;
@@ -478,6 +480,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     public void setControlador(Controlador controlador){
         this.controlador = controlador;
         escuchadoraBoton.setControlador(controlador);
+        escuchadoraCheckBox.setControlador(controlador);
     }
 
     public Tarea getTareaSeleccionada() {
@@ -488,6 +491,14 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     }
     public Persona getPersonaSeleccioanda() {
         return personaSeleccioanda;
+    }
+
+    public JList<Tarea> getTareas() {
+        return tareas;
+    }
+
+    public JList<Persona> getPersonas() {
+        return personas;
     }
 
     public void setTareaSeleccionada(Tarea tareaSeleccionada) {
