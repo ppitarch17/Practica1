@@ -41,6 +41,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     JLabel coste;
     JLabel etiquetas;
     JLabel finalizada;
+    JTextField selectCoste;
 
 
     public static void main(String[] args) {
@@ -69,6 +70,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
         this.escuchadoraLista = new EscuchadoraLista(controlador, this);
         escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
+        this.escuchadoraCheckBox = new EscuchadoraCheckBox(this);
 
 
         //ventana.addWindowListener(new EscuchadoraVentana()); //para guardar el proyecto luego?
@@ -240,8 +242,9 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         c.gridy = 2;
         panelEste.add(introduceCoste, c);
 
-        JTextField selectCoste = new JTextField();
+        selectCoste = new JTextField();
         selectCoste.addActionListener(escuchadoraTextField);
+        selectCoste.setName("seleccionarCoste");
         c.gridx = 2;
         c.gridy = 2;
         panelEste.add(selectCoste, c);
@@ -249,6 +252,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
         JComboBox<facturacion> facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.addActionListener(escuchadoraComboBox);
+        facturacionDato.setName("facturacionTarea");
         c.gridwidth = 2;
         c.gridx = 1;
         c.gridy = 3;
@@ -526,6 +530,10 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         this.personaDeTareaSeleccionada = personaDeTareaSeleccionada;
     }
 
+    public Persona getPersonaDeTareaSeleccionada() {
+        return personaDeTareaSeleccionada;
+    }
+
     public void actualizarInterfaz(){
         setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
         setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
@@ -542,5 +550,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         coste.setText("Coste Final: " + tareaSeleccionada.getCosteFinal());
         //etiquetas;
         finalizada.setText("Finalizada: " + tareaSeleccionada.isFinalizada());
+        selectCoste.setText("");
+        //personasEnTarea.
     }
 }

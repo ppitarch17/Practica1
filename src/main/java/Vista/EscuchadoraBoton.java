@@ -39,7 +39,7 @@ public class EscuchadoraBoton implements ActionListener {
             case "Añadir persona" -> addPersona();
             case "Añadir Persona a Proyecto" -> addPersonaAProyecto();
             case "Añadir persona a tarea" -> addPersonaATarea();
-            case "Quitar persona de tarea" -> System.out.println("quitar personita");
+            case "Quitar persona de tarea" -> removePersonaDeTarea();
             case "Finalizar tarea" -> finalizarTarea();
             case "Añadir etiqueta" -> addEtiqueta();
             case "Set Responsable" -> setResponsable();
@@ -138,6 +138,7 @@ public class EscuchadoraBoton implements ActionListener {
 
     }
 
+
     public void addTareaAProyecto(){
         System.out.println("---Añadiendo Tarea");
 
@@ -171,10 +172,27 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void addPersonaATarea() {
 
-        if (interfazGrafica.getPersonaSeleccioanda() != null && interfazGrafica.getTareaSeleccionada() != null) //TODO error
-            controlador.addPersonaToTarea(interfazGrafica.getPersonaSeleccioanda(), interfazGrafica.getTareaSeleccionada());
+        if (interfazGrafica.getPersonaSeleccioanda() == null || interfazGrafica.getTareaSeleccionada() == null)
+            return;//TODO error
+
+        controlador.addPersonaToTarea(interfazGrafica.getPersonaSeleccioanda(), interfazGrafica.getTareaSeleccionada());
+        actualizarInterfaz();
+    }
+
+    public void removePersonaDeTarea(){
+
+        System.out.println("REMOVE PERSONA-------");
+        if (interfazGrafica.getPersonaDeTareaSeleccionada() == null || interfazGrafica.getTareaSeleccionada() == null)
+            return;//TODO error
+
+        System.out.println("-------");
+        System.out.println(interfazGrafica.getTareaSeleccionada());
+        System.out.println(interfazGrafica.getPersonaSeleccioanda());
+        System.out.println(interfazGrafica.getTareaSeleccionada().getLista());
+        controlador.removePersonaDeTarea(interfazGrafica.getPersonaDeTareaSeleccionada(), interfazGrafica.getTareaSeleccionada());
 
         actualizarInterfaz();
+        interfazGrafica.actualizarInfoTareaSeleccionada();
     }
 
     public void finalizarTarea() {

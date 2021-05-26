@@ -39,11 +39,17 @@ public class EscuchadoraTextField implements ActionListener {
                 case "nombreTareaDato" -> this.nombreTarea = text.getText();
                 case "descripcionDato" -> this.descripcionTarea = text.getText();
                 case "costeInicialDatos" -> costeInicial(text);
+                case "seleccionarCoste" -> seleccionarCoste(Double.parseDouble(text.getText()));
             }
         else this.texto = text.getText();
 
         System.out.println(text.getName() + ": " + text.getText());
 
+    }
+
+    public void seleccionarCoste(double nuevoCoste){
+        interfazGrafica.getTareaSeleccionada().setCoste(nuevoCoste);
+        interfazGrafica.actualizarInfoTareaSeleccionada();
     }
 
     public void costeInicial(JTextField text) {

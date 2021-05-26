@@ -39,14 +39,14 @@ public class EscuchadoraComboBox implements ActionListener {
                 this.tipoResultadoTarea = (Resultado) comboBox.getSelectedItem();
                 System.out.println("Entra resultado");
             }
+            case "facturacionTarea" -> facturacionTarea((facturacion) comboBox.getSelectedItem());
         }
 
     }
 
-    public void tipofacturacion(String selectedItem){
-
-        System.out.println("facturacion seleccionada: " + selectedItem);
-        //System.out.println(prioridadTarea);
+    public void facturacionTarea(facturacion nuevaFacturacion){
+        interfazGrafica.getTareaSeleccionada().setFacturacion(nuevaFacturacion);
+        interfazGrafica.actualizarInfoTareaSeleccionada();
     }
 
     public void tipoResultado(String selectedItem){

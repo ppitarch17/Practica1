@@ -225,11 +225,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 //    }
     @Override
     public String toString() {
-        return  titulo + "{" +
-                ", listaPersonas=" + listaPersonas +
-                ", costeFinal=" + costeFinal +
-                ", finalizada=" + isFinalizada +
-                '}';
+        return  titulo;
     }
 
     @Override
@@ -257,5 +253,9 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
     public boolean isFinalizada() {
         return isFinalizada;
+    }
+
+    public Facturación.facturacion getFacturacion() {
+        return facturacion;
     }
 }
