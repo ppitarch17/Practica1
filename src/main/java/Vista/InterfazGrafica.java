@@ -1,7 +1,8 @@
 package Vista;
 
-import Controlador.Controlador;
+import Controlador.*;
 import Facturación.facturacion;
+import Modelo.ImplementacionModelo;
 import Modelo.InterrogaModelo;
 import Modelo.Persona;
 import Modelo.Tarea;
@@ -69,27 +70,38 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
                 } catch (UnsupportedLookAndFeelException e) {
                     e.printStackTrace();
                 }
-                new InterfazGrafica().ventanaStart();
+                new InterfazGrafica().matame();
             }
         });
     }
 
     public void matame(){
+        conectar();
         ventanaStart();
+    }
+
+    public void conectar(){
+        ImplementacionModelo modelo = new ImplementacionModelo(this);
+        ImplementacionControlador controlador = new ImplementacionControlador(this, modelo);
+
+        this.modelo = modelo;
+        this.controlador = controlador;
+
+        //Conectar Esccuhadores
+        this.escuchadoraBoton = new EscuchadoraBoton(this.controlador, this, this.modelo);
+        this.escuchadoraTextField = new EscuchadoraTextField(this.controlador,this);
+        escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
+        this.escuchadoraComboBox = new EscuchadoraComboBox(this.controlador, this);
+        escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
+        this.escuchadoraLista = new EscuchadoraLista(this.controlador, this);
+        escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
+        this.escuchadoraCheckBox = new EscuchadoraCheckBox(this.controlador, this, this.modelo);
     }
 
     //-------VENTANAS----------
 
     public void ventanaStart(){
         ventana = new JFrame("Primera Ventana"); //Ventana principal
-        this.escuchadoraBoton = new EscuchadoraBoton(controlador, this);
-        this.escuchadoraTextField = new EscuchadoraTextField(controlador,this);
-        escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
-        this.escuchadoraComboBox = new EscuchadoraComboBox(controlador, this);
-        escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
-        this.escuchadoraLista = new EscuchadoraLista(controlador, this);
-        escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
-        this.escuchadoraCheckBox = new EscuchadoraCheckBox(controlador, this);
 
         Container container = ventana.getContentPane();
         container.setLayout(new BorderLayout());
@@ -159,11 +171,11 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         //NORTE
         JPanel panelNorte = new JPanel();
         container.add(panelNorte, BorderLayout.NORTH);
-        JLabel nombre = new JLabel(controlador.getNombre());
+        JLabel nombre = new JLabel(modelo.getNombreProyecto());
         panelNorte.add(nombre);
 
         controlador.calcularCosteTotal();
-        costeTotal = new JLabel("Coste total: " + controlador.getCosteTotal());
+        costeTotal = new JLabel("Coste total: " + modelo.getCosteTotalProyecto());
         panelNorte.add(costeTotal);
 
         //PERSONAS
@@ -201,7 +213,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
         panelCentral.add(new JLabel("Personas: "), BorderLayout.NORTH);
         JButton aPersona = new JButton("Añadir persona");
-        aPersona.addActionListener(new EscuchadoraBoton(controlador, this));
+        aPersona.addActionListener(escuchadoraBoton);
         panelCentral.add(aPersona, BorderLayout.AFTER_LAST_LINE);
 
         //List<Persona> lpersonas = controlador.getListaPersonas();//{new Persona("dni"), new Persona("nif")};
@@ -493,8 +505,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public void setControlador(Controlador controlador){
         this.controlador = controlador;
-        escuchadoraBoton.setControlador(controlador);
-        escuchadoraCheckBox.setControlador(controlador);
+//        escuchadoraBoton.setControlador(controlador);
+//        escuchadoraCheckBox.setControlador(controlador);
     }
 
     public Tarea getTareaSeleccionada() {
@@ -509,6 +521,16 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     public Persona getPersonaDeTareaSeleccionada() {
         return personaDeTareaSeleccionada;
+    }
+
+    @Override
+    public EscuchadoraTextField getEscuchadoraTextField() {
+        return escuchadoraTextField;
+    }
+
+    @Override
+    public EscuchadoraComboBox getEscuchadoraComboBox() {
+        return escuchadoraComboBox;
     }
 
     public JList<Tarea> getTareas() {
@@ -556,18 +578,18 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     }
 
     public void actualizarInterfaz(){
-        setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
-        setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
+        setTareas(modelo.getTareasEnProyecto());
+        setPersonas(modelo.getPersonasEnProyecto());
         if (getTareaSeleccionada() != null)
-            setPersonasEnTarea( (Persona[]) getTareaSeleccionada().getListaAlmacacenada());
+            setPersonasEnTarea( modelo.getListaPersonasEnTarea(tareaSeleccionada));
     }
 
     public void actualizarInfoTareaSeleccionada(){
         if (getTareaSeleccionada() == null)
             return;
         controlador.calcularCosteTotal();
-        costeTotal.setText("Coste total: " + controlador.getCosteTotal());
-        setPersonasEnTarea( (Persona[]) getTareaSeleccionada().getListaAlmacacenada());
+        costeTotal.setText("Coste total: " + modelo.getCosteTotalProyecto());
+        setPersonasEnTarea( modelo.getListaPersonasEnTarea(tareaSeleccionada));
         nombreTarea.setText("Titulo: " + tareaSeleccionada.getTitulo()); //TODO interrogaModelo
         coste.setText("Coste Final: " + tareaSeleccionada.getCosteFinal());
         //etiquetas;
@@ -578,6 +600,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
         selectCoste.setText("");
         facturacionDato.setSelectedItem(tareaSeleccionada.getFacturacion());
-        //personasEnTarea.
+        System.out.println(tareaSeleccionada);
     }
 }

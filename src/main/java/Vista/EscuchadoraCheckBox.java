@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.Controlador;
+import Modelo.InterrogaModelo;
 import Modelo.Persona;
 import Modelo.Tarea;
 import Modelo.UtilidadesParaListas;
@@ -15,11 +16,13 @@ public class EscuchadoraCheckBox implements ActionListener {
 
     InterfazGrafica interfazGrafica;
     Controlador controlador;
+    InterrogaModelo modelo;
 
-    public EscuchadoraCheckBox(Controlador controlador, InterfazGrafica interfazGrafica) {
+    public EscuchadoraCheckBox(Controlador controlador, InterfazGrafica interfazGrafica, InterrogaModelo modelo) {
         this.controlador = controlador;
+        //System.out.println(controlador + "boton");
         this.interfazGrafica = interfazGrafica;
-        System.out.println(controlador + "check");
+        this.modelo = modelo;
     }
 
     @Override
@@ -27,28 +30,18 @@ public class EscuchadoraCheckBox implements ActionListener {
         JCheckBox check = (JCheckBox) e.getSource();
         if ("No responsables".equals(check.getName())) {
             if (check.isSelected())
-                interfazGrafica.setPersonas(listarNoResponsables().toArray(new Persona[0]));
+                interfazGrafica.setPersonas(modelo.listarNoResponsables().toArray(new Persona[0]));
             else {
-                interfazGrafica.setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
-                System.out.println(controlador.getListaPersonas());
-                System.out.println(listarNoResponsables());
+                interfazGrafica.setPersonas(modelo.getPersonasEnProyecto());
             }
         }
         else if ("Sin personas".equals(check.getName())) {
             if (check.isSelected())
-                interfazGrafica.setTareas(UtilidadesParaListas.elementosConListaVacia(controlador.getListaTareas()).toArray(new Tarea[0]));
+                interfazGrafica.setTareas(UtilidadesParaListas.elementosConListaVacia(modelo.getTareasEnModelo()).toArray(new Tarea[0]));
             else
-                interfazGrafica.setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+                interfazGrafica.setTareas(modelo.getTareasEnProyecto());
         }
     }
 
-    public List<Persona> listarNoResponsables() {
-        List<Persona> personas = new ArrayList<>(controlador.getListaPersonas());
-        for (Tarea tarea : controlador.getListaTareas())
-            personas.remove(tarea.getResponsable());
-        return personas;
-    }
-    public void setControlador(Controlador controlador){
-        this.controlador = controlador;
-    }
+
 }

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializable, CambioModelo, InterrogaModelo {
+public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializable {
     private String titulo;
     private String descripcion;
     private List<Persona> listaPersonas;
@@ -225,13 +225,13 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 //    }
     @Override
     public String toString() {
-        return titulo;
-//        return  titulo + "{" +
-//                ", listaPersonas=" + listaPersonas +
-//                ", costeFinal=" + costeFinal +
-//                ", finalizada=" + isFinalizada +
-//                ", responsable=" + responsable +
-//                '}';
+//        return titulo;
+        return  titulo + "{" +
+                ", listaPersonas=" + listaPersonas +
+                ", costeFinal=" + costeFinal +
+                ", finalizada=" + isFinalizada +
+                ", fact=" + facturacion +
+                '}';
     }
 
     @Override
@@ -250,11 +250,6 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
     public double getCosteFinal() {
         return costeFinal;
-    }
-
-    @Override
-    public Object[] getListaAlmacacenada(){
-        return listaPersonas.toArray(new Persona[0]);
     }
 
     public boolean isFinalizada() {

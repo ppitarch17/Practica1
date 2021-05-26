@@ -50,7 +50,8 @@ public class EscuchadoraTextField implements ActionListener, FocusListener {
     }
 
     public void seleccionarCoste(double nuevoCoste){
-        interfazGrafica.getTareaSeleccionada().setCoste(nuevoCoste);
+        this.costeTarea = nuevoCoste;
+        controlador.cambiarCosteTarea();
         interfazGrafica.actualizarInfoTareaSeleccionada();
     }
 

@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializable, CambioModelo, InterrogaModelo {
+public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializable {
     private String nombre;
     private String correo;
     private String DNI; //identificador
@@ -104,9 +104,5 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
         return DNI;
     }
 
-    @Override
-    public Object[] getListaAlmacacenada(){
-        return listaTareas.toArray(new Tarea[0]);
-    }
 
 }

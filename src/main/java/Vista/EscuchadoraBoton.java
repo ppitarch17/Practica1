@@ -2,6 +2,7 @@ package Vista;
 
 import Controlador.*;
 import Facturación.facturacion;
+import Modelo.ImplementacionModelo;
 import Modelo.InterrogaModelo;
 import Modelo.Persona;
 import Modelo.Tarea;
@@ -20,10 +21,11 @@ public class EscuchadoraBoton implements ActionListener {
     EscuchadoraTextField escuchadoraTextField;
     EscuchadoraComboBox escuchadoraComboBox;
 
-    public EscuchadoraBoton(Controlador controlador, InterfazGrafica interfazGrafica) {
+    public EscuchadoraBoton(Controlador controlador, InterfazGrafica interfazGrafica, InterrogaModelo modelo) {
         this.controlador = controlador;
         //System.out.println(controlador + "boton");
         this.interfazGrafica = interfazGrafica;
+        this.modelo = modelo;
     }
 
     @Override
@@ -64,10 +66,9 @@ public class EscuchadoraBoton implements ActionListener {
     }
 
     public void crear() {
-        interfazGrafica.setControlador(new Proyecto(escuchadoraTextField.getTexto())); //TODO nombre al Proyecto
 //        System.out.println(controlador.getNombre());
-        interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
-        interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
+        interfazGrafica.setVectorPersonas(modelo.getPersonasEnProyecto());
+        interfazGrafica.setVectorTareas(modelo.getTareasEnProyecto());
         interfazGrafica.setVectorPersonasEnTarea(new Persona[0]);
         interfazGrafica.getVentana().dispose();
         interfazGrafica.ventanaMain();
@@ -81,15 +82,9 @@ public class EscuchadoraBoton implements ActionListener {
             try{
                 FileInputStream fis = new FileInputStream(nomFichero);
                 ois = new ObjectInputStream(fis);
-                Proyecto proyecto = (Proyecto) ois.readObject();
+                ImplementacionControlador proyecto = (ImplementacionControlador) ois.readObject();
                 interfazGrafica.setControlador(proyecto); //TODO nombre al Proyecto
-                System.out.println(controlador.getNombre());
-                interfazGrafica.setVectorPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
-                interfazGrafica.setVectorTareas(controlador.getListaTareas().toArray(new Tarea[0]));
-                interfazGrafica.setVectorPersonasEnTarea(new Persona[0]);
-                //interfazGrafica.setVectorPersonasEnTarea(controlado);
-                interfazGrafica.getVentana().dispose();
-                interfazGrafica.ventanaMain();
+                crear();
             }finally {
                 if(ois != null) ois.close();
             }
@@ -128,14 +123,12 @@ public class EscuchadoraBoton implements ActionListener {
         System.out.println(escuchadoraTextField.getCorreoPersona());
         System.out.println(escuchadoraTextField.getDniPersona());
 
-        if (!controlador.addPersona(escuchadoraTextField.getNombrePersona(), escuchadoraTextField.getCorreoPersona(), escuchadoraTextField.getDniPersona()))
+        if (!controlador.addPersona())
             interfazGrafica.ventanaError("La persona ya existe en el proyecto");
         else {
             interfazGrafica.getVentana().dispose();
             actualizarInterfaz();
         }
-        System.out.println(controlador.getListaPersonas());
-
     }
 
 
@@ -152,17 +145,13 @@ public class EscuchadoraBoton implements ActionListener {
 
         String titulo = escuchadoraTextField.getNombreTarea();
         String descripcion = escuchadoraTextField.getDescripcionTarea();
-        int prioridad = escuchadoraComboBox.getPrioridadTarea();
-        Resultado resultado = escuchadoraComboBox.getTipoResultadoTarea();
-        double coste = escuchadoraTextField.getCosteTarea();
-        facturacion facturacion = escuchadoraComboBox.getTipofacturacionTarea();
 
         if (titulo == null)
             interfazGrafica.ventanaError("Indica el nombre de la tarea");
         else if (descripcion == null)
             interfazGrafica.ventanaError("Indica la descripción de la tarea");
         else {
-            controlador.addTarea(titulo, descripcion, prioridad, resultado, coste, facturacion);
+            controlador.addTarea();
             interfazGrafica.getVentana().dispose();
             resetValues();
             actualizarInterfaz();
@@ -171,10 +160,10 @@ public class EscuchadoraBoton implements ActionListener {
     }
 
     public void actualizarInterfaz(){
-        interfazGrafica.setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
-        interfazGrafica.setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
+        interfazGrafica.setTareas(modelo.getTareasEnProyecto());
+        interfazGrafica.setPersonas(modelo.getPersonasEnProyecto());
         if (interfazGrafica.getTareaSeleccionada() != null)
-            interfazGrafica.setPersonasEnTarea( (Persona[]) interfazGrafica.getTareaSeleccionada().getListaAlmacacenada());
+            interfazGrafica.setPersonasEnTarea(modelo.getListaPersonasEnTarea(interfazGrafica.getTareaSeleccionada()));
     }
 
     public void addPersonaATarea() {
@@ -182,7 +171,7 @@ public class EscuchadoraBoton implements ActionListener {
         if (interfazGrafica.getPersonaSeleccioanda() == null || interfazGrafica.getTareaSeleccionada() == null)
             return;//TODO error
 
-        controlador.addPersonaToTarea(interfazGrafica.getPersonaSeleccioanda(), interfazGrafica.getTareaSeleccionada());
+        controlador.addPersonaToTarea();
         resetValues();
         actualizarInterfaz();
     }
@@ -197,21 +186,21 @@ public class EscuchadoraBoton implements ActionListener {
         System.out.println(interfazGrafica.getTareaSeleccionada());
         System.out.println(interfazGrafica.getPersonaSeleccioanda());
         System.out.println(interfazGrafica.getTareaSeleccionada().getLista());
-        controlador.removePersonaDeTarea(interfazGrafica.getPersonaDeTareaSeleccionada(), interfazGrafica.getTareaSeleccionada());
+        controlador.removePersonaDeTarea();
 
         actualizarInterfaz();
         interfazGrafica.actualizarInfoTareaSeleccionada();
     }
 
     public void finalizarTarea() {
-        controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
+        controlador.setTareaFinalizada();
 //        actualizarInterfaz();
         interfazGrafica.actualizarInfoTareaSeleccionada();
 //        controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
     }
 
     public void addEtiqueta() {
-        InterrogaModelo tarea= interfazGrafica.getTareaSeleccionada();
+//        InterrogaModelo tarea= interfazGrafica.getTareaSeleccionada(); //TODO
     }
 
     public void setResponsable() {
@@ -220,7 +209,7 @@ public class EscuchadoraBoton implements ActionListener {
         else if (interfazGrafica.getPersonaDeTareaSeleccionada() == null)
             interfazGrafica.ventanaError("Selecciona una persona que pertenezca a la tarea");
         else {
-            controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaDeTareaSeleccionada());
+            controlador.setResponsable();
             interfazGrafica.actualizarInfoTareaSeleccionada();
         }
     }
@@ -232,7 +221,7 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void grabacionDeDatos(Controlador proyecto){
         System.out.println("mueranse");
-        String nomFichero = controlador.getNombre();
+        String nomFichero = modelo.getNombreProyecto();
 
         ObjectOutputStream oos = null;
         try{
