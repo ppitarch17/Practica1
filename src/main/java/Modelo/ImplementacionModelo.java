@@ -2,23 +2,50 @@ package Modelo;
 
 import Controlador.Controlador;
 import Facturación.facturacion;
+import Vista.InformaVista;
+import Vista.InterfazGrafica;
+
+import java.util.List;
 
 public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
 
-    Controlador controlador;
-    //TODO actualizaciones
+    private InformaVista vista;    //TODO actualizaciones
 
-    public ImplementacionModelo(Controlador controlador){
-        this.controlador = controlador;
+    List<Persona> personasEnProyecto;
+    List<Tarea> tareasEnProyecto;
+
+    public ImplementacionModelo(InformaVista vista){
+        this.vista = vista;
     }
 
     //METODOS PARA CONTROLADOR
+
+    @Override
+    public void setTareasEnModelo(List<Tarea> tareas) {
+        this.tareasEnProyecto = tareas;
+    }
+
+    @Override
+    public void setPersonasEnModelo(List<Persona> personas) {
+        this.personasEnProyecto = personas;
+    }
+
+    @Override
+    public List<Tarea> getTareasEnModelo() {
+        return tareasEnProyecto;
+    }
+
+    @Override
+    public List<Persona> getPersonasEnModelo() {
+        return personasEnProyecto;
+    }
 
     //METODOS PARA VISTA
     @Override
     public Persona[] getListaPersonasEnTarea(Tarea tarea) {
         return tarea.getLista().toArray(new Persona[0]);
     }
+
 
     @Override
     public Tarea[] getTareasDePersona(Persona persona){
@@ -56,20 +83,14 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
     }
 
     @Override
-    public Persona[] getPersonasProyecto(Controlador controlador){
-        return controlador.getListaPersonas().toArray(new Persona[0]);
+    public Persona[] getPersonasEnProyecto(){
+        return personasEnProyecto.toArray(new Persona[0]);
     }
 
     @Override
-    public Persona[] getPersonasEnProyecto(Controlador controlador){
-        return controlador.getListaPersonas().toArray(new Persona[0]);
+    public Tarea[] getTareasEnProyecto(){
+        return tareasEnProyecto.toArray(new Tarea[0]);
     }
-
-    @Override
-    public Tarea[] getTareasEnProyecto(Controlador controlador){
-        return controlador.getListaTareas().toArray(new Tarea[0]);
-    }
-
 
 
 }

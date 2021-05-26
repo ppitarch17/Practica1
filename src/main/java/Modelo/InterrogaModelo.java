@@ -8,7 +8,6 @@ public interface InterrogaModelo {
     //void getTareaFinalizada();
 
     Persona[] getListaPersonasEnTarea(Tarea tarea);
-    Persona[] getPersonasProyecto(Controlador controlador);
     Tarea[] getTareasDePersona(Persona persona);
     Persona getResponsable(Tarea tarea);
     String getTitulo(Tarea tarea);
@@ -16,6 +15,6 @@ public interface InterrogaModelo {
     Etiqueta[] getEtiquetasTarea(Tarea tarea);
     boolean isTareaFinalizada(Tarea tarea);
     facturacion getFacturacionTarea(Tarea tarea);
-    Persona[] getPersonasEnProyecto(Controlador controlador);
-    Tarea[] getTareasEnProyecto(Controlador controlador);
+    Persona[] getPersonasEnProyecto();
+    Tarea[] getTareasEnProyecto();
 }
