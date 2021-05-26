@@ -156,10 +156,15 @@ public class EscuchadoraBoton implements ActionListener {
         double coste = escuchadoraTextField.getCosteTarea();
         facturacion facturacion = escuchadoraComboBox.getTipofacturacionTarea();
 
-        controlador.addTarea(titulo, descripcion, prioridad, resultado, coste, facturacion);
-
-        interfazGrafica.getVentana().dispose();
-        actualizarInterfaz();
+        if (titulo == null)
+            interfazGrafica.ventanaError("Indica el nombre de la tarea");
+        else if (descripcion == null)
+            interfazGrafica.ventanaError("Indica la descripción de la tarea");
+        else {
+            controlador.addTarea(titulo, descripcion, prioridad, resultado, coste, facturacion);
+            interfazGrafica.getVentana().dispose();
+            actualizarInterfaz();
+        }
     }
 
     public void actualizarInterfaz(){
@@ -189,7 +194,7 @@ public class EscuchadoraBoton implements ActionListener {
     }
 
     public void setResponsable() {
-       controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaSeleccioanda());
+       controlador.setResponsable(interfazGrafica.getTareaSeleccionada(), interfazGrafica.getPersonaDeTareaSeleccionada());
     }
 
     public void salir() {

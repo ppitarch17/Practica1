@@ -497,6 +497,9 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     public Persona getPersonaSeleccioanda() {
         return personaSeleccioanda;
     }
+    public Persona getPersonaDeTareaSeleccionada() {
+        return personaDeTareaSeleccionada;
+    }
 
     public JList<Tarea> getTareas() {
         return tareas;
@@ -559,5 +562,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         //etiquetas;
         finalizada.setText("Finalizada: " + tareaSeleccionada.isFinalizada());
         responsable.setText("Responsable: " + tareaSeleccionada.getResponsable());
+
     }
 }

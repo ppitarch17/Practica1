@@ -229,6 +229,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
                 ", listaPersonas=" + listaPersonas +
                 ", costeFinal=" + costeFinal +
                 ", finalizada=" + isFinalizada +
+                ", responsable=" + responsable +
                 '}';
     }
 

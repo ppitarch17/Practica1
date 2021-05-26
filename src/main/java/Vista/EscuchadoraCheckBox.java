@@ -28,20 +28,22 @@ public class EscuchadoraCheckBox implements ActionListener {
         if ("No responsables".equals(check.getName())) {
             if (check.isSelected())
                 interfazGrafica.setPersonas(listarNoResponsables().toArray(new Persona[0]));
-            else
+            else {
                 interfazGrafica.setPersonas(controlador.getListaPersonas().toArray(new Persona[0]));
+                System.out.println(controlador.getListaPersonas());
+                System.out.println(listarNoResponsables());
+            }
         }
         else if ("Sin personas".equals(check.getName())) {
             if (check.isSelected())
                 interfazGrafica.setTareas(UtilidadesParaListas.elementosConListaVacia(controlador.getListaTareas()).toArray(new Tarea[0]));
             else
                 interfazGrafica.setTareas(controlador.getListaTareas().toArray(new Tarea[0]));
-
         }
     }
 
     public List<Persona> listarNoResponsables() {
-        List<Persona> personas = controlador.getListaPersonas();
+        List<Persona> personas = new ArrayList<>(controlador.getListaPersonas());
         for (Tarea tarea : controlador.getListaTareas())
             personas.remove(tarea.getResponsable());
         return personas;
