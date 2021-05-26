@@ -88,4 +88,16 @@ public class EscuchadoraTextField implements ActionListener {
     public String getTexto() {
         return texto;
     }
+
+    public void resetValues(){
+        nombrePersona = null;
+        correoPersona = null;
+        dniPersona = null;
+        texto = null;
+
+        nombreTarea = null;
+        descripcionTarea = null;
+        costeTarea = 0;
+    }
+
 }

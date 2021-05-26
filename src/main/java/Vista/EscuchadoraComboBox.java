@@ -1,8 +1,10 @@
 package Vista;
 
 import Controlador.Controlador;
+import Facturación.ConsumoInterno;
 import Facturación.facturacion;
 import Modelo.InterrogaModelo;
+import Resultados.Biblioteca;
 import Resultados.Resultado;
 
 import javax.swing.*;
@@ -15,9 +17,9 @@ public class EscuchadoraComboBox implements ActionListener {
     InterfazGrafica interfazGrafica;
     InterrogaModelo modelo;
 
-    private facturacion tipofacturacionTarea;
-    private int prioridadTarea;
-    private Resultado tipoResultadoTarea;
+    private facturacion tipofacturacionTarea = new ConsumoInterno();
+    private int prioridadTarea = 1;
+    private Resultado tipoResultadoTarea = new Biblioteca();
 
     public EscuchadoraComboBox(Controlador controlador, InterfazGrafica interfazGrafica){
         this.controlador = controlador;
@@ -63,5 +65,12 @@ public class EscuchadoraComboBox implements ActionListener {
 
     public Resultado getTipoResultadoTarea() {
         return tipoResultadoTarea;
+    }
+
+
+    public void resetValues(){
+        tipofacturacionTarea = new ConsumoInterno();
+        prioridadTarea = 1;
+        tipoResultadoTarea = new Biblioteca();
     }
 }

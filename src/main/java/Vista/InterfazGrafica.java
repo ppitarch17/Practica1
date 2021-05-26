@@ -42,6 +42,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     JLabel etiquetas;
     JLabel finalizada;
     JTextField selectCoste;
+    JComboBox<facturacion> facturacionDato;
 
 
     public static void main(String[] args) {
@@ -250,7 +251,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         panelEste.add(selectCoste, c);
 
         facturacion[] tiposFacturacion = { new Descuento(), new ConsumoInterno(), new Urgente()};
-        JComboBox<facturacion> facturacionDato = new JComboBox<>(tiposFacturacion);
+        facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.addActionListener(escuchadoraComboBox);
         facturacionDato.setName("facturacionTarea");
         c.gridwidth = 2;
@@ -551,6 +552,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         //etiquetas;
         finalizada.setText("Finalizada: " + tareaSeleccionada.isFinalizada());
         selectCoste.setText("");
+        facturacionDato.setSelectedItem(tareaSeleccionada.getFacturacion());
         //personasEnTarea.
     }
 }

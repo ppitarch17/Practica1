@@ -158,6 +158,7 @@ public class EscuchadoraBoton implements ActionListener {
         facturacion facturacion = escuchadoraComboBox.getTipofacturacionTarea();
 
         controlador.addTarea(titulo, descripcion, prioridad, resultado, coste, facturacion);
+        resetValues();
 
         interfazGrafica.getVentana().dispose();
         actualizarInterfaz();
@@ -176,6 +177,7 @@ public class EscuchadoraBoton implements ActionListener {
             return;//TODO error
 
         controlador.addPersonaToTarea(interfazGrafica.getPersonaSeleccioanda(), interfazGrafica.getTareaSeleccionada());
+        resetValues();
         actualizarInterfaz();
     }
 
@@ -234,5 +236,10 @@ public class EscuchadoraBoton implements ActionListener {
             e.printStackTrace();
         }
 
+    }
+
+    void resetValues(){
+        escuchadoraComboBox.resetValues();
+        escuchadoraTextField.resetValues();
     }
 }
