@@ -46,7 +46,7 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
                 case "nombreTareaDato" -> this.nombreTarea = text.getText();
                 case "descripcionDato" -> this.descripcionTarea = text.getText();
                 case "costeInicialDatos" -> costeInicial(text);
-                case "seleccionarCoste" -> seleccionarCoste(Double.parseDouble(text.getText()));
+                case "seleccionarCoste" -> seleccionarCoste(text.getText());
                 case "addEtiqueta" -> addEtiqueta(text.getText());
             }
         else this.texto = text.getText();
@@ -57,6 +57,12 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
 
     public void addEtiqueta(String texto){
         this.etiqueta = new Etiqueta(texto);
+
+        if (interfazGrafica.getTareaSeleccionada() == null){
+            interfazGrafica.ventanaError("Selecciona una Tarea");
+            return;
+        }
+
 
         try {
             if(!controlador.addEtiquetaATarea()){
@@ -72,16 +78,32 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
         return this.etiqueta;
     }
 
-    public void seleccionarCoste(double nuevoCoste){
+    public void seleccionarCoste(String nuevoCoste){
+
+        if (interfazGrafica.getTareaSeleccionada() == null){
+            interfazGrafica.ventanaError("Selecciona una Tarea");
+            return;
+        }
 
         try {
-            this.costeTarea = nuevoCoste;
-            controlador.cambiarCosteTarea();
-            interfazGrafica.actualizarInfoTareaSeleccionada();
-        }
-        catch (NumberFormatException e){
+            this.costeTarea = Double.parseDouble(nuevoCoste);
+            this.controlador.cambiarCosteTarea();
+
+
+        }catch (NumberFormatException e){
             interfazGrafica.ventanaError("No es un número");
         }
+
+
+//        try {
+//            this.costeTarea = nuevoCoste;
+//            controlador.cambiarCosteTarea();
+//            interfazGrafica.actualizarInfoTareaSeleccionada();
+//
+//        }
+//        catch (NumberFormatException e){
+//            interfazGrafica.ventanaError("No es un número");
+//        }
 
 
     }

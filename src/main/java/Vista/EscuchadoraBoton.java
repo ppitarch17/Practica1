@@ -43,7 +43,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             case "Añadir persona a tarea" -> addPersonaATarea();
             case "Quitar persona de tarea" -> removePersonaDeTarea();
             case "Finalizar tarea" -> finalizarTarea();
-            case "Añadir etiqueta" -> addEtiqueta();
             case "Set Responsable" -> setResponsable();
             case "Seleccionar coste" -> System.out.println("cuanto cuesta??");
             case "Seleccionar facturación" -> System.out.println("facturacion");
@@ -199,29 +198,29 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
     public void removePersonaDeTarea(){
 
         System.out.println("REMOVE PERSONA-------");
-        if (interfazGrafica.getPersonaDeTareaSeleccionada() == null || interfazGrafica.getTareaSeleccionada() == null)
-            return;//TODO error
+        if (interfazGrafica.getPersonaDeTareaSeleccionada() == null){
+            interfazGrafica.ventanaError("Selecciona una persona en la tarea");
+            return;
+        }
 
-        System.out.println("-------");
-        System.out.println(interfazGrafica.getTareaSeleccionada());
-        System.out.println(interfazGrafica.getPersonaSeleccioanda());
-        System.out.println(interfazGrafica.getTareaSeleccionada().getLista());
+        if (interfazGrafica.getTareaSeleccionada() == null){
+            interfazGrafica.ventanaError("Selecciona una Tarea");
+            return;
+        }
+
         controlador.removePersonaDeTarea();
-
-        //actualizarInterfaz();
-        //interfazGrafica.actualizarInfoTareaSeleccionada();
     }
 
     public void finalizarTarea() {
+
+        if (interfazGrafica.getTareaSeleccionada() == null){
+            interfazGrafica.ventanaError("Selecciona una Tarea");
+            return;
+        }
+
         controlador.setTareaFinalizada();
-//        actualizarInterfaz();
-        //interfazGrafica.actualizarInfoTareaSeleccionada();
-//        controlador.setTareaFinalizada(interfazGrafica.getTareaSeleccionada());
     }
 
-    public void addEtiqueta() {
-//        InterrogaModelo tarea= interfazGrafica.getTareaSeleccionada(); //TODO
-    }
 
     public void setResponsable() {
         if (interfazGrafica.getTareaSeleccionada() == null)
@@ -230,7 +229,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             interfazGrafica.ventanaError("Selecciona una persona que pertenezca a la tarea");
         else {
             controlador.setResponsable();
-            //interfazGrafica.actualizarInfoTareaSeleccionada();
         }
     }
 

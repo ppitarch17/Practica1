@@ -290,7 +290,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         c.gridy = 3;
         panelEste.add(selectEtiqueta, c);
 
-        JLabel introduceCoste = new JLabel("Seleccionar coste: ");
+        JLabel introduceCoste = new JLabel("Cambiar coste: ");
         c.gridx = 1;
         c.gridy = 4;
         panelEste.add(introduceCoste, c);
@@ -522,12 +522,16 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     }
 
     public Tarea getTareaSeleccionada() {
-        return tareaSeleccionada;
+            return tareaSeleccionada;
+
     }
+
     public JFrame getVentana() {
         return ventana;
     }
     public Persona getPersonaSeleccioanda() {
+        if (personaSeleccioanda == null)
+            ventanaError("Persona no seleccionada");
         return personaSeleccioanda;
     }
 

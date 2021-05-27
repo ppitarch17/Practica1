@@ -50,17 +50,14 @@ public class EscuchadoraComboBox implements ActionListener, Serializable {
 
     public void facturacionTarea(facturacion nuevaFacturacion){
         this.tipofacturacionTarea = nuevaFacturacion;
-        System.out.println("\t\tCambiando facturacion");
-        System.out.println("--- facturacion en this chombobox: " + tipofacturacionTarea);
-        System.out.println("--- tarea seleccionada: " + interfazGrafica.getTareaSeleccionada());
+
+        if (interfazGrafica.getTareaSeleccionada() == null){
+            interfazGrafica.ventanaError("Selecciona una Tarea");
+            return;
+        }
 
         controlador.cambiarFacturacionTarea();
-        //controlador.calcularFacturacion();
-        //interfazGrafica.actualizarInfoTareaSeleccionada();
-    }
 
-    public void tipoResultado(String selectedItem){
-        System.out.println("resultado seleccionada: " + selectedItem);
     }
 
     public facturacion getTipofacturacionTarea() {
