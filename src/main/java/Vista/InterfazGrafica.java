@@ -184,8 +184,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     public void ventanaMain(){
         ventana = new JFrame("Ventana Proyecto"); //Ventana principal
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
-        ventana.setSize(1000,400);
-        ventana.setResizable(false);
+
+        ventana.setMinimumSize(new Dimension(900, 450));
 
         //CONT
         Container container = ventana.getContentPane();
@@ -195,7 +195,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         JPanel panelNorte = new JPanel();
         GridBagConstraints dim = new GridBagConstraints();
         dim.fill = GridBagConstraints.BOTH;
-
 
         dim.weightx = 7;
         dim.gridwidth = 7;
@@ -257,7 +256,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         this.personas = new JList<>(vectorPersonas);
         this.personas.setName("cuadroPersonas");
         this.personas.addListSelectionListener(escuchadoraLista);
-        this.personas.setVisibleRowCount(20);
+//        this.personas.setVisibleRowCount(20);
         this.personas.setLayoutOrientation(JList.VERTICAL_WRAP);
         JScrollPane scrollPanel = new JScrollPane(this.personas);
         this.personas.setLayoutOrientation(JList.VERTICAL_WRAP);
