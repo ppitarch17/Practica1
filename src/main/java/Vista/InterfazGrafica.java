@@ -132,6 +132,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         panel.add(boton); panel.add(boton2);
 
         ventana.pack();
+        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -152,6 +153,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
+        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -170,6 +172,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
+        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -177,14 +180,25 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     public void ventanaMain(){
         ventana = new JFrame("Ventana Proyecto"); //Ventana principal
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
+        ventana.setSize(1000,400);
+        ventana.setResizable(false);
 
         //CONT
         Container container = ventana.getContentPane();
-        container.setLayout(new BorderLayout());
+        container.setLayout(new GridBagLayout());
 
         //NORTE
         JPanel panelNorte = new JPanel();
-        container.add(panelNorte, BorderLayout.NORTH);
+        GridBagConstraints dim = new GridBagConstraints();
+        dim.fill = GridBagConstraints.BOTH;
+
+
+        dim.weightx = 7;
+        dim.gridwidth = 7;
+        dim.gridx = 0;
+        dim.gridy = 0;
+        container.add(panelNorte, dim);
+
         JLabel nombre = new JLabel(modelo.getNombreProyecto());
         panelNorte.add(nombre);
 
@@ -195,7 +209,10 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         //PERSONAS
 
         JPanel panelOeste = new JPanel();
-        container.add(panelOeste, BorderLayout.WEST);
+        dim.gridwidth = 2;
+        dim.gridx = 0;
+        dim.gridy = 1;
+        container.add(panelOeste, dim);
         panelOeste.setLayout(new BorderLayout());
 
 
@@ -218,7 +235,9 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
         //PERSONAS EN TAREA
         JPanel panelCentral = new JPanel();
-        container.add(panelCentral, BorderLayout.CENTER);
+        dim.gridx = 2;
+        dim.gridy = 1;
+        container.add(panelCentral, dim);
         panelCentral.setLayout(new BorderLayout());
 
         panelCentral.add(new JLabel("Personas: "), BorderLayout.NORTH);
@@ -239,7 +258,10 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
         //INTERFAZ
         JPanel panelEste = new JPanel();
-        container.add(panelEste, BorderLayout.EAST);
+        dim.gridwidth = 3;
+        dim.gridx = 4;
+        dim.gridy = 1;
+        container.add(panelEste, dim);
         panelEste.setLayout(new GridBagLayout());
 
 
@@ -247,7 +269,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         c.fill = GridBagConstraints.HORIZONTAL;
 
         nombreTarea = new JLabel("Titulo: ");
-        c.weightx = 0.5;
+//        c.weightx = 0.5;
         c.gridx = 0;
         c.gridy = 0;
         panelEste.add(nombreTarea, c);
@@ -283,7 +305,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         c.gridy = 3;
         panelEste.add(finalizar, c);
 
-        JLabel introduceEtiqueta = new JLabel("Introduce etiqueta: ");
+        JLabel introduceEtiqueta = new JLabel("Introduce etiqueta: ", SwingConstants.RIGHT);
         c.gridx = 1;
         c.gridy = 3;
         panelEste.add(introduceEtiqueta, c);
@@ -295,7 +317,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         c.gridy = 3;
         panelEste.add(selectEtiqueta, c);
 
-        JLabel introduceCoste = new JLabel("Cambiar coste: ");
+        JLabel introduceCoste = new JLabel("Cambiar coste: ", SwingConstants.RIGHT);
         c.gridx = 1;
         c.gridy = 4;
         panelEste.add(introduceCoste, c);
@@ -381,7 +403,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         panelEste.add(salir, c);
 
 
-        ventana.pack();
+//        ventana.pack();
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -420,6 +442,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
         container.add(panel);
         ventana.pack();
+        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
 
         ventana.setVisible(true);
@@ -493,6 +516,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
         container.add(panel);
         ventana.pack();
+        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
 
         ventana.setVisible(true);
