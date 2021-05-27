@@ -6,7 +6,9 @@ import Modelo.ImplementacionModelo;
 import Resultados.Resultado;
 import Vista.InterrogaVista;
 
-public class ImplementacionControlador implements Controlador{
+import java.io.Serializable;
+
+public class ImplementacionControlador implements Controlador, Serializable {
 
     InterrogaVista vista;
     CambioModelo modelo;
@@ -83,5 +85,10 @@ public class ImplementacionControlador implements Controlador{
     @Override
     public void setNombreProyecto() {
         modelo.setNombreProyecto(vista.getEscuchadoraTextField().getTexto());
+    }
+
+    @Override
+    public void addEtiquetaATarea() {
+        modelo.addEtiquetaATarea(vista.getTareaSeleccionada(), vista.getEscuchadoraTextField().getEtiqueta());
     }
 }

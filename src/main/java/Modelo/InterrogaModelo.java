@@ -1,6 +1,7 @@
 package Modelo;
 
 import Facturación.facturacion;
+import Resultados.Resultado;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface InterrogaModelo {
     String getNombreProyecto();
     List<Persona> listarNoResponsables();
     double getCosteTotalProyecto();
+    int getPrioridad(Tarea tarea);
+    Resultado getResultado(Tarea tarea);
 }

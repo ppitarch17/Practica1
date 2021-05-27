@@ -12,9 +12,11 @@ import Resultados.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
+import java.io.Serializable;
+import java.util.Arrays;
 
 
-public class InterfazGrafica implements InterrogaVista, InformaVista {
+public class InterfazGrafica implements InterrogaVista, InformaVista, Serializable {
     //MVC
     private Controlador controlador;
     private InterrogaModelo modelo;
@@ -48,6 +50,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
     JLabel resultado;
 
     JTextField selectCoste;
+    JTextField selectEtiqueta;
     JComboBox<facturacion> facturacionDato;
     facturacion[] tiposFacturacion = { new ConsumoInterno(), new Descuento(), new Urgente()};
 
@@ -275,29 +278,34 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         c.gridy = 3;
         panelEste.add(finalizar, c);
 
-        JButton addEtiqueta = new JButton("Añadir etiqueta");
-        addEtiqueta.addActionListener(escuchadoraBoton);
-        c.gridx = 0;
-        c.gridy = 4;
-        panelEste.add(addEtiqueta, c);
+        JLabel introduceEtiqueta = new JLabel("Introduce etiqueta: ");
+        c.gridx = 1;
+        c.gridy = 3;
+        panelEste.add(introduceEtiqueta, c);
+
+        selectEtiqueta = new JTextField();
+        selectEtiqueta.addActionListener(escuchadoraTextField);
+        selectEtiqueta.setName("addEtiqueta");
+        c.gridx = 2;
+        c.gridy = 3;
+        panelEste.add(selectEtiqueta, c);
 
         JLabel introduceCoste = new JLabel("Seleccionar coste: ");
         c.gridx = 1;
-        c.gridy = 3;
+        c.gridy = 4;
         panelEste.add(introduceCoste, c);
 
         selectCoste = new JTextField();
         selectCoste.addActionListener(escuchadoraTextField);
         selectCoste.setName("seleccionarCoste");
         c.gridx = 2;
-        c.gridy = 3;
+        c.gridy = 4;
         panelEste.add(selectCoste, c);
 
         facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.addActionListener(escuchadoraComboBox);
         facturacionDato.setName("facturacionTarea");
-        c.gridwidth = 2;
-        c.gridx = 1;
+        c.gridx = 0;
         c.gridy = 4;
         panelEste.add(facturacionDato, c);
 
@@ -590,17 +598,17 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         controlador.calcularCosteTotal();
         costeTotal.setText("Coste total: " + modelo.getCosteTotalProyecto());
         setPersonasEnTarea( modelo.getListaPersonasEnTarea(tareaSeleccionada));
-        nombreTarea.setText("Titulo: " + tareaSeleccionada.getTitulo()); //TODO interrogaModelo
-        coste.setText("Coste Final: " + tareaSeleccionada.getCosteFinal());
-        //etiquetas;
-        finalizada.setText("Finalizada: " + tareaSeleccionada.isFinalizada());
-        responsable.setText("Responsable: " + tareaSeleccionada.getResponsable());
-        prioridad.setText("Prioridad: " + tareaSeleccionada.getPrioridad());
-        resultado.setText("Resultado: " + tareaSeleccionada.getResultado());
+        nombreTarea.setText("Titulo: " + modelo.getTitulo(tareaSeleccionada)); //TODO interrogaModelo
+        coste.setText("Coste Final: " + modelo.getCosteFinalTarea(tareaSeleccionada));
+        etiquetas.setText("Etiquetas: " + Arrays.toString(modelo.getEtiquetasTarea(tareaSeleccionada)));
+        finalizada.setText("Finalizada: " + modelo.isTareaFinalizada(tareaSeleccionada));
+        responsable.setText("Responsable: " + modelo.getResponsable(tareaSeleccionada));
+        prioridad.setText("Prioridad: " + modelo.getPrioridad(tareaSeleccionada));
+        resultado.setText("Resultado: " + modelo.getResultado(tareaSeleccionada));
 
         selectCoste.setText("");
+        selectEtiqueta.setText("");
         facturacionDato.setSelectedItem(tareaSeleccionada.getFacturacion());
-        System.out.println(tareaSeleccionada);
 
         switch (modelo.getFacturacionTarea(tareaSeleccionada).toString()){
             case "Consumo Interno" -> facturacionDato.setSelectedItem(tiposFacturacion[0]);

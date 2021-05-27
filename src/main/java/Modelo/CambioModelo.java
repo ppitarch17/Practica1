@@ -27,4 +27,6 @@ public interface CambioModelo {
 //    String getNombre();
     void calcularCosteTotal();
     void setNombreProyecto(String nombreProyecto);
+    void addEtiquetaATarea(Tarea tarea, Etiqueta etiqueta);
+
 }

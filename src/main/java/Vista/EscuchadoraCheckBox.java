@@ -9,10 +9,11 @@ import Modelo.UtilidadesParaListas;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EscuchadoraCheckBox implements ActionListener {
+public class EscuchadoraCheckBox implements ActionListener, Serializable {
 
     InterfazGrafica interfazGrafica;
     Controlador controlador;

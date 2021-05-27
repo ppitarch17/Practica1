@@ -11,8 +11,9 @@ import Resultados.Resultado;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-public class EscuchadoraComboBox implements ActionListener {
+public class EscuchadoraComboBox implements ActionListener, Serializable {
 
     Controlador controlador;
     InterfazGrafica interfazGrafica;

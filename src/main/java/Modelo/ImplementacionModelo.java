@@ -6,10 +6,11 @@ import Resultados.Resultado;
 import Vista.InformaVista;
 import Vista.InterrogaVista;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
+public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Serializable {
 
     private List<Persona> listaPersonas = new ArrayList<>();
     private List<Tarea> listaTareas = new ArrayList<>();
@@ -150,6 +151,17 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
     }
 
     @Override
+    public void setNombreProyecto(String nombreProyecto) {
+        this.nombre = nombreProyecto;
+    }
+
+    @Override
+    public void addEtiquetaATarea(Tarea tarea, Etiqueta etiqueta) {
+        tarea.addEtiqueta(etiqueta);
+        vista.actualizarInfoTareaSeleccionada();
+    }
+
+    @Override
     public Persona[] getListaPersonasEnTarea(Tarea tarea) {
         return tarea.getLista().toArray(new Persona[0]);
     }
@@ -224,5 +236,15 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
     @Override
     public double getCosteTotalProyecto() {
         return costeTotal;
+    }
+
+    @Override
+    public int getPrioridad(Tarea tarea) {
+        return tarea.getPrioridad();
+    }
+
+    @Override
+    public Resultado getResultado(Tarea tarea) {
+        return tarea.getResultado();
     }
 }

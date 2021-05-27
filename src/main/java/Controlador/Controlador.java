@@ -22,4 +22,5 @@ public interface Controlador {
     boolean setResponsable();
     void calcularCosteTotal();
     void setNombreProyecto();
+    void addEtiquetaATarea();
 }

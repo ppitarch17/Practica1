@@ -9,8 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.Serializable;
 
-public class EscuchadoraTextField implements ActionListener, FocusListener {
+public class EscuchadoraTextField implements ActionListener, FocusListener, Serializable {
 
     Controlador controlador;
     InterfazGrafica interfazGrafica;
@@ -55,6 +56,7 @@ public class EscuchadoraTextField implements ActionListener, FocusListener {
 
     public void addEtiqueta(String texto){
         this.etiqueta = new Etiqueta(texto);
+        controlador.addEtiquetaATarea();
     }
     public Etiqueta getEtiqueta(){
         return this.etiqueta;
@@ -101,6 +103,10 @@ public class EscuchadoraTextField implements ActionListener, FocusListener {
 
     public String getTexto() {
         return texto;
+    }
+
+    public void setTexto(String string) {
+        this.texto = string;
     }
 
     @Override

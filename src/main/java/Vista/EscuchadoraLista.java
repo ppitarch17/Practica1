@@ -7,8 +7,9 @@ import Modelo.Tarea;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.io.Serializable;
 
-public class EscuchadoraLista implements ListSelectionListener {
+public class EscuchadoraLista implements ListSelectionListener, Serializable {
 
     Controlador controlador;
     InterfazGrafica interfazGrafica;

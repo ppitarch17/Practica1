@@ -5,8 +5,9 @@ import Modelo.InterrogaModelo;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
-public class EscuchadoraRaton {
+public class EscuchadoraRaton implements Serializable {
     Controlador controlador;
     InterfazGrafica interfazGrafica;
     InterrogaModelo modelo;

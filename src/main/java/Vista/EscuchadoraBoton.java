@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
-public class EscuchadoraBoton implements ActionListener {
+public class EscuchadoraBoton implements ActionListener, Serializable {
 
     Controlador controlador;
     InterfazGrafica interfazGrafica;
@@ -65,6 +65,10 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void crear() {
 //        System.out.println(controlador.getNombre());
+        String nomFichero = escuchadoraTextField.getTexto();
+        if (!nomFichero.contains(".bin"))
+            escuchadoraTextField.setTexto(nomFichero + ".bin");
+
         controlador.setNombreProyecto();
         interfazGrafica.setVectorPersonas(modelo.getPersonasEnProyecto());
         interfazGrafica.setVectorTareas(modelo.getTareasEnProyecto());
@@ -75,6 +79,9 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void abrir() {
         String nomFichero = escuchadoraTextField.getTexto();
+        if (!nomFichero.contains(".bin"))
+            nomFichero = nomFichero + ".bin";
+
 
         ObjectInputStream ois = null;
         try{
@@ -220,11 +227,11 @@ public class EscuchadoraBoton implements ActionListener {
     }
 
     public void salir() {
-        grabacionDeDatos(controlador);
+        grabacionDeDatos();
         System.exit(0);
     }
 
-    public void grabacionDeDatos(Controlador proyecto){
+    public void grabacionDeDatos(){
         String nomFichero = modelo.getNombreProyecto();
 
         ObjectOutputStream oos = null;
@@ -232,7 +239,7 @@ public class EscuchadoraBoton implements ActionListener {
             try {
                 FileOutputStream fos = new FileOutputStream(nomFichero);
                 oos = new ObjectOutputStream(fos);
-                oos.writeObject(proyecto);
+                oos.writeObject(controlador);
             }finally {
                 if(oos != null) oos.close();
             }
