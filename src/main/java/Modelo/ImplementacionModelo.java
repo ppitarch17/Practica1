@@ -156,9 +156,12 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
     }
 
     @Override
-    public void addEtiquetaATarea(Tarea tarea, Etiqueta etiqueta) {
-        tarea.addEtiqueta(etiqueta);
-        vista.actualizarInfoTareaSeleccionada();
+    public boolean addEtiquetaATarea(Tarea tarea, Etiqueta etiqueta) {
+        if(tarea.addEtiqueta(etiqueta)){
+            vista.actualizarInfoTareaSeleccionada();
+            return true;
+        }
+        return false;
     }
 
     @Override

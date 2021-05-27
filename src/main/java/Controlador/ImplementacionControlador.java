@@ -85,7 +85,7 @@ public class ImplementacionControlador implements Controlador, Serializable {
     }
 
     @Override
-    public void addEtiquetaATarea() {
-        modelo.addEtiquetaATarea(vista.getTareaSeleccionada(), vista.getEscuchadoraTextField().getEtiqueta());
+    public boolean addEtiquetaATarea() {
+        return modelo.addEtiquetaATarea(vista.getTareaSeleccionada(), vista.getEscuchadoraTextField().getEtiqueta());
     }
 }

@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.Controlador;
+import Excepciones.NoSePuedeInsertarException;
 import Modelo.Etiqueta;
 import Modelo.InterrogaModelo;
 
@@ -56,7 +57,16 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
 
     public void addEtiqueta(String texto){
         this.etiqueta = new Etiqueta(texto);
-        controlador.addEtiquetaATarea();
+
+        try {
+            if(!controlador.addEtiquetaATarea()){
+                throw new NoSePuedeInsertarException();
+            }
+        }catch (NoSePuedeInsertarException e){
+            interfazGrafica.ventanaError("No se puede repetir etiquetas");
+        }
+
+
     }
     public Etiqueta getEtiqueta(){
         return this.etiqueta;

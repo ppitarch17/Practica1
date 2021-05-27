@@ -170,11 +170,11 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
             for (Etiqueta etiquetaEnLista : listaEtiquetas)
                 if (etiquetaEnLista.getNombre().equals(etiqueta.getNombre()))
-                    throw new NoSePuedeInsertarException("La etiqueta " + etiqueta.getNombre() + " ya esta en la tarea " + this.toString());
+                    return false;//throw new NoSePuedeInsertarException("La etiqueta " + etiqueta.getNombre() + " ya esta en la tarea " + this.toString());
 
             return listaEtiquetas.add(etiqueta);
 
-        } catch (NullPointerException | NoSePuedeInsertarException e){
+        } catch (NullPointerException e){
             e.printStackTrace();
         }
 

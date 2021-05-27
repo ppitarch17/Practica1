@@ -532,6 +532,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     }
 
     public Persona getPersonaDeTareaSeleccionada() {
+        if (personaDeTareaSeleccionada == null)
+            ventanaError("Persona en tarea no seleccionada");
         return personaDeTareaSeleccionada;
     }
 
