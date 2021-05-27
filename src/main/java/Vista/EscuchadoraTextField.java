@@ -4,6 +4,7 @@ import Controlador.Controlador;
 import Excepciones.NoSePuedeInsertarException;
 import Modelo.Etiqueta;
 import Modelo.InterrogaModelo;
+import Modelo.Tarea;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -29,10 +30,11 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
 
     private Etiqueta etiqueta;
 
-    public EscuchadoraTextField(Controlador controlador, InterfazGrafica interfazGrafica){
+    public EscuchadoraTextField(Controlador controlador, InterfazGrafica interfazGrafica, InterrogaModelo modelo){
         this.controlador = controlador;
         System.out.println(controlador);
         this.interfazGrafica = interfazGrafica;
+        this.modelo = modelo;
     }
 
     @Override
@@ -63,6 +65,10 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
             return;
         }
 
+        if (texto.length() + getCantidadDeCaracteresEnListaDeEtiquetas(interfazGrafica.getTareaSeleccionada()) > 50){
+            interfazGrafica.ventanaError("No se puede añadir una etiqueta tan larga");
+            return;
+        }
 
         try {
             if(!controlador.addEtiquetaATarea()){
@@ -181,5 +187,11 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
         descripcionTarea = null;
         costeTarea = 0;
     }
-
+    int getCantidadDeCaracteresEnListaDeEtiquetas(Tarea tarea){
+        int cantidad = 0;
+        for (Etiqueta etiq: modelo.getEtiquetasTarea(tarea)) {
+            cantidad += etiq.getNombre().length();
+        }
+        return cantidad;
+    }
 }

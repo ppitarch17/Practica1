@@ -100,7 +100,7 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
                     interfazGrafica.setControlador(controlador);
                     modelo.setVista(interfazGrafica);
                     System.out.println("abrir conectar");
-                    interfazGrafica.conectarCargado();
+                    interfazGrafica.conectarReferenciasEscuchadores();
                     crear();
                 } finally {
                     if (ois != null) ois.close();
@@ -159,12 +159,16 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
         String descripcion = escuchadoraTextField.getDescripcionTarea();
         if (titulo == null || titulo.equals(""))
             interfazGrafica.ventanaError("Indica el nombre de la tarea");
-        else if (descripcion == null)
+        else if(titulo.length() > 20){
+            interfazGrafica.ventanaError("El nombre de la tarea debe tener menos de 20 caracteres");
+        }else if (descripcion == null)
             interfazGrafica.ventanaError("Indica la descripción de la tarea");
 
         else if(escuchadoraTextField.getCosteTarea() == 0) {
             interfazGrafica.ventanaError("Indica un coste inicial");
         }else {
+
+
 
             if (controlador.addTarea()){
                 interfazGrafica.getVentana().dispose();
@@ -255,5 +259,8 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             e.printStackTrace();
         }
     }
+
+
+
 
 }
