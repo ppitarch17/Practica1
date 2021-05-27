@@ -63,9 +63,17 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
     }
 
     public void seleccionarCoste(double nuevoCoste){
-        this.costeTarea = nuevoCoste;
-        controlador.cambiarCosteTarea();
-        interfazGrafica.actualizarInfoTareaSeleccionada();
+
+        try {
+            this.costeTarea = nuevoCoste;
+            controlador.cambiarCosteTarea();
+            interfazGrafica.actualizarInfoTareaSeleccionada();
+        }
+        catch (NumberFormatException e){
+            interfazGrafica.ventanaError("No es un número");
+        }
+
+
     }
 
     public void costeInicial(JTextField text) {

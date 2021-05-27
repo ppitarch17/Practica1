@@ -494,18 +494,20 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     }
 
     public void ventanaError(String error) {
-        ventana = new JFrame("Error 404");
-        Container container = ventana.getContentPane();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//new GridLayout(1,3));
-        JPanel panel = new JPanel();
-        panel.add(new JLabel(error));
-        JButton salir = new JButton("Ok👍👍👍");
-        salir.addActionListener(escuchadoraBoton);
-        panel.add(salir);
-        container.add(panel);
-        ventana.pack();
-        ventana.setLocationRelativeTo(null);
-        ventana.setVisible(true);
+
+        JOptionPane.showMessageDialog(null, error, "Error 404 ¯\\_(ツ)_/¯" , JOptionPane.WARNING_MESSAGE);
+        //        ventana = new JFrame("Error 404");
+//        Container container = ventana.getContentPane();
+//        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//new GridLayout(1,3));
+//        JPanel panel = new JPanel();
+//        panel.add(new JLabel(error));
+//        JButton salir = new JButton("Ok👍👍👍");
+//        salir.addActionListener(escuchadoraBoton);
+//        panel.add(salir);
+//        container.add(panel);
+//        ventana.pack();
+//        ventana.setLocationRelativeTo(null);
+//        ventana.setVisible(true);
     }
 
     //---------METODOS----------
