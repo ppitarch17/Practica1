@@ -23,7 +23,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
         this.vista = vista;
     }
 
-
     @Override
     public boolean addPersona(String nombre, String correo, String DNI) {
         for (Persona persona: listaPersonas) {
@@ -45,7 +44,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
         }
         listaTareas.add(new Tarea(titulo, descripcion, prioridad, resultado, coste,facturacion));
         calcularCosteTotal();
-
         vista.actualizarListasInterfaz();
         vista.resetValue();
         return true;
@@ -58,7 +56,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
             return false;
         tarea.addPersona(persona);
         persona.addTarea(tarea);
-
         vista.actualizarInfoTareaSeleccionada();
         return true;
     }
@@ -69,9 +66,7 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
             return false;
         tarea.removePersona(persona);
         persona.removeTarea(tarea);
-
         vista.actualizarInfoTareaSeleccionada();
-
         return true;
     }
 
@@ -95,20 +90,12 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
     }
 
     @Override
-    public void calcularFacturacionTarea(Tarea tarea) {
-        tarea.calcularFacturacion();
-    }
-
-
-    @Override
     public boolean setResponsable(Tarea tarea, Persona persona) {
-
         if(tarea.setResponsable(persona)){
             vista.actualizarInfoTareaSeleccionada();
             vista.actualizarListasInterfaz();
             return true;
         }
-
         return false;
     }
 
@@ -118,8 +105,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
         for (Tarea tarea: listaTareas) {
             costeTotal += tarea.getCosteFinal();
         }
-
-        //vista.actualizarInfoTareaSeleccionada();
     }
 
     @Override
@@ -144,11 +129,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
     @Override
     public Persona[] getListaPersonasEnTarea(Tarea tarea) {
         return tarea.getLista().toArray(new Persona[0]);
-    }
-
-    @Override
-    public Tarea[] getTareasDePersona(Persona persona) {
-        return persona.getLista().toArray(new Tarea[0]);
     }
 
     @Override
@@ -197,14 +177,10 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
     }
 
     @Override
-    public List<Persona> getPersonasEnModelo() {
-        return listaPersonas;
-    }
-
-    @Override
     public String getNombreProyecto() {
         return nombre;
     }
+
     @Override
     public List<Persona> listarNoResponsables() {
         List<Persona> personas = new ArrayList<>(listaPersonas);

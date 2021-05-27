@@ -13,10 +13,6 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     private String DNI; //identificador
     private List<Tarea> listaTareas;
     private List<Tarea> tareasResponsable = new ArrayList<>();
-    //private boolean clienteEspecial = false;
-
-    //MVC
-    private InformaVista vista;
 
     //-----CONSTRUCTORES-----
 
@@ -42,15 +38,16 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
     }
 
     //-----GETTERS-----
+
     public String getNombre(){return nombre;}
     public String getCorreo(){return correo;}
-
     public String getDNI() {
         return DNI;
     }
     public List<Tarea> getTareasResponsable() {return tareasResponsable;}
 
     //-----METODOS-----
+
     public boolean addTarea(Tarea tarea){
 
         try {
@@ -65,7 +62,6 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
         } catch (NullPointerException | NoSePuedeInsertarException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
