@@ -35,10 +35,8 @@ public class ImplementacionControlador implements Controlador, Serializable {
         System.out.println();
         System.out.println();
         System.out.println();
+        return modelo.addTarea(vista.getEscuchadoraTextField().getNombreTarea(), vista.getEscuchadoraTextField().getDescripcionTarea(), vista.getEscuchadoraComboBox().getPrioridadTarea(), vista.getEscuchadoraComboBox().getTipoResultadoTarea(), vista.getEscuchadoraTextField().getCosteTarea(), vista.getEscuchadoraComboBox().getTipofacturacionTarea());
 
-        boolean resp =  modelo.addTarea(vista.getEscuchadoraTextField().getNombreTarea(), vista.getEscuchadoraTextField().getDescripcionTarea(), vista.getEscuchadoraComboBox().getPrioridadTarea(), vista.getEscuchadoraComboBox().getTipoResultadoTarea(), vista.getEscuchadoraTextField().getCosteTarea(), vista.getEscuchadoraComboBox().getTipofacturacionTarea());
-        System.out.println(resp);
-        return true;
     }
 
     @Override
