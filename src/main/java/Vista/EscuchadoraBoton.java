@@ -42,8 +42,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             case "Quitar persona de tarea" -> removePersonaDeTarea();
             case "Finalizar tarea" -> finalizarTarea();
             case "Set Responsable" -> setResponsable();
-            case "Seleccionar coste" -> System.out.println("cuanto cuesta??");
-            case "Seleccionar facturación" -> System.out.println("facturacion");
             case "Añadir tarea a Proyecto" -> addTareaAProyecto();
             case "Salir y Guardar" -> salir();
         }
@@ -89,7 +87,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
                     interfazGrafica.setModelo(modelo);
                     interfazGrafica.setControlador(controlador);
                     modelo.setVista(interfazGrafica);
-                    System.out.println("abrir conectar");
                     interfazGrafica.conectarReferenciasEscuchadores();
                     crear(direccionFichero);
                 } finally {

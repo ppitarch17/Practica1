@@ -32,7 +32,6 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
 
     public EscuchadoraTextField(Controlador controlador, InterfazGrafica interfazGrafica, InterrogaModelo modelo){
         this.controlador = controlador;
-        System.out.println(controlador);
         this.interfazGrafica = interfazGrafica;
         this.modelo = modelo;
     }

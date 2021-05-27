@@ -9,6 +9,6 @@ public abstract class Resultado implements Serializable {
 
     @Override
     public String toString() {
-        return identificador;
+        return identificador.substring("Resultado.".length() + 1);
     }
 }

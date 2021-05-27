@@ -82,7 +82,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     }
 
     public void conectar(){
-        System.out.println("Metodo conectar");
         ImplementacionModelo modelo = new ImplementacionModelo(this);
         ImplementacionControlador controlador = new ImplementacionControlador(this, modelo);
 
@@ -439,18 +438,18 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel nombreTarea = new JLabel("Titulo: ");
+        JLabel nombreTarea = new JLabel("Título: ");
         JTextField nombreTareaDato = new JTextField(20);
         nombreTareaDato.setName("nombreTareaDato");
         nombreTareaDato.addFocusListener(escuchadoraTextField);
 
-        JLabel descripcion = new JLabel("descripcion: ");
+        JLabel descripcion = new JLabel("Descripción: ");
         JTextField descripcionDato = new JTextField(20);
         descripcionDato.setName("descripcionDato");
         descripcionDato.addFocusListener(escuchadoraTextField);
 
 
-        JLabel prioridad = new JLabel("prioridad: ");
+        JLabel prioridad = new JLabel("Prioridad: ");
         Integer[] tipos = { 1, 2, 3, 4, 5 };
         JComboBox<Integer> prioridadDato = new JComboBox<Integer>(tipos);
         prioridadDato.setName("prioridadDato");
@@ -458,7 +457,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         prioridadDato.setEditable(false);
 
 
-        JLabel resultado = new JLabel("resultado: ");
+        JLabel resultado = new JLabel("Resultado: ");
         Resultado[] tiposResultado = {new Biblioteca(), new Documentación(), new PaginaWeb(), new Programa()};
         JComboBox<Resultado> resultadoDato = new JComboBox<Resultado>(tiposResultado);
         resultadoDato.setName("resultadoDato");
@@ -470,7 +469,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         costeInicialDatos.setName("costeInicialDatos");
         costeInicialDatos.addFocusListener(escuchadoraTextField);
 
-        JLabel facturacion = new JLabel("facturacion: ");
+        JLabel facturacion = new JLabel("Facturación: ");
 
         JComboBox<facturacion> facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.setName("facturacionDato");

@@ -32,17 +32,14 @@ public class EscuchadoraComboBox implements ActionListener, Serializable {
     public void actionPerformed(ActionEvent e) {
 
         JComboBox comboBox = (JComboBox) e.getSource();
-        System.out.println("ComboBox " + comboBox.getName() +": " + comboBox.getSelectedItem());
 
         switch (comboBox.getName()){
             case "facturacionDato" -> this.tipofacturacionTarea = (facturacion) comboBox.getSelectedItem();
             case "prioridadDato" -> {
                 this.prioridadTarea = (int) comboBox.getSelectedItem();
-                System.out.println("Entra prioridad");
             }
             case "resultadoDato" -> {
                 this.tipoResultadoTarea = (Resultado) comboBox.getSelectedItem();
-                System.out.println("Entra resultado");
             }
             case "facturacionTarea" -> facturacionTarea((facturacion) comboBox.getSelectedItem());
         }
