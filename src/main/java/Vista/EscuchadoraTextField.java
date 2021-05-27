@@ -65,7 +65,7 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
             return;
         }
 
-        if (texto.length() + getCantidadDeCaracteresEnListaDeEtiquetas(interfazGrafica.getTareaSeleccionada()) > 50){
+        if (texto.length() + getCantidadDeCaracteresEnListaDeEtiquetas(interfazGrafica.getTareaSeleccionada()) > 40){
             interfazGrafica.ventanaError("No se puede añadir una etiqueta tan larga");
             return;
         }

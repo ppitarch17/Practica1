@@ -10,6 +10,7 @@ import Facturación.*;
 import Resultados.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.io.Serializable;
@@ -125,7 +126,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         panel.add(boton); panel.add(boton2);
 
         ventana.pack();
-        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -138,15 +138,24 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         JPanel panel = new JPanel();
 //        JFileChooser jfc = new JFileChooser();    //TODO quizas
 //        panel.add(jfc);
-        JLabel nombre = new JLabel("Nombre: ");
-        JTextField nom = new JTextField(20);
-        JButton boton = new JButton("Abrir");
-        panel.add(nombre); panel.add(nom); panel.add(boton);
-        nom.addFocusListener(escuchadoraTextField);
-        boton.addActionListener(escuchadoraBoton);
+        JFileChooser selector = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter(
+                "Fichero bin", "bin");
+        selector.setFileFilter(filtro);
+        selector.showDialog(ventana, "Elige un fichero");
+        panel.add(selector);
+        escuchadoraBoton.abrir(selector.getSelectedFile().getAbsolutePath());
+
+
+
+//        JLabel nombre = new JLabel("Nombre: ");
+//        JTextField nom = new JTextField(20);
+//        JButton boton = new JButton("Abrir");
+//        panel.add(nombre); panel.add(nom); panel.add(boton);
+//        nom.addFocusListener(escuchadoraTextField);
+//        boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
-        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -165,7 +174,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
-        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -191,7 +199,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         dim.gridy = 0;
         container.add(panelNorte, dim);
 
-        JLabel nombre = new JLabel(modelo.getNombreProyecto());
+        JLabel nombre = new JLabel("<html>" + "<B>" + modelo.getNombreProyecto() + "</B>" + "</html>");
         panelNorte.add(nombre);
 
         controlador.calcularCosteTotal();
@@ -270,10 +278,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         c.gridy = 1;
         panelEste.add(coste, c);
         etiquetas = new JLabel("Etiquetas: ");
+        c.gridwidth = 2;
         c.gridx = 1;
         c.gridy = 0;
         panelEste.add(etiquetas, c);
         finalizada = new JLabel("Finalizada: ");
+        c.gridwidth = 1;
         c.gridx = 1;
         c.gridy = 1;
         panelEste.add(finalizada, c);
@@ -434,7 +444,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
         container.add(panel);
         ventana.pack();
-        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
 
         ventana.setVisible(true);
@@ -508,7 +517,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
         container.add(panel);
         ventana.pack();
-        ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
 
         ventana.setVisible(true);

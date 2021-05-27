@@ -35,8 +35,8 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
         switch (boton.getText()){
             case "Crear Proyecto" -> crearP();
             case "Abrir Proyecto" -> abrirP();
-            case "Crear" -> crear();
-            case "Abrir" -> abrir();
+            case "Crear" -> crear(escuchadoraTextField.getTexto());
+//            case "Abrir" -> abrir();
             case "Añadir tarea" -> addTarea();
             case "Añadir persona" -> addPersona();
             case "Añadir Persona a Proyecto" -> addPersonaAProyecto();
@@ -62,14 +62,16 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
         interfazGrafica.ventanaAbrir();
     }
 
-    public void crear() {
+    public void crear(String nombre) {
 
-        String nomFichero = escuchadoraTextField.getTexto();
-        if (nomFichero.equals(""))
+//        String nomFichero = escuchadoraTextField.getTexto();
+        if (nombre.equals(""))
             interfazGrafica.ventanaError("Introduce un nombre al proyecto");
         else {
-            if (!nomFichero.contains(".bin"))
-                escuchadoraTextField.setTexto(nomFichero + ".bin");
+            if (!nombre.contains(".bin"))
+                escuchadoraTextField.setTexto(nombre + ".bin");
+
+            escuchadoraTextField.setTexto(nombre);
 
             controlador.setNombreProyecto();
             interfazGrafica.setVectorPersonas(modelo.getPersonasEnProyecto());
@@ -81,18 +83,18 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
         }
     }
 
-    public void abrir() {
-        String nomFichero = escuchadoraTextField.getTexto();
-        if (nomFichero.equals(""))
-            interfazGrafica.ventanaError("Introduce qué proyecto quieres abrir");
-        else {
-            if (!nomFichero.contains(".bin"))
-                nomFichero = nomFichero + ".bin";
+    public void abrir(String direccionFichero) {
+//        String nomFichero = escuchadoraTextField.getTexto();
+//        if (nomFichero.equals(""))
+//            interfazGrafica.ventanaError("Introduce qué proyecto quieres abrir");
+//        else {
+//            if (!nomFichero.contains(".bin"))
+//                nomFichero = nomFichero + ".bin";
 
             ObjectInputStream ois = null;
             try {
                 try {
-                    FileInputStream fis = new FileInputStream(nomFichero);
+                    FileInputStream fis = new FileInputStream(direccionFichero);
                     ois = new ObjectInputStream(fis);
                     ImplementacionModelo modelo = (ImplementacionModelo) ois.readObject();
                     ImplementacionControlador controlador = new ImplementacionControlador(interfazGrafica, modelo);
@@ -101,7 +103,7 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
                     modelo.setVista(interfazGrafica);
                     System.out.println("abrir conectar");
                     interfazGrafica.conectarReferenciasEscuchadores();
-                    crear();
+                    crear(direccionFichero);
                 } finally {
                     if (ois != null) ois.close();
                 }
@@ -112,7 +114,7 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }
+//        }
     }
 
     public void setControlador(Controlador controlador){
