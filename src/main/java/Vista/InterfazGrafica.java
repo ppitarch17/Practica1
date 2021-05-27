@@ -517,6 +517,9 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 //        escuchadoraBoton.setControlador(controlador);
 //        escuchadoraCheckBox.setControlador(controlador);
     }
+    public void setModelo(InterrogaModelo modelo) {
+        this.modelo = modelo;
+    }
 
     public Tarea getTareaSeleccionada() {
         return tareaSeleccionada;
