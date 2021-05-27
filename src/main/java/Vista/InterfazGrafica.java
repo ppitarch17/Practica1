@@ -12,7 +12,6 @@ import Resultados.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
 import java.io.Serializable;
 import java.util.Arrays;
 
