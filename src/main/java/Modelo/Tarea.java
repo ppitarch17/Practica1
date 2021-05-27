@@ -26,10 +26,6 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     private double costeFinal = 0;
     private facturacion facturacion;
 
-    //MVC
-    private InformaVista vista;
-
-
     //-----CONSTRUCTORES-----
     public  Tarea(){
         titulo = "";
@@ -93,6 +89,7 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     }
 
     //-----SETTERS-----
+
     public boolean setResponsable(Persona responsable) {
         if(!listaPersonas.contains(responsable))
             return false;
@@ -124,14 +121,15 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     }
 
     //-----METODOS-----
+
     public void marcarComoFinalizada(){ //Fecha fin es opcional
         isFinalizada = true;
     }
 
-    public void marcarComoFinalizada(LocalDate fechaFin){
+    public void marcarComoFinalizada(LocalDate fechaFin) {
 
-        try{
-            if(fechaFin.isBefore(fechaCreado))
+        try {
+            if (fechaFin.isBefore(fechaCreado))
                 throw new FechaNoValidaException
                         ("La fecha de creacion " + fechaCreado + " no puede ser posterior a la fecha de finalización: " + fechaFin);
 
@@ -141,24 +139,19 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         } catch (FechaNoValidaException e) {
             e.printStackTrace();
         }
-
     }
 
     public boolean addPersona(Persona persona) {
-
         try {
             if(persona == null)
                 throw new NullPointerException("La persona no puede ser " + persona);
             if(!UtilidadesParaListas.sePuedeInsertar(persona, this))
                 throw new NoSePuedeInsertarException("La persona " + persona + " ya esta en la tarea " + this.toString());
-
             return listaPersonas.add(persona);
         } catch (NullPointerException | NoSePuedeInsertarException e) {
             e.printStackTrace();
         }
-
         return false;
-
     }
 
     public boolean removePersona(Persona persona) {
@@ -166,7 +159,6 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
     }
 
     public boolean addEtiqueta(Etiqueta etiqueta) {
-
         try {
             if(etiqueta ==  null)
                 throw new NullPointerException("La etiqueta no puede ser " + etiqueta);
@@ -176,11 +168,9 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
                     return false;//throw new NoSePuedeInsertarException("La etiqueta " + etiqueta.getNombre() + " ya esta en la tarea " + this.toString());
 
             return listaEtiquetas.add(etiqueta);
-
         } catch (NullPointerException e){
             e.printStackTrace();
         }
-
         return false;
 
     }
@@ -195,16 +185,13 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
 
     public void setFacturacion(Facturación.facturacion facturacion){
         this.facturacion = facturacion;
-
         calcularFacturacion();
-        //this.coste = calcularFacturacion();
     }
 
     public boolean calcularFacturacion(){
         try{
             if (this.facturacion == null)
                 throw new NullPointerException("Se debe asignar un tipo de Facturación.facturacion antes de calcular el coste final");
-
             costeFinal = facturacion.costeFacturacion(this.coste);
             return true;
         } catch (NullPointerException e) {
@@ -213,22 +200,8 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         return false;
     }
 
-//    @Override
-//    public String toString() {
-//        return  titulo + "{" +
-//                ", listaPersonas=" + listaPersonas +
-//                ", responsable =" + responsable +
-//                ", isFinalizada=" + isFinalizada +
-//                ", resultado=" + resultado +
-//                ", etiquetas=" + listaEtiquetas +
-//                ", coste=" + coste +
-//                ", costeFinal=" + costeFinal +
-//                ", Facturación.facturacion=" + facturacion +
-//                '}';
-//    }
     @Override
     public String toString() {
-//        return titulo;
         return  titulo;
     }
 

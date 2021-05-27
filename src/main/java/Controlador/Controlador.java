@@ -9,7 +9,6 @@ import Vista.InterrogaVista;
 import java.util.List;
 
 public interface Controlador {
-    //Metodos para Vista
 
     boolean addPersona();
     boolean addTarea();
@@ -18,7 +17,6 @@ public interface Controlador {
     void setTareaFinalizada();
     void cambiarCosteTarea();
     void cambiarFacturacionTarea();
-    void calcularFacturacion();
     boolean setResponsable();
     void calcularCosteTotal();
     void setNombreProyecto();

@@ -54,11 +54,6 @@ public class ImplementacionControlador implements Controlador, Serializable {
     }
 
     @Override
-    public void calcularFacturacion() {
-        modelo.calcularFacturacionTarea(vista.getTareaSeleccionada());
-    }
-
-    @Override
     public boolean setResponsable() {
         return modelo.setResponsable(vista.getTareaSeleccionada(), vista.getPersonaDeTareaSeleccionada());
     }

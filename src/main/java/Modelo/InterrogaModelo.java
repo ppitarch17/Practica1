@@ -6,11 +6,8 @@ import Resultados.Resultado;
 import java.util.List;
 
 public interface InterrogaModelo {
-    //Metodos del modelo para Vista
-    //void getTareaFinalizada();
 
     Persona[] getListaPersonasEnTarea(Tarea tarea);
-    Tarea[] getTareasDePersona(Persona persona);
     Persona getResponsable(Tarea tarea);
     String getTitulo(Tarea tarea);
     double getCosteFinalTarea(Tarea tarea);
@@ -20,7 +17,6 @@ public interface InterrogaModelo {
     Persona[] getPersonasEnProyecto();
     Tarea[] getTareasEnProyecto();
     List<Tarea> getTareasEnModelo();
-    List<Persona> getPersonasEnModelo();
     String getNombreProyecto();
     List<Persona> listarNoResponsables();
     double getCosteTotalProyecto();

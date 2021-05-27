@@ -10,10 +10,5 @@ public abstract class Resultado implements Serializable {
     @Override
     public String toString() {
         return identificador;
-//        return identificador + "{" +
-//                "identificador='" + identificador + '\'' +
-//                ", nHoras=" + nHoras +
-//                ", isInterno=" + isInterno +
-//                '}';
     }
 }
