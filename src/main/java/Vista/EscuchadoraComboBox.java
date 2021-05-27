@@ -2,6 +2,7 @@ package Vista;
 
 import Controlador.Controlador;
 import Facturación.ConsumoInterno;
+import Facturación.Descuento;
 import Facturación.facturacion;
 import Modelo.InterrogaModelo;
 import Resultados.Biblioteca;
@@ -21,9 +22,10 @@ public class EscuchadoraComboBox implements ActionListener {
     private int prioridadTarea = 1;
     private Resultado tipoResultadoTarea = new Biblioteca();
 
-    public EscuchadoraComboBox(Controlador controlador, InterfazGrafica interfazGrafica){
+    public EscuchadoraComboBox(Controlador controlador, InterfazGrafica interfazGrafica, InterrogaModelo modelo){
         this.controlador = controlador;
         this.interfazGrafica = interfazGrafica;
+        this.modelo = modelo;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -47,9 +49,13 @@ public class EscuchadoraComboBox implements ActionListener {
 
     public void facturacionTarea(facturacion nuevaFacturacion){
         this.tipofacturacionTarea = nuevaFacturacion;
+        System.out.println("\t\tCambiando facturacion");
+        System.out.println("--- facturacion en this chombobox: " + tipofacturacionTarea);
+        System.out.println("--- tarea seleccionada: " + interfazGrafica.getTareaSeleccionada());
+
         controlador.cambiarFacturacionTarea();
-        controlador.calcularFacturacion();
-        interfazGrafica.actualizarInfoTareaSeleccionada();
+        //controlador.calcularFacturacion();
+        //interfazGrafica.actualizarInfoTareaSeleccionada();
     }
 
     public void tipoResultado(String selectedItem){

@@ -5,7 +5,7 @@ import Facturación.facturacion;
 import java.util.List;
 
 public interface InterrogaModelo {
-    //Metodos para Vista
+    //Metodos del modelo para Vista
     //void getTareaFinalizada();
 
     Persona[] getListaPersonasEnTarea(Tarea tarea);

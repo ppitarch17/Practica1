@@ -30,13 +30,11 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
                 return false;
         }
         listaPersonas.add(new Persona(nombre,correo, DNI));
+        vista.actualizarListasInterfaz();
+        vista.resetValue();
         return true;
     }
 
-    @Override
-    public boolean addTarea(String titulo) {
-        return false;
-    }
 
     @Override
     public boolean addTarea(String titulo, String descripcion, int prioridad, Resultado resultado, double coste, facturacion facturacion) {
@@ -44,8 +42,11 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
             if (tarea.getTitulo().equals(titulo))
                 return false;
         }
-        listaTareas.add(new Tarea(titulo));
+        listaTareas.add(new Tarea(titulo, descripcion, prioridad, resultado, coste,facturacion));
         calcularCosteTotal();
+
+        vista.actualizarListasInterfaz();
+        vista.resetValue();
         return true;
     }
 
@@ -65,6 +66,8 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
             return false;
         tarea.addPersona(persona);
         persona.addTarea(tarea);
+
+        vista.actualizarInfoTareaSeleccionada();
         return true;
     }
 
@@ -74,12 +77,16 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
             return false;
         tarea.removePersona(persona);
         persona.removeTarea(tarea);
+
+        vista.actualizarInfoTareaSeleccionada();
+
         return true;
     }
 
     @Override
     public void setTareaFinalizada(Tarea tarea) {
         tarea.marcarComoFinalizada();
+        vista.actualizarInfoTareaSeleccionada();
     }
 
 //    @Override
@@ -95,12 +102,14 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
     @Override
     public void cambiarCosteTarea(Tarea tarea, double coste) {
         tarea.setCoste(coste);
+        vista.actualizarInfoTareaSeleccionada();
     }
 
     @Override
     public void cambiarFacturacionTarea(Tarea tarea, facturacion facturacion) {
         tarea.setFacturacion(facturacion);
         tarea.calcularFacturacion();
+        vista.actualizarInfoTareaSeleccionada();
     }
 
     @Override
@@ -115,7 +124,14 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
 
     @Override
     public boolean setResponsable(Tarea tarea, Persona persona) {
-        return tarea.setResponsable(persona);
+
+        if(tarea.setResponsable(persona)){
+            vista.actualizarInfoTareaSeleccionada();
+            vista.actualizarListasInterfaz();
+            return true;
+        }
+
+        return false;
     }
 //
 //    @Override
@@ -129,6 +145,8 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
         for (Tarea tarea: listaTareas) {
             costeTotal += tarea.getCosteFinal();
         }
+
+        //vista.actualizarInfoTareaSeleccionada();
     }
 
     @Override

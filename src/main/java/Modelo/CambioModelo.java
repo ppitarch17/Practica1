@@ -11,7 +11,6 @@ public interface CambioModelo {
     //Vista.Interfaz en: Modelo.Persona y Modelo.Tarea
 
     boolean addPersona(String nombre, String correo, String DNI);
-    boolean addTarea(String titulo);
     boolean addTarea(String titulo, String descripcion, int prioridad, Resultado resultado, double coste, facturacion facturacion);
 //    Persona getPersona(String DNI);
 //    Tarea buscaTarea (String titulo);

@@ -36,12 +36,14 @@ public class EscuchadoraLista implements ListSelectionListener {
 
         switch (lista.getName()){
             case "cuadroPersonas" -> interfazGrafica.setPersonaSeleccioanda((Persona) lista.getSelectedValue());
-            case "cuadroTareas" -> interfazGrafica.setTareaSeleccionada((Tarea) lista.getSelectedValue());
+            case "cuadroTareas" -> {
+                interfazGrafica.setTareaSeleccionada((Tarea) lista.getSelectedValue());
+                interfazGrafica.actualizarInfoTareaSeleccionada();
+            }
             case "cuadroPersonasEnTarea" -> interfazGrafica.setPersonaDeTareaSeleccionada((Persona) lista.getSelectedValue());
         }
-        System.out.println(lista.getName());
-        System.out.println(lista.getSelectedValue());
-        interfazGrafica.actualizarInfoTareaSeleccionada();
+
+
         //interfazGrafica.setTareaSeleccionada((Tarea)lista.getSelectedValue());
     }
 

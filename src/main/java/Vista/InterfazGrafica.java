@@ -49,6 +49,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
 
     JTextField selectCoste;
     JComboBox<facturacion> facturacionDato;
+    facturacion[] tiposFacturacion = { new ConsumoInterno(), new Descuento(), new Urgente()};
+
 
     public static void main(String[] args) {
 
@@ -91,7 +93,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         this.escuchadoraBoton = new EscuchadoraBoton(this.controlador, this, this.modelo);
         this.escuchadoraTextField = new EscuchadoraTextField(this.controlador,this);
         escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
-        this.escuchadoraComboBox = new EscuchadoraComboBox(this.controlador, this);
+        this.escuchadoraComboBox = new EscuchadoraComboBox(this.controlador, this, this.modelo);
         escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
         this.escuchadoraLista = new EscuchadoraLista(this.controlador, this);
         escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
@@ -267,8 +269,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         panelEste.add(resultado, c);
 
 
-
-
         JButton finalizar = new JButton("Finalizar tarea");
         finalizar.addActionListener(escuchadoraBoton);
         c.gridx = 0;
@@ -293,7 +293,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         c.gridy = 3;
         panelEste.add(selectCoste, c);
 
-        facturacion[] tiposFacturacion = { new ConsumoInterno(), new Descuento(), new Urgente()};
         facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.addActionListener(escuchadoraComboBox);
         facturacionDato.setName("facturacionTarea");
@@ -460,7 +459,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         costeInicialDatos.addFocusListener(escuchadoraTextField);
 
         JLabel facturacion = new JLabel("facturacion: ");
-        facturacion[] tiposFacturacion = { new ConsumoInterno(), new Descuento(), new Urgente()};
+
         JComboBox<facturacion> facturacionDato = new JComboBox<>(tiposFacturacion);
         facturacionDato.setName("facturacionDato");
         facturacionDato.addActionListener(escuchadoraComboBox);
@@ -577,13 +576,14 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         this.personaDeTareaSeleccionada = personaDeTareaSeleccionada;
     }
 
-    public void actualizarInterfaz(){
+    @Override
+    public void actualizarListasInterfaz(){
         setTareas(modelo.getTareasEnProyecto());
         setPersonas(modelo.getPersonasEnProyecto());
         if (getTareaSeleccionada() != null)
             setPersonasEnTarea( modelo.getListaPersonasEnTarea(tareaSeleccionada));
     }
-
+    @Override
     public void actualizarInfoTareaSeleccionada(){
         if (getTareaSeleccionada() == null)
             return;
@@ -601,5 +601,17 @@ public class InterfazGrafica implements InterrogaVista, InformaVista {
         selectCoste.setText("");
         facturacionDato.setSelectedItem(tareaSeleccionada.getFacturacion());
         System.out.println(tareaSeleccionada);
+
+        switch (modelo.getFacturacionTarea(tareaSeleccionada).toString()){
+            case "Consumo Interno" -> facturacionDato.setSelectedItem(tiposFacturacion[0]);
+            case "Descuento" -> facturacionDato.setSelectedItem(tiposFacturacion[1]);
+            case "Urgente" -> facturacionDato.setSelectedItem(tiposFacturacion[2]);
+        }
+    }
+
+    @Override
+    public void resetValue() {
+        escuchadoraComboBox.resetValues();
+        escuchadoraTextField.resetValues();
     }
 }
