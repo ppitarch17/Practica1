@@ -29,8 +29,8 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
     JFrame ventana;
 
-    private Tarea tareaSeleccionada; //Tarea
-    private Persona personaSeleccioanda; //Persona
+    private Tarea tareaSeleccionada;
+    private Persona personaSeleccioanda;
     private Persona personaDeTareaSeleccionada;
 
     Tarea[] vectorTareas;
@@ -58,7 +58,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
     public static void main(String[] args) {
 
-        SwingUtilities.invokeLater(new Runnable(){ //Multiples Hilos
+        SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
                 try {
@@ -72,12 +72,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
                 } catch (UnsupportedLookAndFeelException e) {
                     e.printStackTrace();
                 }
-                new InterfazGrafica().matame();
+                new InterfazGrafica().interfaz();
             }
         });
     }
 
-    public void matame(){
+    public void interfaz(){
         conectar();
         ventanaStart();
     }
@@ -90,7 +90,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         this.modelo = modelo;
         this.controlador = controlador;
 
-        //Conectar Esccuhadores
         conectarReferenciasEscuchadores();
     }
 
@@ -109,15 +108,15 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     //-------VENTANAS----------
 
     public void ventanaStart(){
-        ventana = new JFrame("Primera Ventana"); //Ventana principal
+        ventana = new JFrame("Primera Ventana");
 
         Container container = ventana.getContentPane();
         container.setLayout(new BorderLayout());
 
         JButton boton = new JButton("Crear Proyecto");
-        boton.addActionListener(escuchadoraBoton);//Registro al boton
+        boton.addActionListener(escuchadoraBoton);
         JButton boton2 = new JButton("Abrir Proyecto");
-        boton2.addActionListener(escuchadoraBoton);//Registro al boton
+        boton2.addActionListener(escuchadoraBoton);
         container.add(boton);
         container.add(boton2);
 
@@ -132,12 +131,11 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
     public void ventanaAbrir(){
         ventana = new JFrame("Abrir Proyecto");
-        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
         JPanel panel = new JPanel();
-//        JFileChooser jfc = new JFileChooser();    //TODO quizas
-//        panel.add(jfc);
+
         JFileChooser selector = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter(
                 "Fichero bin", "bin");
@@ -146,14 +144,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         panel.add(selector);
         escuchadoraBoton.abrir(selector.getSelectedFile().getAbsolutePath());
 
-
-
-//        JLabel nombre = new JLabel("Nombre: ");
-//        JTextField nom = new JTextField(20);
-//        JButton boton = new JButton("Abrir");
-//        panel.add(nombre); panel.add(nom); panel.add(boton);
-//        nom.addFocusListener(escuchadoraTextField);
-//        boton.addActionListener(escuchadoraBoton);
         container.add(panel);
         ventana.pack();
         ventana.setLocationRelativeTo(null);
@@ -162,25 +152,28 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
     public void ventanaCrear() {
         ventana = new JFrame("Crear Proyecto");
-        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Container container = ventana.getContentPane();
         container.setLayout(new GridLayout(1,3));
+
         JPanel panel = new JPanel();
         JLabel nombre = new JLabel("Nombre: ");
         JTextField nom = new JTextField(20);
         JButton boton = new JButton("Crear");
+
         panel.add(nombre); panel.add(nom); panel.add(boton);
         nom.addFocusListener(escuchadoraTextField);
         boton.addActionListener(escuchadoraBoton);
         container.add(panel);
+
         ventana.pack();
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 
     public void ventanaMain(){
-        ventana = new JFrame("Ventana Proyecto"); //Ventana principal
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//lo mismo que arriba pero easy
+        ventana = new JFrame("Ventana Proyecto");
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ventana.setMinimumSize(new Dimension(900, 450));
 
@@ -207,7 +200,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         panelNorte.add(costeTotal);
 
         //PERSONAS
-
         JPanel panelOeste = new JPanel();
         dim.gridwidth = 2;
         dim.gridx = 0;
@@ -215,10 +207,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         container.add(panelOeste, dim);
         panelOeste.setLayout(new BorderLayout());
 
-
         //TAREAS
-
-
         panelOeste.add(new JLabel("Tareas: "), BorderLayout.NORTH);
         JButton aTarea = new JButton("Añadir tarea");
         aTarea.addActionListener(escuchadoraBoton);
@@ -245,16 +234,13 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         aPersona.addActionListener(escuchadoraBoton);
         panelCentral.add(aPersona, BorderLayout.AFTER_LAST_LINE);
 
-        //List<Persona> lpersonas = controlador.getListaPersonas();//{new Persona("dni"), new Persona("nif")};
         this.personas = new JList<>(vectorPersonas);
         this.personas.setName("cuadroPersonas");
         this.personas.addListSelectionListener(escuchadoraLista);
-//        this.personas.setVisibleRowCount(20);
         this.personas.setLayoutOrientation(JList.VERTICAL_WRAP);
         JScrollPane scrollPanel = new JScrollPane(this.personas);
         this.personas.setLayoutOrientation(JList.VERTICAL_WRAP);
         panelCentral.add(scrollPanel, BorderLayout.CENTER);
-//        panelCentral.add(personas, BorderLayout.CENTER);
 
         //INTERFAZ
         JPanel panelEste = new JPanel();
@@ -269,7 +255,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         c.fill = GridBagConstraints.HORIZONTAL;
 
         nombreTarea = new JLabel("Titulo: ");
-//        c.weightx = 0.5;
         c.gridx = 0;
         c.gridy = 0;
         panelEste.add(nombreTarea, c);
@@ -404,17 +389,15 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         c.gridy = 9;
         panelEste.add(salir, c);
 
-
-//        ventana.pack();
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 
     public void ventanaPersona(){
         ventana = new JFrame("Crear Persona");
-        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Container container = ventana.getContentPane();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//container.setLayout(new GridLayout(1,3));
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -451,9 +434,9 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
     public void ventanaTarea() {
         ventana = new JFrame("Crear Tarea");
-        //ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Container container = ventana.getContentPane();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//new GridLayout(1,3));
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -476,14 +459,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         prioridadDato.setEditable(false);
 
 
-//        JLabel slider = new JLabel("Slider: ");
-//        JSlider sliderDato = new JSlider(JSlider.HORIZONTAL,1,5, 1);
-//        sliderDato.setMinorTickSpacing(1);
-//        sliderDato.setMajorTickSpacing(5);
-//        sliderDato.setPaintTicks(true);
-
         JLabel resultado = new JLabel("resultado: ");
-        //String[] tiposResultado = { "Biblioteca", "Documentacion", "Pagina Web","Programa"};
         Resultado[] tiposResultado = {new Biblioteca(), new Documentación(), new PaginaWeb(), new Programa()};
         JComboBox<Resultado> resultadoDato = new JComboBox<Resultado>(tiposResultado);
         resultadoDato.setName("resultadoDato");
@@ -501,11 +477,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         facturacionDato.setName("facturacionDato");
         facturacionDato.addActionListener(escuchadoraComboBox);
         facturacionDato.setEditable(false);
-        //TODO si descuento seleccionar descuentoPorClienteEspecial
-        //TODO si urgente seleccionar sobrecoste
-
-
-        //TODO ComboBox etiquetas
 
         JButton tareaBoton = new JButton("Añadir tarea a Proyecto");
         tareaBoton.addActionListener(escuchadoraBoton);
@@ -523,29 +494,15 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     }
 
     public void ventanaError(String error) {
-
         JOptionPane.showMessageDialog(null, error, "Error 404 ¯\\_(ツ)_/¯" , JOptionPane.WARNING_MESSAGE);
-        //        ventana = new JFrame("Error 404");
-//        Container container = ventana.getContentPane();
-//        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));//new GridLayout(1,3));
-//        JPanel panel = new JPanel();
-//        panel.add(new JLabel(error));
-//        JButton salir = new JButton("Ok👍👍👍");
-//        salir.addActionListener(escuchadoraBoton);
-//        panel.add(salir);
-//        container.add(panel);
-//        ventana.pack();
-//        ventana.setLocationRelativeTo(null);
-//        ventana.setVisible(true);
     }
 
     //---------METODOS----------
 
     public void setControlador(Controlador controlador){
         this.controlador = controlador;
-//        escuchadoraBoton.setControlador(controlador);
-//        escuchadoraCheckBox.setControlador(controlador);
     }
+
     public void setModelo(InterrogaModelo modelo) {
         this.modelo = modelo;
     }
@@ -557,6 +514,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     public JFrame getVentana() {
         return ventana;
     }
+
     public Persona getPersonaSeleccioanda() {
         if (personaSeleccioanda == null)
             ventanaError("Persona no seleccionada");
@@ -565,24 +523,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
 
     public Persona getPersonaDeTareaSeleccionada() {
         return personaDeTareaSeleccionada;
-    }
-
-    @Override
-    public EscuchadoraTextField getEscuchadoraTextField() {
-        return escuchadoraTextField;
-    }
-
-    @Override
-    public EscuchadoraComboBox getEscuchadoraComboBox() {
-        return escuchadoraComboBox;
-    }
-
-    public JList<Tarea> getTareas() {
-        return tareas;
-    }
-
-    public JList<Persona> getPersonas() {
-        return personas;
     }
 
     public void setTareaSeleccionada(Tarea tareaSeleccionada) {
@@ -620,6 +560,9 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     public void setPersonaDeTareaSeleccionada(Persona personaDeTareaSeleccionada) {
         this.personaDeTareaSeleccionada = personaDeTareaSeleccionada;
     }
+
+
+    //METODOS PARA MODELO
 
     @Override
     public void actualizarListasInterfaz(){
@@ -659,5 +602,18 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     public void resetValue() {
         escuchadoraComboBox.resetValues();
         escuchadoraTextField.resetValues();
+    }
+
+
+    //METODOS PARA CONTROLADOR
+
+    @Override
+    public EscuchadoraTextField getEscuchadoraTextField() {
+        return escuchadoraTextField;
+    }
+
+    @Override
+    public EscuchadoraComboBox getEscuchadoraComboBox() {
+        return escuchadoraComboBox;
     }
 }

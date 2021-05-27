@@ -21,7 +21,6 @@ public class EscuchadoraCheckBox implements ActionListener, Serializable {
 
     public EscuchadoraCheckBox(Controlador controlador, InterfazGrafica interfazGrafica, InterrogaModelo modelo) {
         this.controlador = controlador;
-        //System.out.println(controlador + "boton");
         this.interfazGrafica = interfazGrafica;
         this.modelo = modelo;
     }

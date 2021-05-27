@@ -23,7 +23,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
 
     public EscuchadoraBoton(Controlador controlador, InterfazGrafica interfazGrafica, InterrogaModelo modelo) {
         this.controlador = controlador;
-        //System.out.println(controlador + "boton");
         this.interfazGrafica = interfazGrafica;
         this.modelo = modelo;
     }
@@ -36,7 +35,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             case "Crear Proyecto" -> crearP();
             case "Abrir Proyecto" -> abrirP();
             case "Crear" -> crear(escuchadoraTextField.getTexto());
-//            case "Abrir" -> abrir();
             case "Añadir tarea" -> addTarea();
             case "Añadir persona" -> addPersona();
             case "Añadir Persona a Proyecto" -> addPersonaAProyecto();
@@ -48,7 +46,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             case "Seleccionar facturación" -> System.out.println("facturacion");
             case "Añadir tarea a Proyecto" -> addTareaAProyecto();
             case "Salir y Guardar" -> salir();
-            case "Ok👍👍👍" -> interfazGrafica.getVentana().dispose();
         }
     }
 
@@ -63,8 +60,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
     }
 
     public void crear(String nombre) {
-
-//        String nomFichero = escuchadoraTextField.getTexto();
         if (nombre.equals(""))
             interfazGrafica.ventanaError("Introduce un nombre al proyecto");
         else {
@@ -84,13 +79,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
     }
 
     public void abrir(String direccionFichero) {
-//        String nomFichero = escuchadoraTextField.getTexto();
-//        if (nomFichero.equals(""))
-//            interfazGrafica.ventanaError("Introduce qué proyecto quieres abrir");
-//        else {
-//            if (!nomFichero.contains(".bin"))
-//                nomFichero = nomFichero + ".bin";
-
             ObjectInputStream ois = null;
             try {
                 try {
@@ -170,8 +158,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             interfazGrafica.ventanaError("Indica un coste inicial");
         }else {
 
-
-
             if (controlador.addTarea()){
                 interfazGrafica.getVentana().dispose();
             }
@@ -182,17 +168,13 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
     }
 
     public void addPersonaATarea() {
-
         if (interfazGrafica.getPersonaSeleccioanda() == null || interfazGrafica.getTareaSeleccionada() == null)
-            return;//TODO error
-
+            return;
         controlador.addPersonaToTarea();
-
     }
 
     public void removePersonaDeTarea(){
 
-        System.out.println("REMOVE PERSONA-------");
         if (interfazGrafica.getPersonaDeTareaSeleccionada() == null){
             interfazGrafica.ventanaError("Selecciona una persona en la tarea");
             return;
@@ -202,7 +184,6 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             interfazGrafica.ventanaError("Selecciona una Tarea");
             return;
         }
-
         controlador.removePersonaDeTarea();
     }
 

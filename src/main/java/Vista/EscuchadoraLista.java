@@ -34,7 +34,6 @@ public class EscuchadoraLista implements ListSelectionListener, Serializable {
     public void valueChanged(ListSelectionEvent e) {
         JList lista = (JList) e.getSource();
 
-
         switch (lista.getName()){
             case "cuadroPersonas" -> interfazGrafica.setPersonaSeleccioanda((Persona) lista.getSelectedValue());
             case "cuadroTareas" -> {
@@ -44,8 +43,6 @@ public class EscuchadoraLista implements ListSelectionListener, Serializable {
             case "cuadroPersonasEnTarea" -> interfazGrafica.setPersonaDeTareaSeleccionada((Persona) lista.getSelectedValue());
         }
 
-
-        //interfazGrafica.setTareaSeleccionada((Tarea)lista.getSelectedValue());
     }
 
 

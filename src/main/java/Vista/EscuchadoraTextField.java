@@ -52,9 +52,6 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
                 case "addEtiqueta" -> addEtiqueta(text.getText());
             }
         else this.texto = text.getText();
-
-        System.out.println(text.getName() + ": " + text.getText());
-
     }
 
     public void addEtiqueta(String texto){
@@ -99,18 +96,6 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
         }catch (NumberFormatException e){
             interfazGrafica.ventanaError("No es un número");
         }
-
-
-//        try {
-//            this.costeTarea = nuevoCoste;
-//            controlador.cambiarCosteTarea();
-//            interfazGrafica.actualizarInfoTareaSeleccionada();
-//
-//        }
-//        catch (NumberFormatException e){
-//            interfazGrafica.ventanaError("No es un número");
-//        }
-
 
     }
 
@@ -173,8 +158,6 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
                 case "costeInicialDatos" -> costeInicial(text);
             }
         else this.texto = text.getText();
-
-        System.out.println(text.getName() + ": " + text.getText());
     }
 
     public void resetValues(){
@@ -187,6 +170,7 @@ public class EscuchadoraTextField implements ActionListener, FocusListener, Seri
         descripcionTarea = null;
         costeTarea = 0;
     }
+
     int getCantidadDeCaracteresEnListaDeEtiquetas(Tarea tarea){
         int cantidad = 0;
         for (Etiqueta etiq: modelo.getEtiquetasTarea(tarea)) {
