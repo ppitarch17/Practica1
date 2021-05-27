@@ -89,7 +89,7 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
                 FileInputStream fis = new FileInputStream(nomFichero);
                 ois = new ObjectInputStream(fis);
                 ImplementacionControlador proyecto = (ImplementacionControlador) ois.readObject();
-                interfazGrafica.setControlador(proyecto); //TODO nombre al Proyecto
+                interfazGrafica.setControlador(proyecto);
                 crear();
             }finally {
                 if(ois != null) ois.close();
