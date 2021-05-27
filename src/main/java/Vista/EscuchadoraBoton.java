@@ -152,7 +152,7 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             interfazGrafica.ventanaError("Indica el nombre de la tarea");
         else if (descripcion == null)
             interfazGrafica.ventanaError("Indica la descripción de la tarea");
-        else if (!controlador.addTarea()){
+        else if (controlador.addTarea()){
 
             System.out.println("*****Añadiendo Tarea con Datos:");
             System.out.println(escuchadoraTextField.getNombreTarea());
@@ -168,6 +168,8 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
 
             //resetValues();
         }
+        else
+            interfazGrafica.ventanaError("Ya existe la tarea");
     }
 
     public void actualizarInterfaz(){
