@@ -2,6 +2,7 @@ package Vista;
 
 public interface InformaVista {
     //Metodos para Modelo
-    void actualizarInterfaz();
+    void actualizarListasInterfaz();
     void actualizarInfoTareaSeleccionada();
+    void resetValue();
 }

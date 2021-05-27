@@ -23,7 +23,20 @@ public class ImplementacionControlador implements Controlador{
 
     @Override
     public boolean addTarea() {
-        return modelo.addTarea(vista.getEscuchadoraTextField().getNombreTarea(), vista.getEscuchadoraTextField().getDescripcionTarea(), vista.getEscuchadoraComboBox().getPrioridadTarea(), vista.getEscuchadoraComboBox().getTipoResultadoTarea(), vista.getEscuchadoraTextField().getCosteTarea(), vista.getEscuchadoraComboBox().getTipofacturacionTarea());
+        System.out.println("En controladore----");
+        System.out.println(vista.getEscuchadoraTextField().getNombreTarea());
+        System.out.println(vista.getEscuchadoraTextField().getDescripcionTarea());
+        System.out.println(vista.getEscuchadoraComboBox().getPrioridadTarea());
+        System.out.println(vista.getEscuchadoraComboBox().getTipoResultadoTarea());
+        System.out.println(vista.getEscuchadoraTextField().getCosteTarea());
+        System.out.println(vista.getEscuchadoraComboBox().getTipofacturacionTarea());
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        boolean resp =  modelo.addTarea(vista.getEscuchadoraTextField().getNombreTarea(), vista.getEscuchadoraTextField().getDescripcionTarea(), vista.getEscuchadoraComboBox().getPrioridadTarea(), vista.getEscuchadoraComboBox().getTipoResultadoTarea(), vista.getEscuchadoraTextField().getCosteTarea(), vista.getEscuchadoraComboBox().getTipofacturacionTarea());
+        System.out.println(resp);
+        return true;
     }
 
     @Override
@@ -63,6 +76,7 @@ public class ImplementacionControlador implements Controlador{
 
     @Override
     public void calcularCosteTotal() {
+
         modelo.calcularCosteTotal();
     }
 
