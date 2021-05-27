@@ -61,11 +61,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
             @Override
             public void run(){
                 try {
-
-//                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-//                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                     UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-//                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (InstantiationException e) {
@@ -206,14 +202,11 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         //TAREAS
 
 
-
         panelOeste.add(new JLabel("Tareas: "), BorderLayout.NORTH);
         JButton aTarea = new JButton("Añadir tarea");
         aTarea.addActionListener(escuchadoraBoton);
         panelOeste.add(aTarea, BorderLayout.AFTER_LAST_LINE);
 
-        //Tarea[] datos = (Tarea[]) controlador.getListaTareas().toArray();//{new Tarea("t1"), new Tarea("t2")};
-        //List<Tarea> datos = controlador.getListaTareas();
         tareas = new JList<Tarea>(vectorTareas);
         tareas.setName("cuadroTareas");
         tareas.addListSelectionListener(new EscuchadoraLista(controlador, this));
@@ -221,7 +214,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         JScrollPane scrollPane = new JScrollPane(tareas);
         tareas.setLayoutOrientation(JList.VERTICAL_WRAP);
         panelOeste.add(scrollPane, BorderLayout.CENTER);
-//        panelOeste.add(tareas, BorderLayout.CENTER);
 
 
         //PERSONAS EN TAREA
