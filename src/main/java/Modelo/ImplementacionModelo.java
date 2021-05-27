@@ -34,11 +34,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
     }
 
     @Override
-    public boolean addTarea(String titulo) {
-        return false;
-    }
-
-    @Override
     public boolean addTarea(String titulo, String descripcion, int prioridad, Resultado resultado, double coste, facturacion facturacion) {
         for (Tarea tarea : listaTareas){
             if (tarea.getTitulo().equals(titulo))
@@ -129,6 +124,11 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo{
         for (Tarea tarea: listaTareas) {
             costeTotal += tarea.getCosteFinal();
         }
+    }
+
+    @Override
+    public void setNombreProyecto(String nombreProyecto) {
+        nombre = nombreProyecto;
     }
 
     @Override

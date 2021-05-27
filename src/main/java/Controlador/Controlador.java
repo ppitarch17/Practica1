@@ -21,8 +21,5 @@ public interface Controlador {
     void calcularFacturacion();
     boolean setResponsable();
     void calcularCosteTotal();
-
-
-
-
+    void setNombreProyecto();
 }

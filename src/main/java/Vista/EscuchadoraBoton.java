@@ -67,6 +67,7 @@ public class EscuchadoraBoton implements ActionListener {
 
     public void crear() {
 //        System.out.println(controlador.getNombre());
+        controlador.setNombreProyecto();
         interfazGrafica.setVectorPersonas(modelo.getPersonasEnProyecto());
         interfazGrafica.setVectorTareas(modelo.getTareasEnProyecto());
         interfazGrafica.setVectorPersonasEnTarea(new Persona[0]);
@@ -237,7 +238,6 @@ public class EscuchadoraBoton implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     void resetValues(){

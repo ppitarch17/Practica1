@@ -65,4 +65,9 @@ public class ImplementacionControlador implements Controlador{
     public void calcularCosteTotal() {
         modelo.calcularCosteTotal();
     }
+
+    @Override
+    public void setNombreProyecto() {
+        modelo.setNombreProyecto(vista.getEscuchadoraTextField().getTexto());
+    }
 }
