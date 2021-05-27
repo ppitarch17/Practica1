@@ -90,19 +90,12 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         this.controlador = controlador;
 
         //Conectar Esccuhadores
-        this.escuchadoraBoton = new EscuchadoraBoton(this.controlador, this, this.modelo);
-        this.escuchadoraTextField = new EscuchadoraTextField(this.controlador,this);
-        escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
-        this.escuchadoraComboBox = new EscuchadoraComboBox(this.controlador, this, this.modelo);
-        escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
-        this.escuchadoraLista = new EscuchadoraLista(this.controlador, this);
-        escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
-        this.escuchadoraCheckBox = new EscuchadoraCheckBox(this.controlador, this, this.modelo);
+        conectarReferenciasEscuchadores();
     }
 
-    public void conectarCargado(){
+    public void conectarReferenciasEscuchadores(){
         this.escuchadoraBoton = new EscuchadoraBoton(this.controlador, this, this.modelo);
-        this.escuchadoraTextField = new EscuchadoraTextField(this.controlador,this);
+        this.escuchadoraTextField = new EscuchadoraTextField(this.controlador,this, modelo);
         escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
         this.escuchadoraComboBox = new EscuchadoraComboBox(this.controlador, this, this.modelo);
         escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
