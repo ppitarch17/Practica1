@@ -86,6 +86,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     }
 
     public void conectar(){
+        System.out.println("Metodo conectar");
         ImplementacionModelo modelo = new ImplementacionModelo(this);
         ImplementacionControlador controlador = new ImplementacionControlador(this, modelo);
 
@@ -102,6 +103,18 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
         this.escuchadoraCheckBox = new EscuchadoraCheckBox(this.controlador, this, this.modelo);
     }
+
+    public void conectarCargado(){
+        this.escuchadoraBoton = new EscuchadoraBoton(this.controlador, this, this.modelo);
+        this.escuchadoraTextField = new EscuchadoraTextField(this.controlador,this);
+        escuchadoraBoton.setEscuchadoraTextField(escuchadoraTextField);
+        this.escuchadoraComboBox = new EscuchadoraComboBox(this.controlador, this, this.modelo);
+        escuchadoraBoton.setEscuchadoraComboBox(escuchadoraComboBox);
+        this.escuchadoraLista = new EscuchadoraLista(this.controlador, this);
+        escuchadoraLista.setEscuchadoraBoton(escuchadoraBoton);
+        this.escuchadoraCheckBox = new EscuchadoraCheckBox(this.controlador, this, this.modelo);
+    }
+
 
     //-------VENTANAS----------
 
@@ -365,7 +378,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         c.gridy = 8;
         panelEste.add(sinPersonas, c);
 
-        JButton salir = new JButton("Salir del programa");
+        JButton salir = new JButton("Salir y Guardar");
         salir.addActionListener(escuchadoraBoton);
         c.ipady = 0;
         c.weighty = 1.0;
@@ -522,8 +535,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     }
 
     public Tarea getTareaSeleccionada() {
-            return tareaSeleccionada;
-
+        return tareaSeleccionada;
     }
 
     public JFrame getVentana() {
@@ -536,8 +548,6 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
     }
 
     public Persona getPersonaDeTareaSeleccionada() {
-        if (personaDeTareaSeleccionada == null)
-            ventanaError("Persona en tarea no seleccionada");
         return personaDeTareaSeleccionada;
     }
 
@@ -602,6 +612,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         if (getTareaSeleccionada() != null)
             setPersonasEnTarea( modelo.getListaPersonasEnTarea(tareaSeleccionada));
     }
+
     @Override
     public void actualizarInfoTareaSeleccionada(){
         if (getTareaSeleccionada() == null)
@@ -609,7 +620,7 @@ public class InterfazGrafica implements InterrogaVista, InformaVista, Serializab
         controlador.calcularCosteTotal();
         costeTotal.setText("Coste total: " + modelo.getCosteTotalProyecto());
         setPersonasEnTarea( modelo.getListaPersonasEnTarea(tareaSeleccionada));
-        nombreTarea.setText("Titulo: " + modelo.getTitulo(tareaSeleccionada)); //TODO interrogaModelo
+        nombreTarea.setText("Titulo: " + modelo.getTitulo(tareaSeleccionada));
         coste.setText("Coste Final: " + modelo.getCosteFinalTarea(tareaSeleccionada));
         etiquetas.setText("Etiquetas: " + Arrays.toString(modelo.getEtiquetasTarea(tareaSeleccionada)));
         finalizada.setText("Finalizada: " + modelo.isTareaFinalizada(tareaSeleccionada));

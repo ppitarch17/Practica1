@@ -85,6 +85,18 @@ public class Persona implements tieneLista<Tarea>, tieneClave<String>, Serializa
         return tareasResponsable.add(tarea);
     }
 
+    public boolean removeResponsabilidad(Tarea tarea){
+        try {
+            if (tarea == null)
+                throw new NullPointerException();
+
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+        return tareasResponsable.remove(tarea);
+    }
+
     public boolean removeTarea(Tarea tarea){
         return listaTareas.remove(tarea);
     }

@@ -2,6 +2,7 @@ package Modelo;
 
 import Facturación.facturacion;
 import Resultados.Resultado;
+import Vista.InformaVista;
 import Vista.InterrogaVista;
 
 import java.util.List;
@@ -28,5 +29,6 @@ public interface CambioModelo {
     void calcularCosteTotal();
     void setNombreProyecto(String nombreProyecto);
     boolean addEtiquetaATarea(Tarea tarea, Etiqueta etiqueta);
+    void setVista(InformaVista vista);
 
 }

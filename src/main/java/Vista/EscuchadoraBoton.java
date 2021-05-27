@@ -47,7 +47,7 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             case "Seleccionar coste" -> System.out.println("cuanto cuesta??");
             case "Seleccionar facturación" -> System.out.println("facturacion");
             case "Añadir tarea a Proyecto" -> addTareaAProyecto();
-            case "Salir del programa" -> salir();
+            case "Salir y Guardar" -> salir();
             case "Ok👍👍👍" -> interfazGrafica.getVentana().dispose();
         }
     }
@@ -63,7 +63,7 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
     }
 
     public void crear() {
-//        System.out.println(controlador.getNombre());
+
         String nomFichero = escuchadoraTextField.getTexto();
         if (nomFichero.equals(""))
             interfazGrafica.ventanaError("Introduce un nombre al proyecto");
@@ -77,6 +77,7 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             interfazGrafica.setVectorPersonasEnTarea(new Persona[0]);
             interfazGrafica.getVentana().dispose();
             interfazGrafica.ventanaMain();
+            interfazGrafica.actualizarListasInterfaz();
         }
     }
 
@@ -93,8 +94,13 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
                 try {
                     FileInputStream fis = new FileInputStream(nomFichero);
                     ois = new ObjectInputStream(fis);
-                    modelo = (InterrogaModelo) ois.readObject();
+                    ImplementacionModelo modelo = (ImplementacionModelo) ois.readObject();
+                    ImplementacionControlador controlador = new ImplementacionControlador(interfazGrafica, modelo);
                     interfazGrafica.setModelo(modelo);
+                    interfazGrafica.setControlador(controlador);
+                    modelo.setVista(interfazGrafica);
+                    System.out.println("abrir conectar");
+                    interfazGrafica.conectarCargado();
                     crear();
                 } finally {
                     if (ois != null) ois.close();
@@ -130,59 +136,43 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
     }
 
     public void addPersonaAProyecto(){
-        System.out.println("---Añadiendo Persona");
-        System.out.println(escuchadoraTextField.getNombrePersona());
-        System.out.println(escuchadoraTextField.getCorreoPersona());
-        System.out.println(escuchadoraTextField.getDniPersona());
 
-        if (!controlador.addPersona())
-            interfazGrafica.ventanaError("La persona ya existe en el proyecto");
+        if(escuchadoraTextField.getNombrePersona() == null)
+            interfazGrafica.ventanaError("Escribe un nombre");
+        else  if(escuchadoraTextField.getDniPersona() == null || escuchadoraTextField.getDniPersona().equals(""))
+            interfazGrafica.ventanaError("Escribe un DNI");
+        else if(escuchadoraTextField.getCorreoPersona() == null)
+            interfazGrafica.ventanaError("Escribe un correo");
         else {
-            interfazGrafica.getVentana().dispose();
-            //actualizarInterfaz();
+            if (!controlador.addPersona())
+                interfazGrafica.ventanaError("La persona ya existe en el proyecto");
+            else {
+                interfazGrafica.getVentana().dispose();
+            }
         }
+
     }
 
-
     public void addTareaAProyecto(){
-        System.out.println("---Añadiendo Tarea");
-
-        //String titulo, String descripcion, int prioridad, Resultado resultado, double coste, facturacion facturacion
-
 
         String titulo = escuchadoraTextField.getNombreTarea();
         String descripcion = escuchadoraTextField.getDescripcionTarea();
-        double coste = escuchadoraTextField.getCosteTarea();
-
-        if (titulo == null)
+        if (titulo == null || titulo.equals(""))
             interfazGrafica.ventanaError("Indica el nombre de la tarea");
         else if (descripcion == null)
             interfazGrafica.ventanaError("Indica la descripción de la tarea");
-        else if (controlador.addTarea()){
 
-            System.out.println("*****Añadiendo Tarea con Datos:");
-            System.out.println(escuchadoraTextField.getNombreTarea());
-            System.out.println(escuchadoraTextField.getDescripcionTarea());
-            System.out.println(escuchadoraComboBox.getPrioridadTarea());
-            System.out.println(escuchadoraComboBox.getTipoResultadoTarea());
-            System.out.println(escuchadoraTextField.getCosteTarea());
-            System.out.println(escuchadoraComboBox.getTipofacturacionTarea());
-            interfazGrafica.getVentana().dispose();
+        else if(escuchadoraTextField.getCosteTarea() == 0) {
+            interfazGrafica.ventanaError("Indica un coste inicial");
+        }else {
 
-            //actualizarInterfaz();
-            //interfazGrafica.actualizarInfoTareaSeleccionada();
-
-            //resetValues();
+            if (controlador.addTarea()){
+                interfazGrafica.getVentana().dispose();
+            }
+            else
+                interfazGrafica.ventanaError("Ya existe la tarea");
         }
-        else
-            interfazGrafica.ventanaError("Ya existe la tarea");
-    }
 
-    public void actualizarInterfaz(){
-        interfazGrafica.setTareas(modelo.getTareasEnProyecto());
-        interfazGrafica.setPersonas(modelo.getPersonasEnProyecto());
-        if (interfazGrafica.getTareaSeleccionada() != null)
-            interfazGrafica.setPersonasEnTarea(modelo.getListaPersonasEnTarea(interfazGrafica.getTareaSeleccionada()));
     }
 
     public void addPersonaATarea() {
@@ -191,8 +181,7 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             return;//TODO error
 
         controlador.addPersonaToTarea();
-        //resetValues();
-        //actualizarInterfaz();
+
     }
 
     public void removePersonaDeTarea(){
@@ -218,16 +207,24 @@ public class EscuchadoraBoton implements ActionListener, Serializable {
             return;
         }
 
+        if (modelo.isTareaFinalizada(interfazGrafica.getTareaSeleccionada())){
+            interfazGrafica.ventanaError("La tarea ya esta finalizada");
+            return;
+        }
+
         controlador.setTareaFinalizada();
     }
 
 
     public void setResponsable() {
+
         if (interfazGrafica.getTareaSeleccionada() == null)
             interfazGrafica.ventanaError("No hay ninguna tarea seleccionada");
         else if (interfazGrafica.getPersonaDeTareaSeleccionada() == null)
             interfazGrafica.ventanaError("Selecciona una persona que pertenezca a la tarea");
-        else {
+        else if (modelo.getResponsable(interfazGrafica.getTareaSeleccionada()) == interfazGrafica.getPersonaDeTareaSeleccionada()){
+            interfazGrafica.ventanaError("Ya es responsable");
+        }else {
             controlador.setResponsable();
         }
     }

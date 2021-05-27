@@ -51,15 +51,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
         return true;
     }
 
-//    @Override
-//    public Persona getPersona(String DNI) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Tarea buscaTarea(String titulo) {
-//        return null;
-//    }
 
     @Override
     public boolean addPersonaToTarea(Persona persona, Tarea tarea) {
@@ -90,16 +81,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
         vista.actualizarInfoTareaSeleccionada();
     }
 
-//    @Override
-//    public List<Persona> getListaPersonas() {
-//        return listaPersonas;
-//    }
-//
-//    @Override
-//    public List<Tarea> getListaTareas() {
-//        return listaTareas;
-//    }
-
     @Override
     public void cambiarCosteTarea(Tarea tarea, double coste) {
         tarea.setCoste(coste);
@@ -118,10 +99,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
         tarea.calcularFacturacion();
     }
 
-//    @Override
-//    public double getCosteTotal() {
-//        return costeTotal;
-//    }
 
     @Override
     public boolean setResponsable(Tarea tarea, Persona persona) {
@@ -134,11 +111,6 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
 
         return false;
     }
-//
-//    @Override
-//    public String getNombre() {
-//        return nombre;
-//    }
 
     @Override
     public void calcularCosteTotal() {
@@ -162,6 +134,11 @@ public class ImplementacionModelo implements CambioModelo, InterrogaModelo, Seri
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void setVista(InformaVista vista) {
+        this.vista = vista;
     }
 
     @Override

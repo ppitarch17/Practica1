@@ -97,6 +97,9 @@ public class Tarea implements tieneLista<Persona>, tieneClave<String>, Serializa
         if(!listaPersonas.contains(responsable))
             return false;
 
+        if (responsable != null)
+            responsable.removeResponsabilidad(this);
+
         this.responsable = responsable;
         responsable.addResponsabilidad(this);
         return true;
